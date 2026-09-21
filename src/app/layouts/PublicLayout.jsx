@@ -1,15 +1,17 @@
 import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Volume2, VolumeX, Globe } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 
-const DEFAULT_MUSIC_URL = '/music/wedding-song.mp3'
+const DEFAULT_MUSIC_URL = '/music/ភ្ជាប់និស្ស័យ.mp3'
 
 export function PublicLayout() {
   const { i18n } = useTranslation()
+  const location = useLocation()
   const [isPlaying, setIsPlaying] = useState(false)
   const [audioUrl, setAudioUrl] = useState(null)
   const audioRef = useRef(null)
+  const shouldAutoplay = new URLSearchParams(location.search).get('autoplay') === '1'
 
   useLayoutEffect(() => {
     window.__setWeddingMusic = (url) => {
@@ -23,16 +25,21 @@ export function PublicLayout() {
   useEffect(() => {
     if (!audioRef.current || !audioUrl) return
 
-    audioRef.current.play().catch(() => {
-      // Browsers may require a user gesture before allowing sound.
-      setIsPlaying(false)
-    })
-  }, [audioUrl])
+    if (shouldAutoplay) {
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false))
+    }
+  }, [audioUrl, shouldAutoplay])
 
   useEffect(() => {
     const playAfterInteraction = () => {
       if (!audioRef.current || !audioUrl || isPlaying) return
-      audioRef.current.play().catch(() => setIsPlaying(false))
+      audioRef.current
+        .play()
+        .then(() => setIsPlaying(true))
+        .catch(() => setIsPlaying(false))
     }
 
     window.addEventListener('pointerdown', playAfterInteraction)

@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-import { Heart, Save, CheckCircle, AlertCircle, Link as LinkIcon, Music, Calendar, Sparkles } from 'lucide-react'
+import { Heart, Save, CheckCircle, AlertCircle, Link as LinkIcon, Calendar, Sparkles } from 'lucide-react'
 import api from '../../lib/api'
 import { useAuthStore } from '../../auth/authStore'
 import Card, { CardContent, CardHeader, CardTitle, CardFooter } from '../../components/Card'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
+import Select from '../../components/Select'
 import { SkeletonCard } from '../../components/Skeleton'
 import { useToast } from '../../components/Toast'
+
+const DEFAULT_MUSIC_URL = '/music/ភ្ជាប់និស្ស័យ.mp3'
+const SECOND_MUSIC_URL = '/music/គូស្នេហ៍សំណាងជាងគេ.mp3'
 
 export function WeddingProfilePage() {
   const { t } = useTranslation()
@@ -60,7 +64,9 @@ export function WeddingProfilePage() {
         venue_address: wedding.venue_address || '',
         story: wedding.story || '',
         cover_photo: wedding.cover_photo || '',
-        music_url: wedding.music_url || '',
+        music_url: [DEFAULT_MUSIC_URL, SECOND_MUSIC_URL].includes(wedding.music_url)
+          ? wedding.music_url
+          : DEFAULT_MUSIC_URL,
         slug: wedding.slug || '',
       })
     }
@@ -274,12 +280,14 @@ export function WeddingProfilePage() {
               value={form.cover_photo}
               onChange={(e) => updateField('cover_photo', e.target.value)}
             />
-            <Input
-              label={t('wedding.musicUrl', 'Background Music URL (MP3)')}
-              leftIcon={Music}
+            <Select
+              label={t('wedding.musicUrl', 'Background Music')}
               value={form.music_url}
               onChange={(e) => updateField('music_url', e.target.value)}
-            />
+            >
+              <option value={DEFAULT_MUSIC_URL}>ភ្ជាប់និស្ស័យ</option>
+              <option value={SECOND_MUSIC_URL}>គូស្នេហ៍សំណាងជាងគេ</option>
+            </Select>
           </div>
 
           {form.cover_photo && (

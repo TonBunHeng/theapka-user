@@ -17,6 +17,7 @@ export function TemplateRenderer({
   onWishSubmit,
   onOpenQrCard,
   lang = 'km',
+  previewMode = false,
 }) {
   const config = {
     primaryColor: templateConfig?.primaryColor || '#C59B27',
@@ -89,7 +90,7 @@ export function TemplateRenderer({
 
   return (
     <div
-      className="min-h-screen transition-colors duration-300"
+      className={previewMode ? 'min-h-full transition-colors duration-300' : 'min-h-screen transition-colors duration-300'}
       style={{ backgroundColor: config.bgColor }}
     >
       {/* Sequential blocks based on configured order and visibility */}

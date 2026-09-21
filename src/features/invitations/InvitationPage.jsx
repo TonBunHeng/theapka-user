@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
@@ -15,6 +15,8 @@ import {
   Save,
   X,
   ExternalLink,
+  Volume2,
+  VolumeX,
 } from 'lucide-react'
 import api from '../../lib/api'
 import TemplateRenderer from '../../templates/TemplateRenderer'
@@ -40,6 +42,8 @@ export function InvitationPage() {
   const [templateConfig, setTemplateConfig] = useState(traditionalPreset)
   const [isFullscreenPreview, setIsFullscreenPreview] = useState(false)
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false)
+  const [isPreviewMusicPlaying, setIsPreviewMusicPlaying] = useState(false)
+  const previewMusicRef = useRef(null)
 
   // Fetch current invitation config & wedding info
   const { data, isLoading } = useQuery({
@@ -138,11 +142,47 @@ export function InvitationPage() {
     })
   }
 
+  const wedding = data?.wedding
+
+  useEffect(() => {
+    const musicUrl = wedding?.music_url || '/music/ភ្ជាប់និស្ស័យ.mp3'
+    const audio = new Audio(musicUrl)
+    audio.loop = true
+    audio.preload = 'auto'
+    previewMusicRef.current = audio
+
+    if (isPreviewMusicPlaying) {
+      audio.play().catch(() => setIsPreviewMusicPlaying(false))
+    }
+
+    return () => {
+      audio.pause()
+      previewMusicRef.current = null
+    }
+  }, [wedding?.music_url, isPreviewMusicPlaying])
+
+  const togglePreviewMusic = () => {
+    const audio = previewMusicRef.current
+    if (!audio) return
+
+    if (isPreviewMusicPlaying) {
+      audio.pause()
+      setIsPreviewMusicPlaying(false)
+      return
+    }
+
+    audio.play().then(() => setIsPreviewMusicPlaying(true)).catch(() => setIsPreviewMusicPlaying(false))
+  }
+
+  const togglePreviewLanguage = () => {
+    const next = i18n.language === 'km' ? 'en' : 'km'
+    i18n.changeLanguage(next)
+  }
+
   if (isLoading) {
     return <SkeletonCard />
   }
 
-  const wedding = data?.wedding
   const isPublished = !!data?.is_published
 
   return (
@@ -383,16 +423,41 @@ export function InvitationPage() {
             </button>
           </div>
 
-          <div className="overflow-hidden bg-white">
-            <TemplateRenderer
-              wedding={wedding}
-              guest={{ name: 'ភ្ញៀវកិត្តិយស (គំរូ)', seats: 2 }}
-              schedules={schedules}
-              gallery={gallery}
-              wishes={[]}
-              templateConfig={templateConfig}
-              lang={i18n.language}
-            />
+          <div className="flex justify-center p-4">
+            <div className="w-full max-w-[420px] overflow-hidden rounded-[1.75rem] border border-black bg-white shadow-sm">
+              <div className="h-[700px] overflow-y-auto rounded-[1.5rem]">
+                <TemplateRenderer
+                  wedding={wedding}
+                  guest={{ name: 'ភ្ញៀវកិត្តិយស (គំរូ)', seats: 2 }}
+                  schedules={schedules}
+                  gallery={gallery}
+                  wishes={[]}
+                  templateConfig={templateConfig}
+                  lang={i18n.language}
+                  previewMode
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center gap-3 pb-2">
+            <button
+              type="button"
+              aria-label={isPreviewMusicPlaying ? 'Pause music' : 'Play music'}
+              onClick={togglePreviewMusic}
+              className="h-14 w-14 rounded-full border-2 border-[#D4AF37] bg-[#F6F0E5] shadow-sm flex items-center justify-center text-[#D4AF37] transition-all hover:scale-[1.02]"
+            >
+              {isPreviewMusicPlaying ? <Volume2 className="w-6 h-6" /> : <VolumeX className="w-6 h-6" />}
+            </button>
+
+            <button
+              type="button"
+              onClick={togglePreviewLanguage}
+              aria-label="Toggle language"
+              className="h-14 w-14 rounded-full border-2 border-[#D4AF37] bg-[#F6F0E5] shadow-sm flex items-center justify-center text-[#1B1B1B] font-bold tracking-[0.12em] text-lg"
+            >
+              {i18n.language === 'km' ? 'EN' : 'ខ្មែរ'}
+            </button>
           </div>
         </div>
       </div>
@@ -422,6 +487,7 @@ export function InvitationPage() {
               wishes={[]}
               templateConfig={templateConfig}
               lang={i18n.language}
+              previewMode
             />
           </div>
         </div>

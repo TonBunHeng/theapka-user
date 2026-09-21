@@ -15,6 +15,7 @@ export function PublicInvitationPage() {
   const { success, error } = useToast()
 
   const [isQrModalOpen, setIsQrModalOpen] = useState(false)
+  const [showWelcome, setShowWelcome] = useState(true)
 
   // Fetch invitation data
   const { data, isLoading, isError } = useQuery({
@@ -41,9 +42,22 @@ export function PublicInvitationPage() {
   // Use the bundled song so playback does not depend on a remote MP3 host.
   useEffect(() => {
     if (data && window.__setWeddingMusic) {
-      window.__setWeddingMusic('/music/wedding-song.mp3')
+      window.__setWeddingMusic(data.wedding?.music_url || '/music/ភ្ជាប់និស្ស័យ.mp3')
     }
   }, [data])
+
+  // Lock scroll + ESC to close welcome overlay
+  useEffect(() => {
+    if (!showWelcome) return
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const onKey = (e) => e.key === 'Escape' && setShowWelcome(false)
+    window.addEventListener('keydown', onKey)
+    return () => {
+      document.body.style.overflow = prev
+      window.removeEventListener('keydown', onKey)
+    }
+  }, [showWelcome])
 
   // RSVP Mutation
   const rsvpMutation = useMutation({
@@ -122,6 +136,10 @@ export function PublicInvitationPage() {
   }
 
   const { wedding, guest, group, schedules, gallery, wishes } = data
+  const welcomeNames = [
+    wedding?.groom_name_kh || wedding?.groom_name_en,
+    wedding?.bride_name_kh || wedding?.bride_name_en,
+  ].filter(Boolean)
 
   return (
     <>
@@ -137,6 +155,69 @@ export function PublicInvitationPage() {
         onOpenQrCard={() => setIsQrModalOpen(true)}
         lang={i18n.language}
       />
+
+      {showWelcome && (
+        <div
+          role="dialog"
+          aria-modal="true"
+          onClick={() => setShowWelcome(false)}
+          className="fixed inset-0 z-50 flex items-center justify-center bg-[#f2efe9]/85 backdrop-blur-sm p-4"
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-[420px] rounded border border-[#d4af37]/90 bg-[#f8f2ea] px-6 py-7 text-center shadow-[0_18px_38px_rgba(0,0,0,0.10)]"
+          >
+            <div className="flex items-center justify-center gap-4 mb-5">
+              <div className="h-px w-14 bg-[#d4af37] opacity-80" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#d4af37] bg-[#f7f0e6] text-[#d4af37] shadow-sm">
+                <span className="text-lg">♥</span>
+              </div>
+              <div className="h-px w-14 bg-[#d4af37] opacity-80" />
+            </div>
+
+            <p className="text-[11px] font-semibold uppercase tracking-[0.34em] text-[#a67c2d]">
+              {i18n.language === 'km' ? 'សូមគោរពអញ្ជើញ' : 'Cordially Invited'}
+            </p>
+
+            <div className="mt-5 space-y-3">
+              {welcomeNames.length > 0 ? (
+                <div className="space-y-1.5">
+                  <p className="font-moul text-3xl sm:text-4xl leading-tight break-words text-[#c59b27]">
+                    {welcomeNames[0]}
+                  </p>
+                  <p className="text-xl text-[#a67c2d]">&</p>
+                  <p className="font-moul text-3xl sm:text-4xl leading-tight break-words text-[#c59b27]">
+                    {welcomeNames[1] || welcomeNames[0]}
+                  </p>
+                </div>
+              ) : (
+                <p className="font-moul text-2xl text-[#c59b27]">
+                  {i18n.language === 'km'
+                    ? 'អញ្ជើញចូលរួមពិធីមង្គលការ'
+                    : 'Wedding Invitation'}
+                </p>
+              )}
+
+              <div className="mx-auto mt-5 w-full max-w-[240px] rounded border border-[#d4af37] bg-[#f5eee5] px-3 py-3 shadow-sm">
+                <p className="text-[9px] font-semibold uppercase tracking-[0.28em] text-[#8d6b20]">
+                  {i18n.language === 'km' ? 'ភ្ញៀវកិត្តិយស' : 'Guest'}
+                </p>
+                <p className="mt-2 font-moul text-xl sm:text-2xl leading-tight break-words text-[#c59b27]">
+                  {guest?.name || (i18n.language === 'km' ? 'ភ្ញៀវ' : 'Guest')}
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setShowWelcome(false)}
+              className="mt-7 inline-flex items-center justify-center rounded-full border border-[#c9981b] bg-[#d4af37] px-9 py-3 text-sm font-semibold text-[#3b2f1c] shadow-[0_8px_18px_rgba(212,175,55,0.28)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#c9981b] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#8d6b20] focus-visible:ring-offset-2"
+            >
+              {i18n.language === 'km' ? 'បន្តទៅមុខ' : 'Continue'}
+            </button>
+          </div>
+        </div>
+      )}
 
       {guest && (
         <GuestQrCard
