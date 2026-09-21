@@ -1,0 +1,23 @@
+{
+  "id": "minimal-emerald",
+  "name_kh": "ត្បូងមរកតធម្មជាតិបែបសាមញ្ញ",
+  "name_en": "Botanical Minimal Emerald",
+  "description_kh": "រចនាប័ទ្មបែបធម្មជាតិស្ងប់ស្ងាត់ រំលេចដោយពណ៌បៃតងចាស់ និងបន្ទាត់រចនាសាមញ្ញទាន់សម័យ",
+  "description_en": "Serene botanical aesthetic featuring deep emerald green with clean minimalist lines",
+  "primaryColor": "#1A4D3E",
+  "accentColor": "#C59B27",
+  "bgColor": "#F1F7F4",
+  "cardBg": "#FFFFFF",
+  "fontHeading": "serif",
+  "fontBody": "kantumruy",
+  "ornament": "minimal",
+  "blocks": [
+    { "id": "hero", "enabled": true, "title": "ទំព័រដើម" },
+    { "id": "story", "enabled": true, "title": "ដំណើររឿងស្នេហា" },
+    { "id": "schedule", "enabled": true, "title": "កម្មវិធីពិធី" },
+    { "id": "gallery", "enabled": true, "title": "វិចិត្រសាលរូបភាព" },
+    { "id": "map", "enabled": true, "title": "ទីតាំងប្រារព្ធពិធី" },
+    { "id": "rsvp", "enabled": true, "title": "ការឆ្លើយតប (RSVP)" },
+    { "id": "wishes", "enabled": true, "title": "សៀវភៅជូនពរ" }
+  ]
+}

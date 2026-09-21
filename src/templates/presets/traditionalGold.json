@@ -1,0 +1,23 @@
+{
+  "id": "traditional-gold",
+  "name_kh": "មាសបុរាណប្រពៃណី",
+  "name_en": "Traditional Gold",
+  "description_kh": "រចនាប័ទ្មបែបប្រពៃណីខ្មែរ រំលេចដោយក្បូរក្បាច់មាស និងអក្សរមូលដ៏វិចិត្រ",
+  "description_en": "Classic Cambodian traditional wedding theme with rich soft gold ornaments",
+  "primaryColor": "#C59B27",
+  "accentColor": "#8B1E3F",
+  "bgColor": "#FAF7F2",
+  "cardBg": "#FFFFFF",
+  "fontHeading": "moul",
+  "fontBody": "kantumruy",
+  "ornament": "traditional",
+  "blocks": [
+    { "id": "hero", "enabled": true, "title": "ទំព័រដើម" },
+    { "id": "story", "enabled": true, "title": "ដំណើររឿងស្នេហា" },
+    { "id": "schedule", "enabled": true, "title": "កម្មវិធីពិធី" },
+    { "id": "gallery", "enabled": true, "title": "វិចិត្រសាលរូបភាព" },
+    { "id": "map", "enabled": true, "title": "ទីតាំងប្រារព្ធពិធី" },
+    { "id": "rsvp", "enabled": true, "title": "ការឆ្លើយតប (RSVP)" },
+    { "id": "wishes", "enabled": true, "title": "សៀវភៅជូនពរ" }
+  ]
+}

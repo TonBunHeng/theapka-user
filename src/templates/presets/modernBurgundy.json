@@ -1,0 +1,23 @@
+{
+  "id": "modern-burgundy",
+  "name_kh": "ប៊ឺហ្គិនឌីរាជវង្សទាន់សម័យ",
+  "name_en": "Royal Modern Burgundy",
+  "description_kh": "រចនាប័ទ្មបែបទំនើបផ្កាស្រស់ រំលេចដោយពណ៌ក្រហមក្រមៅ និងអក្សរឡាតាំងដ៏ទាក់ទាញ",
+  "description_en": "Modern floral romantic theme featuring deep royal burgundy and serif typography",
+  "primaryColor": "#8B1E3F",
+  "accentColor": "#C59B27",
+  "bgColor": "#FAF1F3",
+  "cardBg": "#FFFFFF",
+  "fontHeading": "serif",
+  "fontBody": "battambang",
+  "ornament": "floral",
+  "blocks": [
+    { "id": "hero", "enabled": true, "title": "ទំព័រដើម" },
+    { "id": "story", "enabled": true, "title": "ដំណើររឿងស្នេហា" },
+    { "id": "schedule", "enabled": true, "title": "កម្មវិធីពិធី" },
+    { "id": "gallery", "enabled": true, "title": "វិចិត្រសាលរូបភាព" },
+    { "id": "map", "enabled": true, "title": "ទីតាំងប្រារព្ធពិធី" },
+    { "id": "rsvp", "enabled": true, "title": "ការឆ្លើយតប (RSVP)" },
+    { "id": "wishes", "enabled": true, "title": "សៀវភៅជូនពរ" }
+  ]
+}
