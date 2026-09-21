@@ -104,7 +104,7 @@ export function SharePage() {
                   type="text"
                   readOnly
                   value={publicUrl}
-                  className="flex-1 px-3.5 py-2.5 rounded-xl border border-cream-300 bg-cream-50 text-xs sm:text-sm font-mono text-charcoal-800 outline-none"
+                  className="flex-1 px-3.5 py-2.5 rounded border border-cream-300 bg-cream-50 text-xs sm:text-sm font-mono text-charcoal-800 outline-none"
                 />
                 <Button variant="secondary" size="md" onClick={copyLink} leftIcon={Copy}>
                   {t('common.copy', 'Copy')}
@@ -121,7 +121,7 @@ export function SharePage() {
                 <button
                   type="button"
                   onClick={shareTelegram}
-                  className="flex items-center justify-center gap-2 p-3 rounded-xl bg-[#229ED9] text-white font-bold text-xs shadow-sm hover:opacity-90 active:scale-98 transition-all touch-target"
+                  className="flex items-center justify-center gap-2 p-3 rounded bg-[#229ED9] text-white font-bold text-xs shadow-sm hover:opacity-90 active:scale-98 transition-all touch-target"
                 >
                   <Send className="w-4 h-4" />
                   <span>{t('share.shareTelegram', 'Telegram')}</span>
@@ -130,7 +130,7 @@ export function SharePage() {
                 <button
                   type="button"
                   onClick={shareFacebook}
-                  className="flex items-center justify-center gap-2 p-3 rounded-xl bg-[#1877F2] text-white font-bold text-xs shadow-sm hover:opacity-90 active:scale-98 transition-all touch-target"
+                  className="flex items-center justify-center gap-2 p-3 rounded bg-[#1877F2] text-white font-bold text-xs shadow-sm hover:opacity-90 active:scale-98 transition-all touch-target"
                 >
                   <Globe className="w-4 h-4" />
                   <span>{t('share.shareFacebook', 'Facebook')}</span>
@@ -157,7 +157,7 @@ export function SharePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 p-6 sm:p-8">
-            <div className="p-6 bg-white rounded-3xl border-2 border-dashed border-gold-300 inline-block mx-auto shadow-card space-y-3">
+            <div className="p-6 bg-white rounded border-2 border-dashed border-gold-300 inline-block mx-auto shadow-card space-y-3">
               <div className="w-8 h-8 rounded-full bg-gold-100 text-gold-600 flex items-center justify-center mx-auto">
                 <Heart className="w-4 h-4 fill-current" />
               </div>

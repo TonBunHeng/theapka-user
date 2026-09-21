@@ -74,7 +74,7 @@ export function SettingsPage() {
   }
 
   return (
-    <div className="space-y-6 font-ui max-w-4xl">
+    <div className="space-y-6 font-ui w-full">
       {/* Header */}
       <div>
         <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight">
@@ -98,7 +98,7 @@ export function SettingsPage() {
             <button
               type="button"
               onClick={() => switchLanguage('km')}
-              className={`flex-1 p-3 rounded-xl border font-semibold text-xs sm:text-sm transition-all flex items-center justify-between touch-target ${
+              className={`flex-1 p-3 rounded border font-semibold text-xs sm:text-sm transition-all flex items-center justify-between touch-target ${
                 i18n.language === 'km'
                   ? 'bg-gold-50 border-gold-500 text-gold-900 shadow-sm'
                   : 'bg-white border-cream-200 text-charcoal-700 hover:bg-cream-50'
@@ -111,7 +111,7 @@ export function SettingsPage() {
             <button
               type="button"
               onClick={() => switchLanguage('en')}
-              className={`flex-1 p-3 rounded-xl border font-semibold text-xs sm:text-sm transition-all flex items-center justify-between touch-target ${
+              className={`flex-1 p-3 rounded border font-semibold text-xs sm:text-sm transition-all flex items-center justify-between touch-target ${
                 i18n.language === 'en'
                   ? 'bg-gold-50 border-gold-500 text-gold-900 shadow-sm'
                   : 'bg-white border-cream-200 text-charcoal-700 hover:bg-cream-50'
@@ -124,113 +124,115 @@ export function SettingsPage() {
         </CardContent>
       </Card>
 
-      {/* Profile Form */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2">
-            <User className="w-4 h-4 text-gold-600" />
-            <span>{t('settings.profile', 'Profile Info')}</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-5">
-          <form onSubmit={handleProfileSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Profile Form */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <User className="w-4 h-4 text-gold-600" />
+              <span>{t('settings.profile', 'Profile Info')}</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-5">
+            <form onSubmit={handleProfileSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Input
+                  label={t('auth.name', 'Full Name')}
+                  required
+                  value={profileForm.name}
+                  onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
+                />
+
+                <Input
+                  label={t('auth.phone', 'Phone Number')}
+                  value={profileForm.phone}
+                  onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Input
+                  label={t('auth.email', 'Email Address')}
+                  type="email"
+                  required
+                  value={profileForm.email}
+                  onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })}
+                />
+
+                <Input
+                  label="Avatar URL"
+                  value={profileForm.avatar}
+                  onChange={(e) => setProfileForm({ ...profileForm, avatar: e.target.value })}
+                />
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  isLoading={profileMutation.isPending}
+                  leftIcon={Save}
+                >
+                  {t('common.save', 'Save Changes')}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+
+        {/* Change Password Form */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-base flex items-center gap-2">
+              <Lock className="w-4 h-4 text-gold-600" />
+              <span>{t('settings.changePassword', 'Change Password')}</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="p-5">
+            <form onSubmit={handlePasswordSubmit} className="space-y-4">
               <Input
-                label={t('auth.name', 'Full Name')}
-                required
-                value={profileForm.name}
-                onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
-              />
-
-              <Input
-                label={t('auth.phone', 'Phone Number')}
-                value={profileForm.phone}
-                onChange={(e) => setProfileForm({ ...profileForm, phone: e.target.value })}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Input
-                label={t('auth.email', 'Email Address')}
-                type="email"
-                required
-                value={profileForm.email}
-                onChange={(e) => setProfileForm({ ...profileForm, email: e.target.value })}
-              />
-
-              <Input
-                label="Avatar URL"
-                value={profileForm.avatar}
-                onChange={(e) => setProfileForm({ ...profileForm, avatar: e.target.value })}
-              />
-            </div>
-
-            <div className="flex justify-end pt-2">
-              <Button
-                type="submit"
-                variant="primary"
-                isLoading={profileMutation.isPending}
-                leftIcon={Save}
-              >
-                {t('common.save', 'Save Changes')}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
-
-      {/* Change Password Form */}
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-base flex items-center gap-2">
-            <Lock className="w-4 h-4 text-gold-600" />
-            <span>{t('settings.changePassword', 'Change Password')}</span>
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-5">
-          <form onSubmit={handlePasswordSubmit} className="space-y-4">
-            <Input
-              label={t('settings.currentPassword', 'Current Password')}
-              type="password"
-              required
-              value={passwordForm.currentPassword}
-              onChange={(e) =>
-                setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
-              }
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <Input
-                label={t('settings.newPassword', 'New Password')}
+                label={t('settings.currentPassword', 'Current Password')}
                 type="password"
                 required
-                value={passwordForm.newPassword}
-                onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-              />
-
-              <Input
-                label={t('settings.confirmNewPassword', 'Confirm New Password')}
-                type="password"
-                required
-                value={passwordForm.confirmNewPassword}
+                value={passwordForm.currentPassword}
                 onChange={(e) =>
-                  setPasswordForm({ ...passwordForm, confirmNewPassword: e.target.value })
+                  setPasswordForm({ ...passwordForm, currentPassword: e.target.value })
                 }
               />
-            </div>
 
-            <div className="flex justify-end pt-2">
-              <Button
-                type="submit"
-                variant="secondary"
-                isLoading={passwordMutation.isPending}
-              >
-                {t('settings.changePassword', 'Update Password')}
-              </Button>
-            </div>
-          </form>
-        </CardContent>
-      </Card>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <Input
+                  label={t('settings.newPassword', 'New Password')}
+                  type="password"
+                  required
+                  value={passwordForm.newPassword}
+                  onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                />
+
+                <Input
+                  label={t('settings.confirmNewPassword', 'Confirm New Password')}
+                  type="password"
+                  required
+                  value={passwordForm.confirmNewPassword}
+                  onChange={(e) =>
+                    setPasswordForm({ ...passwordForm, confirmNewPassword: e.target.value })
+                  }
+                />
+              </div>
+
+              <div className="flex justify-end pt-2">
+                <Button
+                  type="submit"
+                  variant="secondary"
+                  isLoading={passwordMutation.isPending}
+                >
+                  {t('settings.changePassword', 'Update Password')}
+                </Button>
+              </div>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }

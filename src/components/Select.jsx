@@ -35,7 +35,7 @@ export const Select = forwardRef(
             ref={ref}
             id={selectId}
             className={`
-              w-full min-h-[44px] px-3.5 py-2.5 pr-10 rounded-xl text-charcoal-900 bg-white
+              w-full min-h-[44px] px-3.5 py-2.5 pr-10 rounded text-charcoal-900 bg-white
               border transition-all duration-200 text-sm font-ui appearance-none
               ${
                 error

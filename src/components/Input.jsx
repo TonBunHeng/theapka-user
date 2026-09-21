@@ -30,7 +30,7 @@ export const Input = forwardRef(
           </label>
         )}
 
-        <div className="relative rounded-xl">
+        <div className="relative rounded">
           {LeftIcon && (
             <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-charcoal-400">
               <LeftIcon className="w-5 h-5" />
@@ -42,7 +42,7 @@ export const Input = forwardRef(
             id={inputId}
             type={type}
             className={`
-              w-full min-h-[44px] px-3.5 py-2.5 rounded-xl text-charcoal-900 bg-white
+              w-full min-h-[44px] px-3.5 py-2.5 rounded text-charcoal-900 bg-white
               border transition-all duration-200 text-sm font-ui
               placeholder:text-charcoal-400
               ${LeftIcon ? 'pl-11' : ''}

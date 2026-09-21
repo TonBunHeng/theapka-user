@@ -49,7 +49,7 @@ export function DashboardPage() {
   if (isLoading) {
     return (
       <div className="space-y-6 animate-pulse font-ui">
-        <div className="h-24 bg-white rounded-2xl border border-cream-200" />
+        <div className="h-24 bg-white rounded border border-cream-200" />
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <SkeletonCard />
           <SkeletonCard />
@@ -62,7 +62,7 @@ export function DashboardPage() {
 
   if (isError) {
     return (
-      <div className="p-8 text-center bg-white rounded-2xl border border-red-200 font-ui space-y-4">
+      <div className="p-8 text-center bg-white rounded border border-red-200 font-ui space-y-4">
         <p className="text-red-600 font-semibold">{t('common.error', 'Failed to load dashboard data')}</p>
         <Button variant="outline" onClick={() => refetch()}>
           {t('common.retry', 'Retry')}
@@ -108,7 +108,7 @@ export function DashboardPage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-cream-100 via-white to-gold-50 p-6 sm:p-8 rounded-3xl border border-gold-200 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-gradient-to-r from-cream-100 via-white to-gold-50 p-6 sm:p-8 rounded border border-gold-200 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
             <span className="text-xs font-semibold uppercase tracking-wider text-gold-700 bg-gold-100 px-2.5 py-0.5 rounded-full">
@@ -148,7 +148,7 @@ export function DashboardPage() {
             href={`/i/${wedding?.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold shadow-sm transition-transform active:scale-95 touch-target"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold shadow-sm transition-transform active:scale-95 touch-target"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>{t('dashboard.preview', 'Preview')}</span>
@@ -165,7 +165,7 @@ export function DashboardPage() {
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
                 {t('dashboard.daysCountdown', 'Countdown')}
               </span>
-              <div className="w-8 h-8 rounded-xl bg-gold-100 text-gold-700 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-gold-100 text-gold-700 flex items-center justify-center">
                 <Clock className="w-4 h-4" />
               </div>
             </div>
@@ -178,7 +178,7 @@ export function DashboardPage() {
               </div>
             ) : (
               <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-extrabold text-charcoal-900 font-serif">
+                <span className="text-3xl font-extrabold text-charcoal-900 font-ui">
                   {isKhmer ? toKhmerNumeral(countdown.days) : countdown.days}
                 </span>
                 <span className="text-sm text-charcoal-500">
@@ -199,13 +199,13 @@ export function DashboardPage() {
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
                 {t('dashboard.totalGuests', 'Total Guests')}
               </span>
-              <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-blue-50 text-blue-600 flex items-center justify-center">
                 <Users className="w-4 h-4" />
               </div>
             </div>
 
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-charcoal-900">
+              <span className="text-3xl font-extrabold text-charcoal-900 font-ui">
                 {isKhmer ? toKhmerNumeral(stats?.total_guests || 0) : stats?.total_guests || 0}
               </span>
               <span className="text-xs text-charcoal-500">នាក់ / Guests</span>
@@ -237,13 +237,13 @@ export function DashboardPage() {
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
                 {t('gifts.totalKhr', 'Total Gifts (KHR)')}
               </span>
-              <div className="w-8 h-8 rounded-xl bg-burgundy-50 text-burgundy-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-burgundy-50 text-burgundy-600 flex items-center justify-center">
                 <Gift className="w-4 h-4" />
               </div>
             </div>
 
             <div>
-              <span className="text-2xl font-extrabold text-burgundy-700 block truncate">
+              <span className="text-3xl font-extrabold text-burgundy-700 font-ui block truncate">
                 {formatCurrency(stats?.gifts?.total_khr || 0, 'KHR', isKhmer)}
               </span>
             </div>
@@ -261,13 +261,13 @@ export function DashboardPage() {
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
                 {t('gifts.totalUsd', 'Total Gifts (USD)')}
               </span>
-              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-emerald-50 text-emerald-600 flex items-center justify-center">
                 <Gift className="w-4 h-4" />
               </div>
             </div>
 
             <div>
-              <span className="text-2xl font-extrabold text-emerald-700 block truncate">
+              <span className="text-3xl font-extrabold text-emerald-700 font-ui block truncate">
                 {formatCurrency(stats?.gifts?.total_usd || 0, 'USD', isKhmer)}
               </span>
             </div>
@@ -333,35 +333,35 @@ export function DashboardPage() {
 
             <CardContent className="space-y-4">
               <div className="space-y-3 font-ui text-sm">
-                <div className="flex items-center justify-between p-3 rounded-xl bg-cream-50">
+                <div className="flex items-center justify-between p-3 rounded bg-cream-50">
                   <span className="text-charcoal-600">{t('dashboard.invited', 'Invited')}</span>
                   <span className="font-bold text-charcoal-900">
                     {isKhmer ? toKhmerNumeral(stats?.invited || 0) : stats?.invited || 0}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-cream-50">
+                <div className="flex items-center justify-between p-3 rounded bg-cream-50">
                   <span className="text-charcoal-600">{t('dashboard.opened', 'Opened Link')}</span>
                   <span className="font-bold text-charcoal-900">
                     {isKhmer ? toKhmerNumeral(stats?.opened || 0) : stats?.opened || 0}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-green-50 text-green-800">
+                <div className="flex items-center justify-between p-3 rounded bg-green-50 text-green-800">
                   <span>{t('dashboard.attending', 'Attending')}</span>
                   <span className="font-bold">
                     {isKhmer ? toKhmerNumeral(stats?.attending || 0) : stats?.attending || 0}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-red-50 text-red-800">
+                <div className="flex items-center justify-between p-3 rounded bg-red-50 text-red-800">
                   <span>{t('dashboard.declined', 'Declined')}</span>
                   <span className="font-bold">
                     {isKhmer ? toKhmerNumeral(stats?.declined || 0) : stats?.declined || 0}
                   </span>
                 </div>
 
-                <div className="flex items-center justify-between p-3 rounded-xl bg-amber-50 text-amber-800">
+                <div className="flex items-center justify-between p-3 rounded bg-amber-50 text-amber-800">
                   <span>{t('dashboard.pending', 'Pending')}</span>
                   <span className="font-bold">
                     {isKhmer ? toKhmerNumeral(stats?.pending || 0) : stats?.pending || 0}

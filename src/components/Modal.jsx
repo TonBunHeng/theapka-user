@@ -52,7 +52,7 @@ export function Modal({
       {/* Modal Container */}
       <div
         ref={modalRef}
-        className={`relative w-full ${maxWidth} bg-white rounded-2xl shadow-elevated border border-gold-200/60 overflow-hidden transform transition-all duration-200 animate-in fade-in zoom-in-95 my-8 ${className}`}
+        className={`relative w-full ${maxWidth} bg-white rounded shadow-elevated border border-gold-200/60 overflow-hidden transform transition-all duration-200 animate-in fade-in zoom-in-95 my-8 ${className}`}
       >
         {/* Header */}
         {(title || showClose) && (
@@ -72,7 +72,7 @@ export function Modal({
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1.5 -mr-1 text-charcoal-400 hover:text-charcoal-700 hover:bg-cream-100 rounded-lg transition-colors touch-target flex items-center justify-center"
+                className="p-1.5 -mr-1 text-charcoal-400 hover:text-charcoal-700 hover:bg-cream-100 rounded transition-colors touch-target flex items-center justify-center"
                 aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />

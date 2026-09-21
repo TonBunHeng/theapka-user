@@ -23,6 +23,7 @@ import Button from '../../components/Button'
 import Modal from '../../components/Modal'
 import { SkeletonCard } from '../../components/Skeleton'
 import { useToast } from '../../components/Toast'
+import { FONT_OPTIONS } from '../../lib/fonts'
 
 import traditionalPreset from '../../templates/presets/traditionalGold.json'
 import modernPreset from '../../templates/presets/modernBurgundy.json'
@@ -198,7 +199,7 @@ export function InvitationPage() {
                     key={preset.id}
                     onClick={() => handleApplyPreset(preset)}
                     className={`
-                      p-3.5 rounded-xl border-2 cursor-pointer transition-all flex items-center justify-between
+                      p-3.5 rounded border-2 cursor-pointer transition-all flex items-center justify-between
                       ${
                         isSelected
                           ? 'border-gold-500 bg-gold-50/50 shadow-sm'
@@ -208,7 +209,7 @@ export function InvitationPage() {
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-xs font-serif font-bold"
+                        className="w-8 h-8 rounded flex items-center justify-center text-white text-xs font-serif font-bold"
                         style={{ backgroundColor: preset.primaryColor }}
                       >
                         TK
@@ -250,7 +251,7 @@ export function InvitationPage() {
                       onChange={(e) =>
                         setTemplateConfig({ ...templateConfig, primaryColor: e.target.value })
                       }
-                      className="w-9 h-9 rounded-lg cursor-pointer border border-cream-300 p-0.5"
+                      className="w-9 h-9 rounded cursor-pointer border border-cream-300 p-0.5"
                     />
                     <span className="text-xs font-mono text-charcoal-700">
                       {templateConfig.primaryColor}
@@ -269,7 +270,7 @@ export function InvitationPage() {
                       onChange={(e) =>
                         setTemplateConfig({ ...templateConfig, accentColor: e.target.value })
                       }
-                      className="w-9 h-9 rounded-lg cursor-pointer border border-cream-300 p-0.5"
+                      className="w-9 h-9 rounded cursor-pointer border border-cream-300 p-0.5"
                     />
                     <span className="text-xs font-mono text-charcoal-700">
                       {templateConfig.accentColor}
@@ -282,34 +283,17 @@ export function InvitationPage() {
                 <label className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">
                   {t('invitation.fonts', 'Heading Typography')}
                 </label>
-                <div className="grid grid-cols-2 gap-2">
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setTemplateConfig({ ...templateConfig, fontHeading: 'moul' })
-                    }
-                    className={`p-2.5 rounded-xl border text-xs font-moul transition-all ${
-                      templateConfig.fontHeading === 'moul'
-                        ? 'bg-gold-50 border-gold-500 text-gold-800'
-                        : 'bg-white border-cream-200 text-charcoal-600'
-                    }`}
-                  >
-                    អក្សរមូល (Moul)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setTemplateConfig({ ...templateConfig, fontHeading: 'serif' })
-                    }
-                    className={`p-2.5 rounded-xl border text-xs font-serif font-bold transition-all ${
-                      templateConfig.fontHeading === 'serif'
-                        ? 'bg-gold-50 border-gold-500 text-gold-800'
-                        : 'bg-white border-cream-200 text-charcoal-600'
-                    }`}
-                  >
-                    Serif Roman
-                  </button>
-                </div>
+                <select
+                  value={templateConfig.fontHeading || 'moul'}
+                  onChange={(e) => setTemplateConfig({ ...templateConfig, fontHeading: e.target.value })}
+                  className="w-full px-3.5 py-2.5 rounded border border-cream-300 bg-white text-sm text-charcoal-800 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none font-ui"
+                >
+                  {FONT_OPTIONS.map((font) => (
+                    <option key={font.value} value={font.value}>
+                      {font.label}
+                    </option>
+                  ))}
+                </select>
               </div>
             </CardContent>
           </Card>
@@ -325,7 +309,7 @@ export function InvitationPage() {
                 return (
                   <div
                     key={block.id}
-                    className={`flex items-center justify-between p-3 rounded-xl border transition-all ${
+                    className={`flex items-center justify-between p-3 rounded border transition-all ${
                       isEnabled ? 'bg-white border-cream-200' : 'bg-cream-100/60 border-cream-200 opacity-60'
                     }`}
                   >
@@ -333,7 +317,7 @@ export function InvitationPage() {
                       <button
                         type="button"
                         onClick={() => toggleBlockVisibility(block.id)}
-                        className={`p-1.5 rounded-lg touch-target flex items-center justify-center ${
+                        className={`p-1.5 rounded touch-target flex items-center justify-center ${
                           isEnabled ? 'text-green-600 hover:bg-green-50' : 'text-charcoal-400 hover:bg-cream-200'
                         }`}
                         title={isEnabled ? 'Hide block' : 'Show block'}
@@ -375,12 +359,20 @@ export function InvitationPage() {
 
         {/* Live Preview Frame (7 Cols) */}
         <div className="lg:col-span-7 space-y-3">
-          <div className="flex items-center justify-between px-2">
-            <div className="flex items-center gap-2 text-xs font-bold text-charcoal-700 uppercase tracking-wider">
-              <Smartphone className="w-4 h-4 text-gold-600" />
-              <span>{t('invitation.mobileView', 'Mobile Frame Live Preview')}</span>
-            </div>
-
+          <div className="flex items-center justify-end px-2">
+            <a
+              href={wedding?.slug ? `/i/${wedding.slug}?autoplay=1` : '#'}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(event) => {
+                if (!wedding?.slug) event.preventDefault()
+              }}
+              className="flex items-center gap-1.5 text-xs text-burgundy-600 hover:text-burgundy-700 font-semibold font-ui mr-4"
+              aria-disabled={!wedding?.slug}
+            >
+              <ExternalLink className="w-3.5 h-3.5" />
+              <span>{t('dashboard.preview', 'Preview')}</span>
+            </a>
             <button
               type="button"
               onClick={() => setIsFullscreenPreview(true)}
@@ -391,23 +383,16 @@ export function InvitationPage() {
             </button>
           </div>
 
-          {/* Smartphone Simulator Frame */}
-          <div className="mx-auto max-w-[390px] rounded-[44px] border-[10px] border-charcoal-800 shadow-elevated overflow-hidden bg-white relative">
-            {/* Phone Speaker Notch */}
-            <div className="w-32 h-5 bg-charcoal-800 rounded-b-xl mx-auto absolute top-0 inset-x-0 z-30" />
-
-            {/* Scrollable Screen Content */}
-            <div className="h-[680px] overflow-y-auto">
-              <TemplateRenderer
-                wedding={wedding}
-                guest={{ name: 'ភ្ញៀវកិត្តិយស (គំរូ)', seats: 2 }}
-                schedules={schedules}
-                gallery={gallery}
-                wishes={[]}
-                templateConfig={templateConfig}
-                lang={i18n.language}
-              />
-            </div>
+          <div className="overflow-hidden bg-white">
+            <TemplateRenderer
+              wedding={wedding}
+              guest={{ name: 'ភ្ញៀវកិត្តិយស (គំរូ)', seats: 2 }}
+              schedules={schedules}
+              gallery={gallery}
+              wishes={[]}
+              templateConfig={templateConfig}
+              lang={i18n.language}
+            />
           </div>
         </div>
       </div>
@@ -422,7 +407,7 @@ export function InvitationPage() {
             <button
               type="button"
               onClick={() => setIsFullscreenPreview(false)}
-              className="p-2 text-charcoal-600 hover:text-charcoal-900 rounded-lg touch-target"
+              className="p-2 text-charcoal-600 hover:text-charcoal-900 rounded touch-target"
             >
               <X className="w-5 h-5" />
             </button>

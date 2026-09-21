@@ -130,7 +130,7 @@ export function GuestGroupsPage() {
                     <button
                       type="button"
                       onClick={() => openEdit(group)}
-                      className="p-1.5 text-charcoal-500 hover:text-charcoal-900 rounded-lg"
+                      className="p-1.5 text-charcoal-500 hover:text-charcoal-900 rounded"
                       title={t('common.edit', 'Edit')}
                     >
                       <Edit2 className="w-4 h-4" />
@@ -142,7 +142,7 @@ export function GuestGroupsPage() {
                           deleteMutation.mutate(group.id)
                         }
                       }}
-                      className="p-1.5 text-charcoal-400 hover:text-red-600 rounded-lg"
+                      className="p-1.5 text-charcoal-400 hover:text-red-600 rounded"
                       title={t('common.delete', 'Delete')}
                     >
                       <Trash2 className="w-4 h-4" />
@@ -206,7 +206,7 @@ export function GuestGroupsPage() {
                 type="color"
                 value={formData.color}
                 onChange={(e) => setFormData({ ...formData, color: e.target.value })}
-                className="w-8 h-8 rounded-lg cursor-pointer border border-cream-300 p-0.5"
+                className="w-8 h-8 rounded cursor-pointer border border-cream-300 p-0.5"
               />
             </div>
           </div>

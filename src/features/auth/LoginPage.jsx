@@ -87,7 +87,7 @@ export function LoginPage() {
         </div>
 
         {serverError && (
-          <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-ui flex items-center gap-2">
+          <div className="p-3 rounded bg-red-50 border border-red-200 text-red-700 text-xs font-ui flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{serverError}</span>
           </div>
@@ -146,7 +146,7 @@ export function LoginPage() {
                 setValue('email', 'sovann@theapka.com')
                 setValue('password', 'password123')
               }}
-              className="px-2.5 py-1.5 rounded-lg bg-cream-100 hover:bg-cream-200 text-[11px] font-semibold text-charcoal-700 font-ui border border-cream-200 truncate"
+              className="px-2.5 py-1.5 rounded bg-cream-100 hover:bg-cream-200 text-[11px] font-semibold text-charcoal-700 font-ui border border-cream-200 truncate"
             >
               Couple Account
             </button>
@@ -156,7 +156,7 @@ export function LoginPage() {
                 setValue('email', 'admin@theapka.com')
                 setValue('password', 'admin123')
               }}
-              className="px-2.5 py-1.5 rounded-lg bg-red-50 hover:bg-red-100 text-[11px] font-semibold text-red-700 font-ui border border-red-100 truncate"
+              className="px-2.5 py-1.5 rounded bg-red-50 hover:bg-red-100 text-[11px] font-semibold text-red-700 font-ui border border-red-100 truncate"
             >
               Admin (Test Reject)
             </button>

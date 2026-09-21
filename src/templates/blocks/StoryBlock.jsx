@@ -1,20 +1,21 @@
 import React from 'react'
 import { Heart } from 'lucide-react'
+import { getFontFamily } from '../../lib/fonts'
 
 export function StoryBlock({ wedding, config = {}, lang = 'km' }) {
   const isKhmer = lang === 'km'
   const primaryColor = config.primaryColor || '#C59B27'
-  const fontHeading = config.fontHeading === 'serif' ? 'font-serif' : 'font-moul'
+  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
 
   return (
     <section className="py-12 md:py-16 px-4">
       <div className="max-w-xl mx-auto space-y-10">
         {/* Parents Announcement Section */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gold-200/60 shadow-card text-center space-y-6">
+        <div className="bg-white rounded p-6 sm:p-8 border border-gold-200/60 shadow-card text-center space-y-6">
           <div className="space-y-1">
             <h3
-              className={`text-lg sm:text-xl leading-relaxed ${fontHeading}`}
-              style={{ color: primaryColor }}
+              className="text-lg sm:text-xl leading-relaxed"
+              style={{ ...headingFont, color: primaryColor }}
             >
               {isKhmer ? 'សេចក្តីគោរពអញ្ជើញពីមាតាបិតាទាំងសងខាង' : 'With Blessings from Parents'}
             </h3>
@@ -25,7 +26,7 @@ export function StoryBlock({ wedding, config = {}, lang = 'km' }) {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2 border-t border-cream-200/80">
             {/* Groom's Parents */}
-            <div className="space-y-1.5 p-3 rounded-2xl bg-cream-50/60 border border-gold-100">
+            <div className="space-y-1.5 p-3 rounded bg-cream-50/60 border border-gold-100">
               <span className="text-xs font-bold text-gold-700 font-ui uppercase">
                 {isKhmer ? 'ខាងកូនកំលោះ' : "Groom's Side"}
               </span>
@@ -38,7 +39,7 @@ export function StoryBlock({ wedding, config = {}, lang = 'km' }) {
             </div>
 
             {/* Bride's Parents */}
-            <div className="space-y-1.5 p-3 rounded-2xl bg-cream-50/60 border border-gold-100">
+            <div className="space-y-1.5 p-3 rounded bg-cream-50/60 border border-gold-100">
               <span className="text-xs font-bold text-gold-700 font-ui uppercase">
                 {isKhmer ? 'ខាងកូនក្រមុំ' : "Bride's Side"}
               </span>
@@ -54,14 +55,14 @@ export function StoryBlock({ wedding, config = {}, lang = 'km' }) {
 
         {/* Love Story Section */}
         {wedding?.story && (
-          <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gold-200/60 shadow-card text-center space-y-4">
+          <div className="bg-white rounded p-6 sm:p-8 border border-gold-200/60 shadow-card text-center space-y-4">
             <div className="w-8 h-8 rounded-full bg-gold-100 flex items-center justify-center text-gold-600 mx-auto">
               <Heart className="w-4 h-4 fill-current" />
             </div>
 
             <h3
-              className={`text-lg sm:text-xl leading-relaxed ${fontHeading}`}
-              style={{ color: primaryColor }}
+              className="text-lg sm:text-xl leading-relaxed"
+              style={{ ...headingFont, color: primaryColor }}
             >
               {isKhmer ? 'ដំណើររឿងនៃក្តីស្រឡាញ់' : 'Our Love Story'}
             </h3>

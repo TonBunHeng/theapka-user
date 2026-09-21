@@ -14,9 +14,9 @@ export function EmptyState({
 }) {
   return (
     <div
-      className={`flex flex-col items-center justify-center text-center p-8 md:p-12 rounded-2xl bg-cream-50/70 border border-dashed border-gold-300/50 ${className}`}
+      className={`flex flex-col items-center justify-center text-center p-8 md:p-12 rounded bg-cream-50/70 border border-dashed border-gold-300/50 ${className}`}
     >
-      <div className="w-14 h-14 rounded-2xl bg-gold-100 flex items-center justify-center text-gold-600 mb-4 shadow-sm">
+      <div className="w-14 h-14 rounded bg-gold-100 flex items-center justify-center text-gold-600 mb-4 shadow-sm">
         <Icon className="w-7 h-7" />
       </div>
 

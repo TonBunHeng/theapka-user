@@ -26,7 +26,7 @@ export function WishForm({ guestName = '', onSubmit, isSubmitting = false, lang 
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder={isKhmer ? 'ឈ្មោះភ្ញៀវកិត្តិយស...' : 'Enter your name...'}
-          className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
+          className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
         />
       </div>
 
@@ -44,7 +44,7 @@ export function WishForm({ guestName = '', onSubmit, isSubmitting = false, lang 
               ? 'សូមជូនពរឱ្យអ្នកទាំងពីរមានសុភមង្គល...'
               : 'Write your warmest wishes for the couple...'
           }
-          className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui resize-none outline-none"
+          className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui resize-none outline-none"
         />
       </div>
 

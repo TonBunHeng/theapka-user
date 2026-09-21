@@ -5,7 +5,6 @@ import ScheduleBlock from './blocks/ScheduleBlock'
 import GalleryBlock from './blocks/GalleryBlock'
 import MapBlock from './blocks/MapBlock'
 import RsvpBlock from './blocks/RsvpBlock'
-import WishesBlock from './blocks/WishesBlock'
 
 export function TemplateRenderer({
   wedding,
@@ -32,7 +31,6 @@ export function TemplateRenderer({
       { id: 'gallery', enabled: true },
       { id: 'map', enabled: true },
       { id: 'rsvp', enabled: true },
-      { id: 'wishes', enabled: true },
     ],
   }
 
@@ -83,16 +81,6 @@ export function TemplateRenderer({
         key="rsvp"
         guest={guest}
         onRsvpSubmit={onRsvpSubmit}
-        config={config}
-        lang={lang}
-      />
-    ),
-    wishes: (
-      <WishesBlock
-        key="wishes"
-        wishes={wishes}
-        guest={guest}
-        onWishSubmit={onWishSubmit}
         config={config}
         lang={lang}
       />

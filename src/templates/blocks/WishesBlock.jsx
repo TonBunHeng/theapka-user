@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { MessageSquareHeart, Send, User } from 'lucide-react'
 import Button from '../../components/Button'
 import { formatDate } from '../../lib/format'
+import { getFontFamily } from '../../lib/fonts'
 
 export function WishesBlock({
   wishes = [],
@@ -12,7 +13,7 @@ export function WishesBlock({
 }) {
   const isKhmer = lang === 'km'
   const primaryColor = config.primaryColor || '#C59B27'
-  const fontHeading = config.fontHeading === 'serif' ? 'font-serif' : 'font-moul'
+  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
 
   const [name, setName] = useState(guest?.name || '')
   const [message, setMessage] = useState('')
@@ -38,8 +39,8 @@ export function WishesBlock({
       <div className="max-w-xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h3
-            className={`text-xl sm:text-2xl leading-relaxed ${fontHeading}`}
-            style={{ color: primaryColor }}
+            className="text-xl sm:text-2xl leading-relaxed"
+            style={{ ...headingFont, color: primaryColor }}
           >
             {isKhmer ? 'សៀវភៅជូនពរ' : 'Guestbook Wishes'}
           </h3>
@@ -49,7 +50,7 @@ export function WishesBlock({
         </div>
 
         {/* Wish Form */}
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gold-200/60 shadow-card space-y-4">
+        <div className="bg-white rounded p-6 sm:p-8 border border-gold-200/60 shadow-card space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4 font-ui">
             <div>
               <label className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">
@@ -61,7 +62,7 @@ export function WishesBlock({
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={isKhmer ? 'ឈ្មោះភ្ញៀវកិត្តិយស...' : 'Enter your name...'}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
+                className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
               />
             </div>
 
@@ -79,7 +80,7 @@ export function WishesBlock({
                     ? 'សូមជូនពរឱ្យអ្នកទាំងពីរមានសុភមង្គល...'
                     : 'Write your warmest wishes for the couple...'
                 }
-                className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui resize-none outline-none"
+                className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui resize-none outline-none"
               />
             </div>
 
@@ -101,7 +102,7 @@ export function WishesBlock({
             wishes.map((w, idx) => (
               <div
                 key={w.id || idx}
-                className="p-4 rounded-2xl bg-white border border-gold-100 shadow-sm flex items-start gap-3.5 animate-in fade-in duration-200"
+                className="p-4 rounded bg-white border border-gold-100 shadow-sm flex items-start gap-3.5 animate-in fade-in duration-200"
               >
                 <div className="w-9 h-9 rounded-full bg-gold-100 text-gold-700 flex items-center justify-center font-bold text-xs shrink-0 mt-0.5">
                   {w.name?.[0] || <User className="w-4 h-4" />}

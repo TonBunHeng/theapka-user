@@ -146,7 +146,7 @@ export function SchedulePage() {
               <Card key={item.id} className="hover:border-gold-300 transition-all">
                 <CardContent className="p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-2xl bg-gold-100 text-gold-700 font-bold flex items-center justify-center shrink-0">
+                    <div className="w-10 h-10 rounded bg-gold-100 text-gold-700 font-bold flex items-center justify-center shrink-0">
                       {isKhmer ? toKhmerNumeral(index + 1) : index + 1}
                     </div>
 
@@ -180,7 +180,7 @@ export function SchedulePage() {
                       type="button"
                       disabled={index === 0}
                       onClick={() => moveOrder(index, -1)}
-                      className="p-2 text-charcoal-400 hover:text-charcoal-700 disabled:opacity-30 rounded-lg touch-target"
+                      className="p-2 text-charcoal-400 hover:text-charcoal-700 disabled:opacity-30 rounded touch-target"
                       title="Move up"
                     >
                       <ArrowUp className="w-4 h-4" />
@@ -190,7 +190,7 @@ export function SchedulePage() {
                       type="button"
                       disabled={index === schedules.length - 1}
                       onClick={() => moveOrder(index, 1)}
-                      className="p-2 text-charcoal-400 hover:text-charcoal-700 disabled:opacity-30 rounded-lg touch-target"
+                      className="p-2 text-charcoal-400 hover:text-charcoal-700 disabled:opacity-30 rounded touch-target"
                       title="Move down"
                     >
                       <ArrowDown className="w-4 h-4" />
@@ -199,7 +199,7 @@ export function SchedulePage() {
                     <button
                       type="button"
                       onClick={() => openEditModal(item)}
-                      className="p-2 text-charcoal-600 hover:text-burgundy-600 rounded-lg touch-target"
+                      className="p-2 text-charcoal-600 hover:text-burgundy-600 rounded touch-target"
                       title={t('common.edit', 'Edit')}
                     >
                       <Edit2 className="w-4 h-4" />
@@ -208,7 +208,7 @@ export function SchedulePage() {
                     <button
                       type="button"
                       onClick={() => handleDelete(item.id)}
-                      className="p-2 text-charcoal-400 hover:text-red-600 rounded-lg touch-target"
+                      className="p-2 text-charcoal-400 hover:text-red-600 rounded touch-target"
                       title={t('common.delete', 'Delete')}
                     >
                       <Trash2 className="w-4 h-4" />
@@ -274,7 +274,7 @@ export function SchedulePage() {
               placeholder="ការពិពណ៌នាអំពីពិធី..."
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
+              className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
             />
           </div>
 

@@ -114,7 +114,7 @@ export function DashboardLayout() {
       <aside className="hidden md:flex flex-col w-64 lg:w-72 bg-white border-r border-gold-200/50 shadow-sm shrink-0 h-screen sticky top-0 z-30">
         {/* Brand Header */}
         <div className="p-6 border-b border-cream-200 flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-white shadow-soft font-moul text-lg">
+          <div className="w-10 h-10 rounded bg-gold-500 flex items-center justify-center text-white shadow-soft font-moul text-lg">
             ធ
           </div>
           <div>
@@ -125,7 +125,7 @@ export function DashboardLayout() {
 
         {/* Wedding / Couple Quick Banner */}
         {wedding && (
-          <div className="mx-4 my-3 p-3 bg-cream-50 rounded-xl border border-gold-200/40 flex items-center justify-between">
+          <div className="mx-4 my-3 p-3 bg-cream-50 rounded border border-gold-200/40 flex items-center justify-between">
             <div className="truncate pr-2">
               <p className="text-xs font-semibold text-charcoal-800 font-ui truncate">
                 {wedding.groom_name_kh} & {wedding.bride_name_kh}
@@ -138,7 +138,7 @@ export function DashboardLayout() {
                 target="_blank"
                 rel="noreferrer"
                 title="Open Public Link"
-                className="p-1.5 text-charcoal-400 hover:text-burgundy-600 rounded-lg hover:bg-white transition-colors"
+                className="p-1.5 text-charcoal-400 hover:text-burgundy-600 rounded hover:bg-white transition-colors"
               >
                 <ExternalLink className="w-4 h-4" />
               </a>
@@ -148,7 +148,7 @@ export function DashboardLayout() {
 
         {/* Offline pending badge button in sidebar */}
         {pendingCount > 0 && (
-          <div className="mx-4 mb-2 p-2.5 bg-amber-50 border border-amber-200 rounded-xl flex items-center justify-between animate-pulse">
+          <div className="mx-4 mb-2 p-2.5 bg-amber-50 border border-amber-200 rounded flex items-center justify-between animate-pulse">
             <div className="flex items-center gap-2 text-xs font-medium text-amber-800 font-ui">
               <CloudOff className="w-4 h-4 text-amber-600 shrink-0" />
               <span>Pending sync ({pendingCount})</span>
@@ -173,9 +173,9 @@ export function DashboardLayout() {
               <NavLink
                 key={item.to}
                 to={item.to}
-                end={item.to === '/'}
+                end
                 className={({ isActive }) => `
-                  flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200
+                  flex items-center justify-between px-3.5 py-2.5 rounded text-sm font-medium transition-all duration-200
                   ${
                     isActive
                       ? 'bg-burgundy-50 text-burgundy-600 font-semibold shadow-sm border border-burgundy-200/50'
@@ -203,7 +203,7 @@ export function DashboardLayout() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-2.5 py-1.5 text-xs font-medium text-charcoal-600 hover:text-charcoal-900 hover:bg-cream-100 rounded-lg transition-colors font-ui"
+              className="flex items-center gap-2 px-2.5 py-1.5 text-xs font-medium text-charcoal-600 hover:text-charcoal-900 hover:bg-cream-100 rounded transition-colors font-ui"
             >
               <Globe className="w-4 h-4 text-gold-600" />
               <span>{i18n.language === 'km' ? 'ភាសាខ្មែរ' : 'English'}</span>
@@ -212,7 +212,7 @@ export function DashboardLayout() {
             <button
               type="button"
               onClick={handleLogout}
-              className="p-2 text-charcoal-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+              className="p-2 text-charcoal-400 hover:text-red-600 hover:bg-red-50 rounded transition-colors"
               title={t('auth.logout', 'Log out')}
             >
               <LogOut className="w-4 h-4" />
@@ -234,7 +234,7 @@ export function DashboardLayout() {
       {/* Mobile Top Header */}
       <header className="md:hidden sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-gold-200/50 px-4 py-3 flex items-center justify-between shadow-sm">
         <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-gold-500 flex items-center justify-center text-white font-moul text-sm shadow-soft">
+          <div className="w-8 h-8 rounded bg-gold-500 flex items-center justify-center text-white font-moul text-sm shadow-soft">
             ធ
           </div>
           <div>
@@ -257,7 +257,7 @@ export function DashboardLayout() {
           <button
             type="button"
             onClick={toggleLanguage}
-            className="p-2 text-charcoal-600 hover:text-charcoal-900 rounded-lg"
+            className="p-2 text-charcoal-600 hover:text-charcoal-900 rounded"
             title="Switch Language"
           >
             <Globe className="w-4 h-4" />
@@ -266,7 +266,7 @@ export function DashboardLayout() {
           <button
             type="button"
             onClick={() => setIsMobileMenuOpen(true)}
-            className="p-2 text-charcoal-700 hover:text-charcoal-900 rounded-lg touch-target flex items-center justify-center"
+            className="p-2 text-charcoal-700 hover:text-charcoal-900 rounded touch-target flex items-center justify-center"
             aria-label="Open menu"
           >
             <Menu className="w-5 h-5" />
@@ -288,7 +288,8 @@ export function DashboardLayout() {
             <NavLink
               key={tab.to}
               to={tab.to}
-              className={`flex flex-col items-center justify-center py-1 px-2 rounded-xl transition-colors min-w-[56px] touch-target ${
+              end
+              className={`flex flex-col items-center justify-center py-1 px-2 rounded transition-colors min-w-[56px] touch-target ${
                 isActive ? 'text-burgundy-600 font-semibold' : 'text-charcoal-500 hover:text-charcoal-800'
               }`}
             >
@@ -309,7 +310,7 @@ export function DashboardLayout() {
         <button
           type="button"
           onClick={() => setIsMobileMenuOpen(true)}
-          className="flex flex-col items-center justify-center py-1 px-2 rounded-xl text-charcoal-500 hover:text-charcoal-800 min-w-[56px] touch-target"
+          className="flex flex-col items-center justify-center py-1 px-2 rounded text-charcoal-500 hover:text-charcoal-800 min-w-[56px] touch-target"
         >
           <Menu className="w-5 h-5" />
           <span className="text-[10px] font-ui mt-1">ផ្សេងៗ</span>
@@ -332,9 +333,10 @@ export function DashboardLayout() {
                 <NavLink
                   key={item.to}
                   to={item.to}
+                  end
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={`
-                    flex items-center gap-3 p-3 rounded-xl border text-sm font-medium transition-all
+                    flex items-center gap-3 p-3 rounded border text-sm font-medium transition-all
                     ${
                       isActive
                         ? 'bg-burgundy-50 border-burgundy-300 text-burgundy-700 font-semibold'
@@ -353,7 +355,7 @@ export function DashboardLayout() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="flex items-center gap-2 px-3 py-2 bg-cream-100 rounded-xl text-sm text-charcoal-800 font-ui"
+              className="flex items-center gap-2 px-3 py-2 bg-cream-100 rounded text-sm text-charcoal-800 font-ui"
             >
               <Globe className="w-4 h-4 text-gold-600" />
               <span>{i18n.language === 'km' ? 'ប្តូរភាសា: English' : 'Switch: ភាសាខ្មែរ'}</span>
@@ -362,7 +364,7 @@ export function DashboardLayout() {
             <button
               type="button"
               onClick={handleLogout}
-              className="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-600 rounded-xl text-sm font-ui"
+              className="flex items-center gap-2 px-3 py-2 bg-red-50 text-red-600 rounded text-sm font-ui"
             >
               <LogOut className="w-4 h-4" />
               <span>{t('auth.logout', 'Log out')}</span>

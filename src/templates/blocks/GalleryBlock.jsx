@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import { X, ZoomIn } from 'lucide-react'
+import { getFontFamily } from '../../lib/fonts'
 
 export function GalleryBlock({ gallery = [], config = {}, lang = 'km' }) {
   const [selectedPhoto, setSelectedPhoto] = useState(null)
   const isKhmer = lang === 'km'
   const primaryColor = config.primaryColor || '#C59B27'
-  const fontHeading = config.fontHeading === 'serif' ? 'font-serif' : 'font-moul'
+  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
 
   if (!gallery || gallery.length === 0) return null
 
@@ -14,8 +15,8 @@ export function GalleryBlock({ gallery = [], config = {}, lang = 'km' }) {
       <div className="max-w-3xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h3
-            className={`text-xl sm:text-2xl leading-relaxed ${fontHeading}`}
-            style={{ color: primaryColor }}
+            className="text-xl sm:text-2xl leading-relaxed"
+            style={{ ...headingFont, color: primaryColor }}
           >
             {isKhmer ? 'វិចិត្រសាលរូបភាព' : 'Moments & Memories'}
           </h3>
@@ -30,7 +31,7 @@ export function GalleryBlock({ gallery = [], config = {}, lang = 'km' }) {
             <div
               key={photo.id || index}
               onClick={() => setSelectedPhoto(photo.url)}
-              className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer bg-cream-200 border border-gold-200/50 shadow-sm"
+              className="group relative aspect-[3/4] rounded overflow-hidden cursor-pointer bg-cream-200 border border-gold-200/50 shadow-sm"
             >
               <img
                 src={photo.url}
@@ -48,7 +49,7 @@ export function GalleryBlock({ gallery = [], config = {}, lang = 'km' }) {
         {/* Fullscreen Lightbox Modal */}
         {selectedPhoto && (
           <div
-            className="fixed inset-0 z-50 bg-charcoal-900/90 backdrop-blur-md flex items-center justify-center p-4"
+            className="fixed inset-0 z-50 bg-charcoal-900/90 backdrop-blur-md flex items-center justify-center"
             onClick={() => setSelectedPhoto(null)}
           >
             <button
@@ -61,13 +62,13 @@ export function GalleryBlock({ gallery = [], config = {}, lang = 'km' }) {
             </button>
 
             <div
-              className="max-w-3xl max-h-[90vh] overflow-hidden rounded-2xl"
+              className="w-screen h-screen flex items-center justify-center overflow-hidden"
               onClick={(e) => e.stopPropagation()}
             >
               <img
                 src={selectedPhoto}
                 alt="Enlarged wedding moment"
-                className="w-full h-auto max-h-[85vh] object-contain rounded-2xl shadow-elevated"
+                className="max-w-full max-h-full w-auto h-auto object-contain shadow-elevated"
               />
             </div>
           </div>

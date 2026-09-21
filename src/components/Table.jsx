@@ -2,7 +2,7 @@ import React from 'react'
 
 export function Table({ children, className = '', containerClassName = '' }) {
   return (
-    <div className={`w-full overflow-x-auto rounded-xl border border-cream-200/80 ${containerClassName}`}>
+    <div className={`w-full overflow-x-auto rounded border border-cream-200/80 ${containerClassName}`}>
       <table className={`w-full text-left text-sm text-charcoal-800 font-ui border-collapse ${className}`}>
         {children}
       </table>

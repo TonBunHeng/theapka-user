@@ -371,7 +371,7 @@ export function GuestsPage() {
       ) : (
         <>
           {/* Desktop Table View */}
-          <div className="hidden md:block bg-white rounded-2xl border border-gold-200/50 shadow-card overflow-hidden">
+          <div className="hidden md:block bg-white rounded border border-gold-200/50 shadow-card overflow-hidden">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -442,7 +442,7 @@ export function GuestsPage() {
                           <button
                             type="button"
                             onClick={() => copyPersonalLink(guest.token)}
-                            className="p-1.5 text-charcoal-500 hover:text-burgundy-600 rounded-lg hover:bg-cream-100"
+                            className="p-1.5 text-charcoal-500 hover:text-burgundy-600 rounded hover:bg-cream-100"
                             title={t('guests.copyPersonalLink', 'Copy Personal Link')}
                           >
                             <Copy className="w-4 h-4" />
@@ -451,7 +451,7 @@ export function GuestsPage() {
                           <button
                             type="button"
                             onClick={() => setSelectedQrGuest(guest)}
-                            className="p-1.5 text-charcoal-500 hover:text-gold-600 rounded-lg hover:bg-cream-100"
+                            className="p-1.5 text-charcoal-500 hover:text-gold-600 rounded hover:bg-cream-100"
                             title={t('guests.viewQr', 'View Guest QR')}
                           >
                             <QrIcon className="w-4 h-4" />
@@ -460,7 +460,7 @@ export function GuestsPage() {
                           <button
                             type="button"
                             onClick={() => openEditGuest(guest)}
-                            className="p-1.5 text-charcoal-500 hover:text-charcoal-900 rounded-lg hover:bg-cream-100"
+                            className="p-1.5 text-charcoal-500 hover:text-charcoal-900 rounded hover:bg-cream-100"
                             title={t('common.edit', 'Edit')}
                           >
                             <Edit2 className="w-4 h-4" />
@@ -473,7 +473,7 @@ export function GuestsPage() {
                                 deleteMutation.mutate(guest.id)
                               }
                             }}
-                            className="p-1.5 text-charcoal-400 hover:text-red-600 rounded-lg hover:bg-red-50"
+                            className="p-1.5 text-charcoal-400 hover:text-red-600 rounded hover:bg-red-50"
                             title={t('common.delete', 'Delete')}
                           >
                             <Trash2 className="w-4 h-4" />
@@ -531,7 +531,7 @@ export function GuestsPage() {
                       <button
                         type="button"
                         onClick={() => toggleSentStatus(guest)}
-                        className={`text-xs font-semibold px-2.5 py-1 rounded-lg ${
+                        className={`text-xs font-semibold px-2.5 py-1 rounded ${
                           guest.sent_at ? 'text-green-700 bg-green-50' : 'text-charcoal-500 bg-cream-100'
                         }`}
                       >
@@ -542,7 +542,7 @@ export function GuestsPage() {
                         <button
                           type="button"
                           onClick={() => copyPersonalLink(guest.token)}
-                          className="p-2 text-charcoal-500 hover:text-burgundy-600 rounded-lg touch-target"
+                          className="p-2 text-charcoal-500 hover:text-burgundy-600 rounded touch-target"
                           title="Copy Link"
                         >
                           <Copy className="w-4 h-4" />
@@ -550,7 +550,7 @@ export function GuestsPage() {
                         <button
                           type="button"
                           onClick={() => setSelectedQrGuest(guest)}
-                          className="p-2 text-charcoal-500 hover:text-gold-600 rounded-lg touch-target"
+                          className="p-2 text-charcoal-500 hover:text-gold-600 rounded touch-target"
                           title="View QR"
                         >
                           <QrIcon className="w-4 h-4" />
@@ -558,7 +558,7 @@ export function GuestsPage() {
                         <button
                           type="button"
                           onClick={() => openEditGuest(guest)}
-                          className="p-2 text-charcoal-500 hover:text-charcoal-900 rounded-lg touch-target"
+                          className="p-2 text-charcoal-500 hover:text-charcoal-900 rounded touch-target"
                           title="Edit"
                         >
                           <Edit2 className="w-4 h-4" />
@@ -570,7 +570,7 @@ export function GuestsPage() {
                               deleteMutation.mutate(guest.id)
                             }
                           }}
-                          className="p-2 text-charcoal-400 hover:text-red-600 rounded-lg touch-target"
+                          className="p-2 text-charcoal-400 hover:text-red-600 rounded touch-target"
                           title="Delete"
                         >
                           <Trash2 className="w-4 h-4" />
@@ -681,12 +681,12 @@ export function GuestsPage() {
             )}
           </p>
 
-          <div className="p-4 border-2 border-dashed border-gold-300 rounded-2xl bg-cream-50/60 text-center">
+          <div className="p-4 border-2 border-dashed border-gold-300 rounded bg-cream-50/60 text-center">
             <input
               type="file"
               accept=".csv"
               onChange={handleCsvFileChange}
-              className="text-xs file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-gold-500 file:text-white hover:file:bg-gold-600 cursor-pointer"
+              className="text-xs file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-gold-500 file:text-white hover:file:bg-gold-600 cursor-pointer"
             />
           </div>
 
@@ -707,7 +707,7 @@ export function GuestsPage() {
                 </div>
               </div>
 
-              <div className="max-h-60 overflow-y-auto rounded-xl border border-cream-200 text-xs">
+              <div className="max-h-60 overflow-y-auto rounded border border-cream-200 text-xs">
                 <table className="w-full text-left">
                   <thead className="bg-cream-100 font-semibold text-charcoal-700">
                     <tr>

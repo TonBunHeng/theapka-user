@@ -70,7 +70,7 @@ export function RegisterPage() {
         </div>
 
         {serverError && (
-          <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-xs font-ui flex items-center gap-2">
+          <div className="p-3 rounded bg-red-50 border border-red-200 text-red-700 text-xs font-ui flex items-center gap-2">
             <AlertCircle className="w-4 h-4 shrink-0" />
             <span>{serverError}</span>
           </div>

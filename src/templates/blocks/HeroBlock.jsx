@@ -1,13 +1,14 @@
 import React from 'react'
 import { Calendar, MapPin, Heart, Sparkles } from 'lucide-react'
 import { formatDate, getCountdown, toKhmerNumeral } from '../../lib/format'
+import { getFontFamily } from '../../lib/fonts'
 
 export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
   const countdown = getCountdown(wedding?.wedding_date)
   const isKhmer = lang === 'km'
 
-  const fontHeading = config.fontHeading === 'serif' ? 'font-serif' : 'font-moul'
   const primaryColor = config.primaryColor || '#C59B27'
+  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
 
   return (
     <section className="relative text-center py-12 md:py-20 px-4 overflow-hidden">
@@ -33,8 +34,8 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
         {/* Couple Names */}
         <div className="space-y-3 my-4">
           <h1
-            className={`text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed ${fontHeading}`}
-            style={{ color: primaryColor }}
+            className="text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed"
+            style={{ ...headingFont, color: primaryColor }}
           >
             {isKhmer ? wedding?.groom_name_kh : wedding?.groom_name_en}
           </h1>
@@ -46,8 +47,8 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
           </div>
 
           <h1
-            className={`text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed ${fontHeading}`}
-            style={{ color: primaryColor }}
+            className="text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed"
+            style={{ ...headingFont, color: primaryColor }}
           >
             {isKhmer ? wedding?.bride_name_kh : wedding?.bride_name_en}
           </h1>
@@ -55,7 +56,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
 
         {/* Personalized Guest Greeting Badge (if guest token provided) */}
         {guest && (
-          <div className="inline-block mx-auto p-4 rounded-2xl bg-white/90 border border-gold-300/50 shadow-card animate-in fade-in max-w-sm">
+          <div className="inline-block mx-auto p-4 rounded bg-white/90 border border-gold-300/50 shadow-card animate-in fade-in max-w-sm">
             <div className="flex items-center justify-center gap-1 text-xs text-gold-700 font-semibold mb-1">
               <Sparkles className="w-3.5 h-3.5" />
               <span>{isKhmer ? 'សូមគោរពអញ្ជើញ' : 'Cordially Invited'}</span>
@@ -73,12 +74,12 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
 
         {/* Wedding Date & Venue Info */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-charcoal-700 font-ui pt-2">
-          <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded-xl border border-cream-200">
+          <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded border border-cream-200">
             <Calendar className="w-4 h-4 text-gold-600" />
             <span>{formatDate(wedding?.wedding_date, 'dddd D MMMM YYYY', lang)}</span>
           </div>
 
-          <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded-xl border border-cream-200 text-center max-w-xs truncate">
+          <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded border border-cream-200 text-center max-w-xs truncate">
             <MapPin className="w-4 h-4 text-gold-600 shrink-0" />
             <span className="truncate">{wedding?.venue_name}</span>
           </div>
@@ -86,7 +87,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
 
         {/* Cover Photo */}
         {wedding?.cover_photo && (
-          <div className="relative mx-auto rounded-3xl overflow-hidden shadow-elevated border-4 border-white max-w-md aspect-[4/5] mt-6">
+          <div className="relative mx-auto rounded overflow-hidden shadow-elevated border-4 border-white max-w-md aspect-[4/5] mt-6">
             <img
               src={wedding.cover_photo}
               alt="Couple Cover"
@@ -104,7 +105,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
               {isKhmer ? 'កម្មវិធីបានប្រារព្ធដោយជោគជ័យ' : 'The wedding celebration has concluded'}
             </p>
           ) : (
-            <div className="inline-flex items-center gap-4 bg-white/90 px-6 py-3 rounded-2xl border border-gold-200/80 shadow-soft">
+            <div className="inline-flex items-center gap-4 bg-white/90 px-6 py-3 rounded border border-gold-200/80 shadow-soft">
               <div className="text-center">
                 <span className="block text-2xl font-bold font-serif" style={{ color: primaryColor }}>
                   {isKhmer ? toKhmerNumeral(countdown.days) : countdown.days}

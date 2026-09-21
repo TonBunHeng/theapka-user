@@ -26,7 +26,7 @@ export function RsvpForm({ guest, onSubmit, isSubmitting = false, lang = 'km' })
           <button
             type="button"
             onClick={() => setStatus('attending')}
-            className={`flex flex-col items-center justify-center p-3 rounded-xl border text-xs font-semibold transition-all touch-target ${
+            className={`flex flex-col items-center justify-center p-3 rounded border text-xs font-semibold transition-all touch-target ${
               status === 'attending'
                 ? 'bg-green-50 border-green-500 text-green-800 ring-2 ring-green-200'
                 : 'bg-white border-cream-300 text-charcoal-600 hover:bg-cream-50'
@@ -39,7 +39,7 @@ export function RsvpForm({ guest, onSubmit, isSubmitting = false, lang = 'km' })
           <button
             type="button"
             onClick={() => setStatus('declined')}
-            className={`flex flex-col items-center justify-center p-3 rounded-xl border text-xs font-semibold transition-all touch-target ${
+            className={`flex flex-col items-center justify-center p-3 rounded border text-xs font-semibold transition-all touch-target ${
               status === 'declined'
                 ? 'bg-red-50 border-red-500 text-red-800 ring-2 ring-red-200'
                 : 'bg-white border-cream-300 text-charcoal-600 hover:bg-cream-50'
@@ -52,7 +52,7 @@ export function RsvpForm({ guest, onSubmit, isSubmitting = false, lang = 'km' })
           <button
             type="button"
             onClick={() => setStatus('maybe')}
-            className={`flex flex-col items-center justify-center p-3 rounded-xl border text-xs font-semibold transition-all touch-target ${
+            className={`flex flex-col items-center justify-center p-3 rounded border text-xs font-semibold transition-all touch-target ${
               status === 'maybe'
                 ? 'bg-amber-50 border-amber-500 text-amber-800 ring-2 ring-amber-200'
                 : 'bg-white border-cream-300 text-charcoal-600 hover:bg-cream-50'
@@ -79,7 +79,7 @@ export function RsvpForm({ guest, onSubmit, isSubmitting = false, lang = 'km' })
                   key={val}
                   type="button"
                   onClick={() => setSeats(val)}
-                  className={`flex-1 py-2.5 rounded-xl border text-sm font-bold transition-all touch-target ${
+                  className={`flex-1 py-2.5 rounded border text-sm font-bold transition-all touch-target ${
                     seats === val
                       ? 'bg-gold-500 border-gold-600 text-white shadow-sm'
                       : 'bg-cream-50 border-cream-300 text-charcoal-700 hover:bg-cream-100'
@@ -106,7 +106,7 @@ export function RsvpForm({ guest, onSubmit, isSubmitting = false, lang = 'km' })
               ? 'សរសេរសារជូនពរខ្លីៗដល់គូស្វាមីភរិយា...'
               : 'Leave a brief note or blessing...'
           }
-          className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui resize-none outline-none"
+          className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui resize-none outline-none"
         />
       </div>
 

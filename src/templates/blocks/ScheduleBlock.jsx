@@ -1,11 +1,12 @@
 import React from 'react'
 import { Clock, MapPin } from 'lucide-react'
 import { toKhmerNumeral } from '../../lib/format'
+import { getFontFamily } from '../../lib/fonts'
 
 export function ScheduleBlock({ schedules = [], config = {}, lang = 'km' }) {
   const isKhmer = lang === 'km'
   const primaryColor = config.primaryColor || '#C59B27'
-  const fontHeading = config.fontHeading === 'serif' ? 'font-serif' : 'font-moul'
+  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
 
   if (!schedules || schedules.length === 0) return null
 
@@ -14,8 +15,8 @@ export function ScheduleBlock({ schedules = [], config = {}, lang = 'km' }) {
       <div className="max-w-xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h3
-            className={`text-xl sm:text-2xl leading-relaxed ${fontHeading}`}
-            style={{ color: primaryColor }}
+            className="text-xl sm:text-2xl leading-relaxed"
+            style={{ ...headingFont, color: primaryColor }}
           >
             {isKhmer ? 'កម្មវិធីពិធីមង្គលការ' : 'Wedding Program'}
           </h3>
@@ -42,7 +43,7 @@ export function ScheduleBlock({ schedules = [], config = {}, lang = 'km' }) {
                 </div>
 
                 {/* Event Card */}
-                <div className="bg-white rounded-2xl p-5 border border-gold-200/60 shadow-card space-y-2 hover:shadow-elevated transition-shadow duration-200">
+                <div className="bg-white rounded p-5 border border-gold-200/60 shadow-card space-y-2 hover:shadow-elevated transition-shadow duration-200">
                   <div className="flex flex-wrap items-center justify-between gap-2">
                     <h4 className="text-base font-bold text-charcoal-900 font-ui">
                       {item.title}

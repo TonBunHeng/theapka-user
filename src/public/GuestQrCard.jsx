@@ -61,7 +61,7 @@ export function GuestQrCard({ isOpen, onClose, guest, wedding, group, lang = 'km
         </div>
 
         {/* Guest Details Box */}
-        <div className="p-4 rounded-2xl bg-cream-50 border border-gold-200 text-center space-y-1">
+        <div className="p-4 rounded bg-cream-50 border border-gold-200 text-center space-y-1">
           <p className="text-xs text-charcoal-500">
             {isKhmer ? 'សូមគោរពអញ្ជើញ' : 'Cordially Invited'}
           </p>
@@ -85,7 +85,7 @@ export function GuestQrCard({ isOpen, onClose, guest, wedding, group, lang = 'km
         </div>
 
         {/* QR Code */}
-        <div className="p-4 bg-white rounded-2xl border-2 border-dashed border-gold-300 inline-block mx-auto shadow-inner">
+        <div className="p-4 bg-white rounded border-2 border-dashed border-gold-300 inline-block mx-auto shadow-inner">
           <QRCodeSVG
             id="guest-qr-svg"
             value={qrValue}

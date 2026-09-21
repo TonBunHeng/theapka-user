@@ -120,7 +120,7 @@ export function GalleryPage() {
         </div>
 
         <div>
-          <label className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-burgundy-500 hover:bg-burgundy-600 text-white text-sm font-semibold shadow-sm cursor-pointer active:scale-95 transition-all touch-target">
+          <label className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-burgundy-500 hover:bg-burgundy-600 text-white text-sm font-semibold shadow-sm cursor-pointer active:scale-95 transition-all touch-target">
             <Upload className="w-4 h-4" />
             <span>{isUploading ? t('common.loading', 'Uploading...') : t('gallery.uploadButton', 'Upload Photos')}</span>
             <input
@@ -168,7 +168,7 @@ export function GalleryPage() {
                     <button
                       type="button"
                       onClick={() => setCoverMutation.mutate(photo)}
-                      className="p-2 rounded-xl bg-white text-charcoal-800 hover:text-gold-600 shadow-sm touch-target"
+                      className="w-14 h-14 rounded bg-white text-charcoal-800 hover:text-gold-600 shadow-sm touch-target flex items-center justify-center"
                       title={t('gallery.setAsCover', 'Set as cover photo')}
                     >
                       <Star className="w-4 h-4" />
@@ -182,7 +182,7 @@ export function GalleryPage() {
                         deleteMutation.mutate(photo.id)
                       }
                     }}
-                    className="p-2 rounded-xl bg-white text-red-600 hover:bg-red-50 shadow-sm touch-target"
+                      className="w-14 h-14 rounded bg-white text-red-600 hover:bg-red-50 shadow-sm touch-target flex items-center justify-center"
                     title={t('gallery.deletePhoto', 'Delete photo')}
                   >
                     <Trash2 className="w-4 h-4" />

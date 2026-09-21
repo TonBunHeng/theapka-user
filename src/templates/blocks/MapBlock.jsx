@@ -1,11 +1,12 @@
 import React from 'react'
 import { MapPin, Navigation, ExternalLink } from 'lucide-react'
 import Button from '../../components/Button'
+import { getFontFamily } from '../../lib/fonts'
 
 export function MapBlock({ wedding, config = {}, lang = 'km' }) {
   const isKhmer = lang === 'km'
   const primaryColor = config.primaryColor || '#C59B27'
-  const fontHeading = config.fontHeading === 'serif' ? 'font-serif' : 'font-moul'
+  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
 
   const lat = Number(wedding?.lat) || 11.6685
   const lng = Number(wedding?.lng) || 104.9452
@@ -22,8 +23,8 @@ export function MapBlock({ wedding, config = {}, lang = 'km' }) {
       <div className="max-w-xl mx-auto space-y-6">
         <div className="text-center space-y-2">
           <h3
-            className={`text-xl sm:text-2xl leading-relaxed ${fontHeading}`}
-            style={{ color: primaryColor }}
+            className="text-xl sm:text-2xl leading-relaxed"
+            style={{ ...headingFont, color: primaryColor }}
           >
             {isKhmer ? 'ទីតាំងប្រារព្ធពិធី' : 'Venue & Directions'}
           </h3>
@@ -33,8 +34,8 @@ export function MapBlock({ wedding, config = {}, lang = 'km' }) {
         </div>
 
         {/* Venue Details Card */}
-        <div className="bg-white rounded-3xl p-6 border border-gold-200/60 shadow-card text-center space-y-4">
-          <div className="w-10 h-10 rounded-2xl bg-gold-100 flex items-center justify-center text-gold-600 mx-auto">
+        <div className="bg-white rounded p-6 border border-gold-200/60 shadow-card text-center space-y-4">
+          <div className="w-10 h-10 rounded bg-gold-100 flex items-center justify-center text-gold-600 mx-auto">
             <MapPin className="w-5 h-5" />
           </div>
 
@@ -48,7 +49,7 @@ export function MapBlock({ wedding, config = {}, lang = 'km' }) {
           </div>
 
           {/* Embedded Map */}
-          <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded-2xl overflow-hidden border border-cream-300 shadow-inner bg-cream-100 relative">
+          <div className="w-full aspect-[16/9] sm:aspect-[2/1] rounded overflow-hidden border border-cream-300 shadow-inner bg-cream-100 relative">
             <iframe
               title="Venue Map"
               width="100%"
@@ -69,7 +70,7 @@ export function MapBlock({ wedding, config = {}, lang = 'km' }) {
               href={mapUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-semibold text-sm shadow-sm transition-transform active:scale-[0.98] font-ui touch-target"
+              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded bg-gold-500 hover:bg-gold-600 text-white font-semibold text-sm shadow-sm transition-transform active:scale-[0.98] font-ui touch-target"
             >
               <Navigation className="w-4 h-4" />
               <span>{isKhmer ? 'បើកក្នុង Google Maps' : 'Open in Google Maps'}</span>

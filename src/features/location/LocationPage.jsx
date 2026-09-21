@@ -113,7 +113,7 @@ export function LocationPage() {
                 required
                 value={form.venue_address}
                 onChange={(e) => setForm({ ...form, venue_address: e.target.value })}
-                className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
+                className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
               />
             </div>
 

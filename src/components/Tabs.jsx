@@ -3,7 +3,7 @@ import React from 'react'
 export function Tabs({ tabs = [], activeTab, onChange, className = '' }) {
   return (
     <div
-      className={`flex items-center gap-1.5 p-1 bg-cream-200/70 rounded-xl overflow-x-auto ${className}`}
+      className={`flex items-center gap-1.5 p-1 bg-cream-200/70 rounded overflow-x-auto ${className}`}
       role="tablist"
     >
       {tabs.map((tab) => {
@@ -15,7 +15,7 @@ export function Tabs({ tabs = [], activeTab, onChange, className = '' }) {
             aria-selected={isActive}
             onClick={() => onChange(tab.id)}
             className={`
-              flex items-center gap-2 px-3.5 py-2 rounded-lg text-sm font-medium font-ui
+              flex items-center gap-2 px-3.5 py-2 rounded text-sm font-medium font-ui
               whitespace-nowrap transition-all duration-200 touch-target
               ${
                 isActive

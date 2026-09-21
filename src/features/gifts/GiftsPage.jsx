@@ -370,7 +370,7 @@ export function GiftsPage() {
                 {t('gifts.neverSumWarning', 'Strictly isolated currency')}
               </p>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-burgundy-100 text-burgundy-700 flex items-center justify-center text-xl font-bold font-moul shrink-0">
+            <div className="w-12 h-12 rounded bg-burgundy-100 text-burgundy-700 flex items-center justify-center text-xl font-bold font-moul shrink-0">
               ៛
             </div>
           </CardContent>
@@ -390,7 +390,7 @@ export function GiftsPage() {
                 {gifts.length} {isKhmer ? 'កំណត់ត្រាសរុប' : 'total entries'}
               </p>
             </div>
-            <div className="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold font-serif shrink-0">
+            <div className="w-12 h-12 rounded bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl font-bold font-serif shrink-0">
               $
             </div>
           </CardContent>
@@ -402,7 +402,7 @@ export function GiftsPage() {
         <CardHeader className="bg-gold-50/50 border-b border-gold-200/60 pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-xl bg-gold-500 text-white flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-gold-500 text-white flex items-center justify-center">
                 <Gift className="w-4 h-4" />
               </div>
               <CardTitle className="text-base sm:text-lg text-charcoal-900">
@@ -411,11 +411,11 @@ export function GiftsPage() {
             </div>
 
             {/* Currency Toggle Buttons */}
-            <div className="flex items-center p-1 bg-cream-200 rounded-xl">
+            <div className="flex items-center p-1 bg-cream-200 rounded">
               <button
                 type="button"
                 onClick={() => setCurrency('KHR')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all touch-target ${
+                className={`px-3 py-1.5 rounded text-xs font-bold transition-all touch-target ${
                   currency === 'KHR'
                     ? 'bg-burgundy-600 text-white shadow-sm'
                     : 'text-charcoal-600 hover:text-charcoal-900'
@@ -426,7 +426,7 @@ export function GiftsPage() {
               <button
                 type="button"
                 onClick={() => setCurrency('USD')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all touch-target ${
+                className={`px-3 py-1.5 rounded text-xs font-bold transition-all touch-target ${
                   currency === 'USD'
                     ? 'bg-emerald-600 text-white shadow-sm'
                     : 'text-charcoal-600 hover:text-charcoal-900'
@@ -456,7 +456,7 @@ export function GiftsPage() {
                       setSelectedGuest(null)
                       setGuestSearchQuery(e.target.value)
                     }}
-                    className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
+                    className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
                   />
                   {selectedGuest && (
                     <button
@@ -474,7 +474,7 @@ export function GiftsPage() {
 
                 {/* Suggestions Dropdown */}
                 {guestSuggestions.length > 0 && !selectedGuest && (
-                  <div className="absolute left-0 right-0 top-full mt-1 bg-white rounded-xl shadow-elevated border border-gold-200 z-30 divide-y divide-cream-100 overflow-hidden">
+                  <div className="absolute left-0 right-0 top-full mt-1 bg-white rounded shadow-elevated border border-gold-200 z-30 divide-y divide-cream-100 overflow-hidden">
                     {guestSuggestions.map((g) => (
                       <div
                         key={g.id}
@@ -504,7 +504,7 @@ export function GiftsPage() {
                   disabled={!!selectedGuest}
                   value={walkInName}
                   onChange={(e) => setWalkInName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded-xl border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none disabled:bg-cream-100"
+                  className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none disabled:bg-cream-100"
                 />
               </div>
             </div>
@@ -522,7 +522,7 @@ export function GiftsPage() {
                     key={val}
                     type="button"
                     onClick={() => setAmount(String(val))}
-                    className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all touch-target ${
+                    className={`px-3 py-2 rounded text-xs font-bold border transition-all touch-target ${
                       amount === String(val)
                         ? 'bg-gold-500 border-gold-600 text-white shadow-sm'
                         : 'bg-cream-50 border-cream-200 text-charcoal-800 hover:bg-cream-100'
@@ -548,7 +548,7 @@ export function GiftsPage() {
                     placeholder={currency === 'KHR' ? '100000' : '50'}
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full h-14 px-4 text-2xl sm:text-3xl font-bold font-mono rounded-2xl border-2 border-gold-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
+                    className="w-full h-14 px-4 text-2xl sm:text-3xl font-bold font-mono rounded border-2 border-gold-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
                   />
                   <div className="absolute right-4 top-4 font-bold text-charcoal-400">
                     {currency === 'KHR' ? '៛' : '$'}
@@ -571,7 +571,7 @@ export function GiftsPage() {
                       key={m.id}
                       type="button"
                       onClick={() => setMethod(m.id)}
-                      className={`h-14 rounded-xl border text-xs font-bold flex items-center justify-center transition-all touch-target ${
+                      className={`h-14 rounded border text-xs font-bold flex items-center justify-center transition-all touch-target ${
                         method === m.id
                           ? 'bg-gold-500 border-gold-600 text-white shadow-sm'
                           : 'bg-white border-cream-200 text-charcoal-700 hover:bg-cream-50'
@@ -612,7 +612,7 @@ export function GiftsPage() {
       </Card>
 
       {/* Append-only Policy Notice */}
-      <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-3 font-ui">
+      <div className="p-4 rounded bg-amber-50 border border-amber-200 text-xs text-amber-900 leading-relaxed flex items-start gap-3 font-ui">
         <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
         <div>
           <p className="font-bold mb-0.5">ច្បាប់កត់ត្រាចំណងដៃ (Append-only Policy):</p>
@@ -661,7 +661,7 @@ export function GiftsPage() {
                     {/* Left Details */}
                     <div className="flex items-start gap-3">
                       <div
-                        className={`w-10 h-10 rounded-2xl flex items-center justify-center font-bold text-xs shrink-0 ${
+                        className={`w-10 h-10 rounded flex items-center justify-center font-bold text-xs shrink-0 ${
                           isCorrection
                             ? 'bg-red-100 text-red-700'
                             : gift.currency === 'USD'
@@ -718,7 +718,7 @@ export function GiftsPage() {
                             setCorrectionReason('')
                             setIsCorrectionModalOpen(true)
                           }}
-                          className="px-2.5 py-1 text-xs font-semibold rounded-lg border border-red-200 text-red-700 hover:bg-red-50 transition-colors touch-target"
+                          className="px-2.5 py-1 text-xs font-semibold rounded border border-red-200 text-red-700 hover:bg-red-50 transition-colors touch-target"
                           title="Add Correction"
                         >
                           {t('gifts.correctEntry', 'កែតម្រូវ')}
@@ -741,7 +741,7 @@ export function GiftsPage() {
       >
         {targetCorrectionGift && (
           <form onSubmit={handleManualCorrectionSubmit} className="space-y-4 font-ui">
-            <div className="p-3 bg-red-50 border border-red-200 rounded-xl space-y-1 text-xs">
+            <div className="p-3 bg-red-50 border border-red-200 rounded space-y-1 text-xs">
               <p className="font-bold text-red-900">
                 កំណត់ត្រាដើម: {targetCorrectionGift.giver_name}
               </p>

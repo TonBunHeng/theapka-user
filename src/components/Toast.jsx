@@ -82,7 +82,7 @@ function ToastItem({ toast, onClose }) {
   return (
     <div
       className={`
-        pointer-events-auto flex items-start gap-3 p-4 rounded-xl border shadow-elevated font-ui
+        pointer-events-auto flex items-start gap-3 p-4 rounded border shadow-elevated font-ui
         animate-in slide-in-from-bottom-5 duration-200
         ${borderStyles[toast.type] || borderStyles.info}
       `}

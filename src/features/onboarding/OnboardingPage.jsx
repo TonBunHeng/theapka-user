@@ -97,7 +97,7 @@ export function OnboardingPage() {
       <div className="w-full max-w-xl space-y-6">
         {/* Header Branding */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gold-500 text-white font-moul text-xl shadow-card mb-1">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded bg-gold-500 text-white font-moul text-xl shadow-card mb-1">
             ធ
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-charcoal-900 tracking-tight">
@@ -231,7 +231,7 @@ export function OnboardingPage() {
                         key={preset.id}
                         onClick={() => handlePresetSelect(preset)}
                         className={`
-                          p-4 rounded-2xl border-2 cursor-pointer transition-all flex items-center justify-between
+                          p-4 rounded border-2 cursor-pointer transition-all flex items-center justify-between
                           ${
                             isSelected
                               ? 'border-gold-500 bg-gold-50/50 shadow-sm'
@@ -241,7 +241,7 @@ export function OnboardingPage() {
                       >
                         <div className="flex items-center gap-3.5">
                           <div
-                            className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-serif font-bold text-sm shadow-sm shrink-0"
+                            className="w-10 h-10 rounded flex items-center justify-center text-white font-serif font-bold text-sm shadow-sm shrink-0"
                             style={{ backgroundColor: preset.primaryColor }}
                           >
                             TK

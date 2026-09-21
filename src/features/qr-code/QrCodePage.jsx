@@ -97,7 +97,7 @@ export function QrCodePage() {
       </Card>
 
       {/* Instructions Banner (Hidden when printing) */}
-      <div className="no-print p-4 bg-gold-50 border border-gold-200 rounded-2xl flex items-center justify-between">
+      <div className="no-print p-4 bg-gold-50 border border-gold-200 rounded flex items-center justify-between">
         <div className="flex items-center gap-3 text-xs text-gold-900 leading-relaxed">
           <QrIcon className="w-5 h-5 text-gold-600 shrink-0" />
           <span>{t('qr.instructions', 'Click print to generate beautifully formatted A4 printable cards')}</span>
@@ -122,7 +122,7 @@ export function QrCodePage() {
             <div
               key={guest.id}
               onClick={() => setSelectedQrGuest(guest)}
-              className="print-card bg-white rounded-2xl border-2 border-dashed border-gold-300/80 p-4 text-center space-y-3 cursor-pointer hover:shadow-card transition-all"
+              className="print-card bg-white rounded border-2 border-dashed border-gold-300/80 p-4 text-center space-y-3 cursor-pointer hover:shadow-card transition-all"
             >
               {/* Wedding Emblem */}
               <div className="flex items-center justify-center gap-1.5 text-xs text-gold-700 font-moul">
@@ -153,7 +153,7 @@ export function QrCodePage() {
               </div>
 
               {/* QR Code */}
-              <div className="p-2 bg-white rounded-xl inline-block mx-auto border border-cream-200">
+              <div className="p-2 bg-white rounded inline-block mx-auto border border-cream-200">
                 <QRCodeSVG
                   value={qrData}
                   size={120}

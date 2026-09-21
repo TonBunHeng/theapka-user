@@ -1,13 +1,47 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Volume2, VolumeX, Globe } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
+
+const DEFAULT_MUSIC_URL = '/music/wedding-song.mp3'
 
 export function PublicLayout() {
   const { i18n } = useTranslation()
   const [isPlaying, setIsPlaying] = useState(false)
   const [audioUrl, setAudioUrl] = useState(null)
   const audioRef = useRef(null)
+
+  useLayoutEffect(() => {
+    window.__setWeddingMusic = (url) => {
+      setAudioUrl(url || DEFAULT_MUSIC_URL)
+    }
+    return () => {
+      delete window.__setWeddingMusic
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!audioRef.current || !audioUrl) return
+
+    audioRef.current.play().catch(() => {
+      // Browsers may require a user gesture before allowing sound.
+      setIsPlaying(false)
+    })
+  }, [audioUrl])
+
+  useEffect(() => {
+    const playAfterInteraction = () => {
+      if (!audioRef.current || !audioUrl || isPlaying) return
+      audioRef.current.play().catch(() => setIsPlaying(false))
+    }
+
+    window.addEventListener('pointerdown', playAfterInteraction)
+    window.addEventListener('keydown', playAfterInteraction)
+    return () => {
+      window.removeEventListener('pointerdown', playAfterInteraction)
+      window.removeEventListener('keydown', playAfterInteraction)
+    }
+  }, [audioUrl, isPlaying])
 
   const toggleLanguage = () => {
     const next = i18n.language === 'km' ? 'en' : 'km'
@@ -23,19 +57,9 @@ export function PublicLayout() {
       audioRef.current
         .play()
         .then(() => setIsPlaying(true))
-        .catch((e) => console.log('Audio autoplay prevented:', e))
+        .catch(() => setIsPlaying(false))
     }
   }
-
-  // Setup global handler so child pages can pass the wedding music URL
-  useEffect(() => {
-    window.__setWeddingMusic = (url) => {
-      setAudioUrl(url)
-    }
-    return () => {
-      delete window.__setWeddingMusic
-    }
-  }, [])
 
   return (
     <div className="min-h-screen bg-cream-100 font-ui text-charcoal-900 relative selection:bg-gold-200">
@@ -45,7 +69,11 @@ export function PublicLayout() {
           ref={audioRef}
           src={audioUrl}
           loop
-          preload="none"
+          preload="metadata"
+          autoPlay
+          onError={() => {
+            if (audioUrl !== DEFAULT_MUSIC_URL) setAudioUrl(DEFAULT_MUSIC_URL)
+          }}
           onPlay={() => setIsPlaying(true)}
           onPause={() => setIsPlaying(false)}
         />

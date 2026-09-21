@@ -24,11 +24,11 @@ export function Drawer({
 
   const positionClasses = {
     bottom:
-      'inset-x-0 bottom-0 max-h-[85vh] rounded-t-3xl animate-in slide-in-from-bottom duration-250',
+      'inset-x-0 bottom-0 max-h-[85vh] rounded animate-in slide-in-from-bottom duration-250',
     right:
-      'inset-y-0 right-0 w-full max-w-md rounded-l-3xl animate-in slide-in-from-right duration-250',
+      'inset-y-0 right-0 w-full max-w-md rounded animate-in slide-in-from-right duration-250',
     left:
-      'inset-y-0 left-0 w-full max-w-md rounded-r-3xl animate-in slide-in-from-left duration-250',
+      'inset-y-0 left-0 w-full max-w-md rounded animate-in slide-in-from-left duration-250',
   }
 
   return (
@@ -57,7 +57,7 @@ export function Drawer({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 -mr-2 text-charcoal-400 hover:text-charcoal-700 rounded-lg touch-target flex items-center justify-center"
+            className="p-1.5 -mr-2 text-charcoal-400 hover:text-charcoal-700 rounded touch-target flex items-center justify-center"
           >
             <X className="w-5 h-5" />
           </button>

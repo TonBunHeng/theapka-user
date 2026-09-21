@@ -38,12 +38,12 @@ export function PublicInvitationPage() {
     retry: 1,
   })
 
-  // Set music URL in layout if present
+  // Use the bundled song so playback does not depend on a remote MP3 host.
   useEffect(() => {
-    if (data?.wedding?.music_url && window.__setWeddingMusic) {
-      window.__setWeddingMusic(data.wedding.music_url)
+    if (data && window.__setWeddingMusic) {
+      window.__setWeddingMusic('/music/wedding-song.mp3')
     }
-  }, [data?.wedding?.music_url])
+  }, [data])
 
   // RSVP Mutation
   const rsvpMutation = useMutation({
@@ -98,7 +98,7 @@ export function PublicInvitationPage() {
       <div className="min-h-screen bg-cream-100 flex flex-col items-center justify-center p-6 space-y-6">
         <Skeleton className="w-16 h-16 rounded-full" />
         <Skeleton className="h-8 w-64 max-w-full" />
-        <Skeleton className="h-64 w-80 max-w-full rounded-3xl" />
+        <Skeleton className="h-64 w-80 max-w-full rounded" />
         <Skeleton className="h-4 w-48" />
       </div>
     )
@@ -108,7 +108,7 @@ export function PublicInvitationPage() {
   if (isError || !data?.wedding) {
     return (
       <div className="min-h-screen bg-cream-100 flex flex-col items-center justify-center p-6 text-center font-ui">
-        <div className="w-16 h-16 rounded-2xl bg-gold-100 text-gold-700 flex items-center justify-center text-2xl font-moul mb-4">
+        <div className="w-16 h-16 rounded bg-gold-100 text-gold-700 flex items-center justify-center text-2xl font-moul mb-4">
           ធ
         </div>
         <h2 className="text-xl font-bold text-charcoal-900 mb-2">ធៀបការ អនឡាញ</h2>

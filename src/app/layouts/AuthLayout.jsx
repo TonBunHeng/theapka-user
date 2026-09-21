@@ -20,7 +20,7 @@ export function AuthLayout() {
       {/* Top Header */}
       <header className="p-4 sm:p-6 flex items-center justify-between max-w-6xl mx-auto w-full z-10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gold-500 flex items-center justify-center text-white shadow-soft font-moul text-lg">
+          <div className="w-10 h-10 rounded bg-gold-500 flex items-center justify-center text-white shadow-soft font-moul text-lg">
             ធ
           </div>
           <div>
@@ -32,7 +32,7 @@ export function AuthLayout() {
         <button
           type="button"
           onClick={toggleLanguage}
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/80 border border-gold-200/60 shadow-sm text-xs font-medium text-charcoal-700 hover:text-charcoal-900 transition-colors font-ui"
+          className="flex items-center gap-2 px-3 py-1.5 rounded bg-white/80 border border-gold-200/60 shadow-sm text-xs font-medium text-charcoal-700 hover:text-charcoal-900 transition-colors font-ui"
         >
           <Globe className="w-3.5 h-3.5 text-gold-600" />
           <span>{i18n.language === 'km' ? 'English' : 'ភាសាខ្មែរ'}</span>
