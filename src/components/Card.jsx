@@ -3,7 +3,7 @@ import React from 'react'
 export function Card({ children, className = '', ...props }) {
   return (
     <div
-      className={`bg-white rounded border border-gold-200/50 shadow-card overflow-hidden transition-all duration-200 ${className}`}
+      className={`bg-white rounded border border-slate-200 shadow-sm transition-all ${className}`}
       {...props}
     >
       {children}
@@ -13,7 +13,7 @@ export function Card({ children, className = '', ...props }) {
 
 export function CardHeader({ children, className = '', ...props }) {
   return (
-    <div className={`p-5 md:p-6 border-b border-cream-200/70 ${className}`} {...props}>
+    <div className={`p-5 border-b border-slate-100 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -22,7 +22,7 @@ export function CardHeader({ children, className = '', ...props }) {
 export function CardTitle({ children, className = '', ...props }) {
   return (
     <h3
-      className={`text-lg font-semibold text-charcoal-900 font-ui tracking-tight ${className}`}
+      className={`text-base font-semibold leading-tight text-slate-900 tracking-tight ${className}`}
       {...props}
     >
       {children}
@@ -32,7 +32,7 @@ export function CardTitle({ children, className = '', ...props }) {
 
 export function CardDescription({ children, className = '', ...props }) {
   return (
-    <p className={`text-sm text-charcoal-500 font-ui mt-1 ${className}`} {...props}>
+    <p className={`text-xs text-slate-500 mt-1 ${className}`} {...props}>
       {children}
     </p>
   )
@@ -40,7 +40,7 @@ export function CardDescription({ children, className = '', ...props }) {
 
 export function CardContent({ children, className = '', ...props }) {
   return (
-    <div className={`p-5 md:p-6 ${className}`} {...props}>
+    <div className={`p-5 ${className}`} {...props}>
       {children}
     </div>
   )
@@ -49,7 +49,7 @@ export function CardContent({ children, className = '', ...props }) {
 export function CardFooter({ children, className = '', ...props }) {
   return (
     <div
-      className={`p-5 md:p-6 bg-cream-50/50 border-t border-cream-200/60 flex items-center justify-end gap-3 ${className}`}
+      className={`p-5 bg-slate-50/50 border-t border-slate-100 flex items-center justify-end gap-3 ${className}`}
       {...props}
     >
       {children}

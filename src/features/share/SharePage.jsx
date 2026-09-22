@@ -5,6 +5,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { Copy, Share2, Download, Send, Globe, Heart } from 'lucide-react'
 import api from '../../lib/api'
 import Card, { CardContent, CardHeader, CardTitle } from '../../components/Card'
+import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import { useToast } from '../../components/Toast'
 
@@ -75,28 +76,24 @@ export function SharePage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Header */}
-      <div>
-        <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight">
-          {t('share.title', 'Share Invitation')}
-        </h2>
-        <p className="text-xs sm:text-sm text-charcoal-500">
-          {t('share.subtitle', 'Send digital invitations to your loved ones and friends')}
-        </p>
-      </div>
+      <PageHeader
+        title={t('share.title', 'Share Invitation')}
+        subtitle={t('share.subtitle', 'Send digital invitations to your loved ones and friends')}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
         {/* Share Links Card */}
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Share2 className="w-4 h-4 text-gold-600" />
+              <Share2 className="w-4 h-4 text-brand-emerald-700" />
               <span>{t('share.publicLink', 'Public Invitation Link')}</span>
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Link Copy Box */}
             <div className="space-y-2">
-              <label className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
                 URL
               </label>
               <div className="flex items-center gap-2">
@@ -104,7 +101,7 @@ export function SharePage() {
                   type="text"
                   readOnly
                   value={publicUrl}
-                  className="flex-1 px-3.5 py-2.5 rounded border border-cream-300 bg-cream-50 text-xs sm:text-sm font-mono text-charcoal-800 outline-none"
+                  className="flex-1 px-3.5 py-2.5 rounded border border-slate-300 bg-slate-50 text-xs sm:text-sm font-mono text-slate-800 outline-none"
                 />
                 <Button variant="secondary" size="md" onClick={copyLink} leftIcon={Copy}>
                   {t('common.copy', 'Copy')}
@@ -113,8 +110,8 @@ export function SharePage() {
             </div>
 
             {/* Social Share Buttons */}
-            <div className="space-y-2.5 pt-2 border-t border-cream-100">
-              <label className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider">
+            <div className="space-y-2.5 pt-2 border-t border-slate-100">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider">
                 Direct Share
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
@@ -157,11 +154,11 @@ export function SharePage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 p-6 sm:p-8">
-            <div className="p-6 bg-white rounded border-2 border-dashed border-gold-300 inline-block mx-auto shadow-card space-y-3">
-              <div className="w-8 h-8 rounded-full bg-gold-100 text-gold-600 flex items-center justify-center mx-auto">
+            <div className="p-6 bg-white rounded border border-dashed border-slate-300 inline-block mx-auto shadow-card space-y-3">
+              <div className="w-8 h-8 rounded-full bg-brand-emerald-50 text-brand-emerald-700 flex items-center justify-center mx-auto">
                 <Heart className="w-4 h-4 fill-current" />
               </div>
-              <h4 className="font-moul text-sm text-gold-700">
+              <h4 className="font-moul text-sm text-slate-800">
                 {wedding?.groom_name_kh} & {wedding?.bride_name_kh}
               </h4>
               <QRCodeSVG
@@ -173,7 +170,7 @@ export function SharePage() {
                 level="Q"
                 includeMargin={true}
               />
-              <p className="text-[11px] text-charcoal-500 font-mono">/{slug}</p>
+              <p className="text-[11px] text-slate-500 font-mono">/{slug}</p>
             </div>
 
             <div className="pt-2">

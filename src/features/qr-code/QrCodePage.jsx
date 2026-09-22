@@ -5,6 +5,7 @@ import { QRCodeSVG } from 'qrcode.react'
 import { Printer, QrCode as QrIcon, Heart, Search, Filter } from 'lucide-react'
 import api from '../../lib/api'
 import Card, { CardContent } from '../../components/Card'
+import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import Select from '../../components/Select'
@@ -58,19 +59,16 @@ export function QrCodePage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Header (Hidden when printing) */}
-      <div className="no-print flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight">
-            {t('qr.title', 'QR Codes & Print Sheet')}
-          </h2>
-          <p className="text-xs sm:text-sm text-charcoal-500">
-            {t('qr.subtitle', 'Download single QR codes or print A4 guest entry sheets')}
-          </p>
-        </div>
-
-        <Button variant="primary" onClick={handlePrint} leftIcon={Printer}>
-          {t('qr.printNow', 'Print Sheet Now')}
-        </Button>
+      <div className="no-print">
+        <PageHeader
+          title={t('qr.title', 'QR Codes & Print Sheet')}
+          subtitle={t('qr.subtitle', 'Download single QR codes or print A4 guest entry sheets')}
+          actions={
+            <Button variant="primary" onClick={handlePrint} leftIcon={Printer}>
+              {t('qr.printNow', 'Print Sheet Now')}
+            </Button>
+          }
+        />
       </div>
 
       {/* Filter controls (Hidden when printing) */}
@@ -97,12 +95,12 @@ export function QrCodePage() {
       </Card>
 
       {/* Instructions Banner (Hidden when printing) */}
-      <div className="no-print p-4 bg-gold-50 border border-gold-200 rounded flex items-center justify-between">
-        <div className="flex items-center gap-3 text-xs text-gold-900 leading-relaxed">
-          <QrIcon className="w-5 h-5 text-gold-600 shrink-0" />
+      <div className="no-print p-4 bg-slate-50 border border-slate-200 rounded flex items-center justify-between">
+        <div className="flex items-center gap-3 text-xs text-slate-700 leading-relaxed">
+          <QrIcon className="w-5 h-5 text-brand-emerald-700 shrink-0" />
           <span>{t('qr.instructions', 'Click print to generate beautifully formatted A4 printable cards')}</span>
         </div>
-        <span className="text-xs font-bold text-gold-700 font-mono">
+        <span className="text-xs font-bold text-brand-emerald-700 font-mono">
           {filteredGuests.length} {isKhmer ? 'កាត' : 'cards'}
         </span>
       </div>
@@ -122,7 +120,7 @@ export function QrCodePage() {
             <div
               key={guest.id}
               onClick={() => setSelectedQrGuest(guest)}
-              className="print-card bg-white rounded border-2 border-dashed border-gold-300/80 p-4 text-center space-y-3 cursor-pointer hover:shadow-card transition-all"
+              className="print-card bg-white rounded border border-dashed border-slate-300 p-4 text-center space-y-3 cursor-pointer hover:shadow-card transition-all"
             >
               {/* Wedding Emblem */}
               <div className="flex items-center justify-center gap-1.5 text-xs text-gold-700 font-moul">

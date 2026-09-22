@@ -44,7 +44,7 @@ export function Modal({
     >
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-charcoal-900/50 backdrop-blur-sm transition-opacity duration-200"
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-2xs animate-modal-backdrop transition-opacity duration-200"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -52,19 +52,19 @@ export function Modal({
       {/* Modal Container */}
       <div
         ref={modalRef}
-        className={`relative w-full ${maxWidth} bg-white rounded shadow-elevated border border-gold-200/60 overflow-hidden transform transition-all duration-200 animate-in fade-in zoom-in-95 my-8 ${className}`}
+        className={`relative w-full ${maxWidth} bg-white rounded shadow-elevated border border-slate-200 shadow-2xl animate-modal-content overflow-hidden transform transition-all duration-200 animate-in fade-in zoom-in-95 my-8 ${className}`}
       >
         {/* Header */}
         {(title || showClose) && (
-          <div className="flex items-start justify-between p-5 md:p-6 border-b border-cream-200">
+          <div className="flex items-start justify-between p-5 border-b border-slate-100">
             <div>
               {title && (
-                <h3 id="modal-title" className="text-lg font-semibold text-charcoal-900 font-ui">
+                <h3 id="modal-title" className="text-base font-semibold leading-6 text-slate-900">
                   {title}
                 </h3>
               )}
               {description && (
-                <p className="text-sm text-charcoal-500 font-ui mt-0.5">{description}</p>
+                <p className="text-xs text-slate-500 mt-1">{description}</p>
               )}
             </div>
 
@@ -72,7 +72,7 @@ export function Modal({
               <button
                 type="button"
                 onClick={onClose}
-                className="p-1.5 -mr-1 text-charcoal-400 hover:text-charcoal-700 hover:bg-cream-100 rounded transition-colors touch-target flex items-center justify-center"
+                className="p-1.5 -mr-1 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded transition-colors touch-target flex items-center justify-center"
                 aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />
@@ -82,7 +82,7 @@ export function Modal({
         )}
 
         {/* Body */}
-        <div className="p-5 md:p-6 max-h-[calc(100vh-12rem)] overflow-y-auto font-ui">
+        <div className="p-5 max-h-[calc(100vh-12rem)] overflow-y-auto">
           {children}
         </div>
       </div>

@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Plus, Edit2, Trash2, FolderKanban, Users } from 'lucide-react'
 import api from '../../lib/api'
 import Card, { CardContent } from '../../components/Card'
+import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import Modal from '../../components/Modal'
 import Input from '../../components/Input'
@@ -87,20 +88,15 @@ export function GuestGroupsPage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight">
-            {t('groups.title', 'Guest Groups')}
-          </h2>
-          <p className="text-xs sm:text-sm text-charcoal-500">
-            {t('groups.subtitle', 'Organize guests into groups (Family, Friends, Colleagues)')}
-          </p>
-        </div>
-
-        <Button variant="primary" onClick={openAdd} leftIcon={Plus}>
-          {t('groups.addGroup', 'Create Group')}
-        </Button>
-      </div>
+      <PageHeader
+        title={t('groups.title', 'Guest Groups')}
+        subtitle={t('groups.subtitle', 'Organize guests into groups (Family, Friends, Colleagues)')}
+        actions={
+          <Button variant="primary" onClick={openAdd} leftIcon={Plus}>
+            {t('groups.addGroup', 'Create Group')}
+          </Button>
+        }
+      />
 
       {isLoading ? (
         <SkeletonCard />
@@ -115,7 +111,7 @@ export function GuestGroupsPage() {
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {groups.map((group) => (
-            <Card key={group.id} className="hover:border-gold-300 transition-all">
+            <Card key={group.id} className="hover:border-slate-300 shadow-sm transition-all">
               <CardContent className="p-5 space-y-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">

@@ -21,6 +21,7 @@ import {
 import api from '../../lib/api'
 import { useAuthStore } from '../../auth/authStore'
 import Card, { CardContent, CardHeader, CardTitle } from '../../components/Card'
+import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import Modal from '../../components/Modal'
 import Input from '../../components/Input'
@@ -316,68 +317,65 @@ export function GiftsPage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Header & Status Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight flex items-center gap-2">
-            <span>{t('gifts.title', 'Gifts / ចំណងដៃ')}</span>
-            {pendingCount > 0 ? (
-              <span className="px-2.5 py-0.5 rounded-full bg-amber-500 text-white text-xs font-bold animate-pulse">
-                Pending sync ({pendingCount})
-              </span>
-            ) : (
-              <span className="px-2.5 py-0.5 rounded-full bg-green-100 text-green-800 text-xs font-semibold">
-                ✓ Synced
-              </span>
+      <PageHeader
+        title={t('gifts.title', 'Gifts / ចំណងដៃ')}
+        subtitle={t('gifts.subtitle', 'Fast reception gift recording with offline-first support')}
+        badge={
+          pendingCount > 0 ? (
+            <Badge variant="warning" dot>
+              Pending sync ({pendingCount})
+            </Badge>
+          ) : (
+            <Badge variant="success" dot>
+              Synced
+            </Badge>
+          )
+        }
+        actions={
+          <div className="flex items-center gap-2">
+            {pendingCount > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                isLoading={isSyncing}
+                onClick={handleSync}
+                leftIcon={RefreshCw}
+              >
+                Sync Now ({pendingCount})
+              </Button>
             )}
-          </h2>
-          <p className="text-xs sm:text-sm text-charcoal-500">
-            {t('gifts.subtitle', 'Fast reception gift recording with offline-first support')}
-          </p>
-        </div>
 
-        <div className="flex items-center gap-2">
-          {pendingCount > 0 && (
-            <Button
-              variant="outline"
-              size="sm"
-              isLoading={isSyncing}
-              onClick={handleSync}
-              leftIcon={RefreshCw}
-            >
-              Sync Now ({pendingCount})
+            <Button variant="secondary" size="sm" onClick={handleExportCsv} leftIcon={Download}>
+              {t('common.download', 'Export CSV')}
             </Button>
-          )}
-
-          <Button variant="secondary" size="sm" onClick={handleExportCsv} leftIcon={Download}>
-            {t('common.download', 'Export CSV')}
-          </Button>
-        </div>
-      </div>
+          </div>
+        }
+      />
 
       {/* Totals Summary Cards (Strictly Separate KHR and USD!) */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {/* KHR Total */}
-        <Card className="border-burgundy-200/60 bg-gradient-to-br from-white to-burgundy-50/40">
+        <Card className="border-slate-200 bg-white shadow-sm">
           <CardContent className="p-5 flex items-center justify-between">
             <div className="space-y-1">
-              <span className="text-xs font-bold text-burgundy-700 uppercase tracking-wider">
+              <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
                 {t('gifts.totalKhr', 'Total Gifts (KHR)')}
               </span>
-              <div className="text-2xl sm:text-3xl font-extrabold text-burgundy-900 truncate">
+              <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 truncate">
                 {formatCurrency(summary?.total_khr || 0, 'KHR', isKhmer)}
               </div>
-              <p className="text-[11px] text-charcoal-500">
+              <p className="text-[11px] text-slate-500">
                 {t('gifts.neverSumWarning', 'Strictly isolated currency')}
               </p>
             </div>
-            <div className="w-12 h-12 rounded bg-burgundy-100 text-burgundy-700 flex items-center justify-center text-xl font-bold font-moul shrink-0">
+            <div className="w-12 h-12 rounded bg-brand-emerald-50 text-brand-emerald-700 border border-brand-emerald-200/60 flex items-center justify-center text-xl font-bold font-moul shrink-0">
               ៛
             </div>
           </CardContent>
         </Card>
 
         {/* USD Total */}
-        <Card className="border-emerald-200/60 bg-gradient-to-br from-white to-emerald-50/40">
+        <Card className="border-slate-200 bg-white shadow-sm">
           <CardContent className="p-5 flex items-center justify-between">
             <div className="space-y-1">
               <span className="text-xs font-bold text-emerald-700 uppercase tracking-wider">
@@ -386,7 +384,7 @@ export function GiftsPage() {
               <div className="text-2xl sm:text-3xl font-extrabold text-emerald-900 truncate">
                 {formatCurrency(summary?.total_usd || 0, 'USD', isKhmer)}
               </div>
-              <p className="text-[11px] text-charcoal-500">
+              <p className="text-[11px] text-slate-500">
                 {gifts.length} {isKhmer ? 'កំណត់ត្រាសរុប' : 'total entries'}
               </p>
             </div>
@@ -398,27 +396,27 @@ export function GiftsPage() {
       </div>
 
       {/* QUICK ENTRY FORM (The Primary Reception Tool) */}
-      <Card className="border-2 border-gold-400 shadow-elevated bg-white">
-        <CardHeader className="bg-gold-50/50 border-b border-gold-200/60 pb-3">
+      <Card className="border border-slate-200 shadow-sm bg-white">
+        <CardHeader className="bg-slate-50 border-b border-slate-100 pb-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded bg-gold-500 text-white flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-brand-emerald-700 text-white flex items-center justify-center">
                 <Gift className="w-4 h-4" />
               </div>
-              <CardTitle className="text-base sm:text-lg text-charcoal-900">
+              <CardTitle className="text-base sm:text-lg text-slate-900">
                 {t('gifts.quickEntry', 'Quick Gift Entry')}
               </CardTitle>
             </div>
 
             {/* Currency Toggle Buttons */}
-            <div className="flex items-center p-1 bg-cream-200 rounded">
+            <div className="flex items-center p-1 bg-slate-100 rounded">
               <button
                 type="button"
                 onClick={() => setCurrency('KHR')}
                 className={`px-3 py-1.5 rounded text-xs font-bold transition-all touch-target ${
                   currency === 'KHR'
-                    ? 'bg-burgundy-600 text-white shadow-sm'
-                    : 'text-charcoal-600 hover:text-charcoal-900'
+                    ? 'bg-brand-emerald-700 text-white shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 ៛ KHR
@@ -428,8 +426,8 @@ export function GiftsPage() {
                 onClick={() => setCurrency('USD')}
                 className={`px-3 py-1.5 rounded text-xs font-bold transition-all touch-target ${
                   currency === 'USD'
-                    ? 'bg-emerald-600 text-white shadow-sm'
-                    : 'text-charcoal-600 hover:text-charcoal-900'
+                    ? 'bg-brand-emerald-700 text-white shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
                 $ USD
@@ -444,7 +442,7 @@ export function GiftsPage() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {/* Option A: Search Guest Autocomplete */}
               <div className="relative">
-                <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                   {t('gifts.searchOrScan', 'Search Guest or Scan')}
                 </label>
                 <div className="relative">
@@ -456,7 +454,7 @@ export function GiftsPage() {
                       setSelectedGuest(null)
                       setGuestSearchQuery(e.target.value)
                     }}
-                    className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none"
+                    className="w-full px-3.5 py-2.5 rounded border border-slate-300 focus:border-brand-emerald-600 focus:ring-2 focus:ring-brand-emerald-100 text-sm font-ui outline-none"
                   />
                   {selectedGuest && (
                     <button
@@ -465,7 +463,7 @@ export function GiftsPage() {
                         setSelectedGuest(null)
                         setGuestSearchQuery('')
                       }}
-                      className="absolute right-3 top-2.5 text-xs text-charcoal-400 hover:text-charcoal-700"
+                      className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-700"
                     >
                       Clear
                     </button>
@@ -474,7 +472,7 @@ export function GiftsPage() {
 
                 {/* Suggestions Dropdown */}
                 {guestSuggestions.length > 0 && !selectedGuest && (
-                  <div className="absolute left-0 right-0 top-full mt-1 bg-white rounded shadow-elevated border border-gold-200 z-30 divide-y divide-cream-100 overflow-hidden">
+                  <div className="absolute left-0 right-0 top-full mt-1 bg-white rounded shadow-elevated border border-slate-200 z-30 divide-y divide-slate-100 overflow-hidden">
                     {guestSuggestions.map((g) => (
                       <div
                         key={g.id}
@@ -483,10 +481,10 @@ export function GiftsPage() {
                           setWalkInName('')
                           setGuestSearchQuery('')
                         }}
-                        className="p-2.5 hover:bg-cream-100 cursor-pointer flex items-center justify-between text-xs"
+                        className="p-2.5 hover:bg-slate-100 cursor-pointer flex items-center justify-between text-xs"
                       >
-                        <span className="font-bold text-charcoal-900">{g.name}</span>
-                        <span className="text-charcoal-500">{g.phone || `Token: ${g.token}`}</span>
+                        <span className="font-bold text-slate-900">{g.name}</span>
+                        <span className="text-slate-500">{g.phone || `Token: ${g.token}`}</span>
                       </div>
                     ))}
                   </div>
@@ -495,7 +493,7 @@ export function GiftsPage() {
 
               {/* Option B: Walk-in Giver Name */}
               <div>
-                <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                   {t('gifts.walkInGiver', 'Walk-in Name (ភ្ញៀវក្រៅបញ្ជី)')}
                 </label>
                 <input
@@ -504,14 +502,14 @@ export function GiftsPage() {
                   disabled={!!selectedGuest}
                   value={walkInName}
                   onChange={(e) => setWalkInName(e.target.value)}
-                  className="w-full px-3.5 py-2.5 rounded border border-cream-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 text-sm font-ui outline-none disabled:bg-cream-100"
+                  className="w-full px-3.5 py-2.5 rounded border border-slate-300 focus:border-brand-emerald-600 focus:ring-2 focus:ring-brand-emerald-100 text-sm font-ui outline-none disabled:bg-slate-100"
                 />
               </div>
             </div>
 
             {/* Quick Amount Preset Chips */}
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider">
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider">
                 {currency === 'KHR'
                   ? t('gifts.quickAmountsKhr', 'Quick Amounts (៛)')
                   : t('gifts.quickAmountsUsd', 'Quick Amounts ($)')}
@@ -524,8 +522,8 @@ export function GiftsPage() {
                     onClick={() => setAmount(String(val))}
                     className={`px-3 py-2 rounded text-xs font-bold border transition-all touch-target ${
                       amount === String(val)
-                        ? 'bg-gold-500 border-gold-600 text-white shadow-sm'
-                        : 'bg-cream-50 border-cream-200 text-charcoal-800 hover:bg-cream-100'
+                        ? 'bg-brand-emerald-700 border-brand-emerald-800 text-white shadow-sm'
+                        : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50'
                     }`}
                   >
                     {formatCurrency(val, currency, isKhmer)}
@@ -537,7 +535,7 @@ export function GiftsPage() {
             {/* Amount Input (Large Tap Target & Keypad) */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
               <div className="sm:col-span-2">
-                <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                   {t('gifts.amount', 'Gift Amount')} ({currency}) *
                 </label>
                 <div className="relative">
@@ -548,9 +546,9 @@ export function GiftsPage() {
                     placeholder={currency === 'KHR' ? '100000' : '50'}
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
-                    className="w-full h-14 px-4 text-2xl sm:text-3xl font-bold font-mono rounded border-2 border-gold-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200 outline-none"
+                    className="w-full h-14 px-4 text-2xl sm:text-3xl font-bold font-mono rounded border border-slate-300 focus:border-brand-emerald-600 focus:ring-2 focus:ring-brand-emerald-100 outline-none"
                   />
-                  <div className="absolute right-4 top-4 font-bold text-charcoal-400">
+                  <div className="absolute right-4 top-4 font-bold text-slate-400">
                     {currency === 'KHR' ? '៛' : '$'}
                   </div>
                 </div>
@@ -558,7 +556,7 @@ export function GiftsPage() {
 
               {/* Method Selector */}
               <div>
-                <label className="block text-xs font-bold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
                   {t('gifts.method', 'Payment Method')}
                 </label>
                 <div className="grid grid-cols-3 gap-1.5">
@@ -573,8 +571,8 @@ export function GiftsPage() {
                       onClick={() => setMethod(m.id)}
                       className={`h-14 rounded border text-xs font-bold flex items-center justify-center transition-all touch-target ${
                         method === m.id
-                          ? 'bg-gold-500 border-gold-600 text-white shadow-sm'
-                          : 'bg-white border-cream-200 text-charcoal-700 hover:bg-cream-50'
+                          ? 'bg-brand-emerald-700 border-brand-emerald-800 text-white shadow-sm'
+                          : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
                       }`}
                     >
                       {m.label}
@@ -625,7 +623,7 @@ export function GiftsPage() {
         <CardHeader className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <CardTitle>{t('gifts.recentEntries', 'Recent Entries')}</CardTitle>
-            <p className="text-xs text-charcoal-500 mt-0.5">
+            <p className="text-xs text-slate-500 mt-0.5">
               {filteredGifts.length} {isKhmer ? 'កំណត់ត្រា' : 'records found'}
             </p>
           </div>
@@ -644,7 +642,7 @@ export function GiftsPage() {
           {isLoadingGifts ? (
             <SkeletonTable rows={6} cols={6} />
           ) : filteredGifts.length === 0 ? (
-            <div className="p-8 text-center text-charcoal-400 text-xs">
+            <div className="p-8 text-center text-slate-400 text-xs">
               {t('gifts.empty', 'No gift entries recorded yet')}
             </div>
           ) : (
@@ -655,7 +653,7 @@ export function GiftsPage() {
                   <div
                     key={gift.id || gift.client_uuid}
                     className={`p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors ${
-                      isCorrection ? 'bg-red-50/60' : 'hover:bg-cream-50/50'
+                      isCorrection ? 'bg-red-50/60' : 'hover:bg-slate-50/50'
                     }`}
                   >
                     {/* Left Details */}
@@ -666,7 +664,7 @@ export function GiftsPage() {
                             ? 'bg-red-100 text-red-700'
                             : gift.currency === 'USD'
                             ? 'bg-emerald-100 text-emerald-700'
-                            : 'bg-burgundy-100 text-burgundy-700'
+                            : 'bg-brand-emerald-50 text-brand-emerald-700'
                         }`}
                       >
                         {isCorrection ? <RotateCcw className="w-4 h-4" /> : gift.currency === 'USD' ? '$' : '៛'}
@@ -674,7 +672,7 @@ export function GiftsPage() {
 
                       <div className="space-y-0.5">
                         <div className="flex items-center gap-2">
-                          <h4 className="font-bold text-sm text-charcoal-900 font-ui">
+                          <h4 className="font-bold text-sm text-slate-900 font-ui">
                             {gift.giver_name}
                           </h4>
                           {isCorrection && (
@@ -682,16 +680,16 @@ export function GiftsPage() {
                               កែតម្រូវ
                             </span>
                           )}
-                          <span className="text-[11px] font-semibold text-charcoal-500 uppercase px-1.5 py-0.2 bg-cream-100 rounded">
+                          <span className="text-[11px] font-semibold text-slate-500 uppercase px-1.5 py-0.2 bg-slate-100 rounded">
                             {gift.method}
                           </span>
                         </div>
 
-                        <div className="flex items-center gap-2 text-xs text-charcoal-500">
+                        <div className="flex items-center gap-2 text-xs text-slate-500">
                           <span>{gift.recorded_by}</span>
                           <span>•</span>
                           <span>{formatDate(gift.recorded_at, 'DD/MM HH:mm', i18n.language)}</span>
-                          {gift.note && <span className="text-charcoal-700 italic">({gift.note})</span>}
+                          {gift.note && <span className="text-slate-700 italic">({gift.note})</span>}
                         </div>
                       </div>
                     </div>
@@ -704,7 +702,7 @@ export function GiftsPage() {
                             ? 'text-red-600'
                             : gift.currency === 'USD'
                             ? 'text-emerald-700'
-                            : 'text-burgundy-700'
+                            : 'text-brand-emerald-700'
                         }`}
                       >
                         {formatCurrency(gift.amount, gift.currency, isKhmer)}
@@ -761,7 +759,7 @@ export function GiftsPage() {
               onChange={(e) => setCorrectionReason(e.target.value)}
             />
 
-            <div className="flex justify-end gap-3 pt-3 border-t border-cream-200">
+            <div className="flex justify-end gap-3 pt-3 border-t border-slate-100">
               <Button variant="ghost" onClick={() => setIsCorrectionModalOpen(false)}>
                 {t('common.cancel', 'Cancel')}
               </Button>

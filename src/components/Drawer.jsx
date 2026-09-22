@@ -35,14 +35,14 @@ export function Drawer({
     <div className="fixed inset-0 z-50 overflow-hidden" role="dialog" aria-modal="true">
       {/* Backdrop */}
       <div
-        className="fixed inset-0 bg-charcoal-900/50 backdrop-blur-sm transition-opacity"
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-2xs animate-modal-backdrop transition-opacity"
         onClick={onClose}
         aria-hidden="true"
       />
 
       {/* Sheet panel */}
       <div
-        className={`fixed bg-white shadow-elevated border-gold-200/50 flex flex-col z-10 ${positionClasses[position]} ${className}`}
+        className={`fixed bg-white shadow-elevated border-slate-200 flex flex-col z-10 ${positionClasses[position]} ${className}`}
       >
         {/* Drag handle indicator for bottom drawer */}
         {position === 'bottom' && (
@@ -52,19 +52,19 @@ export function Drawer({
         )}
 
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-cream-200">
-          <h3 className="text-base font-semibold text-charcoal-900 font-ui">{title}</h3>
+        <div className="flex items-center justify-between p-5 border-b border-slate-100 bg-slate-50/50">
+          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 -mr-2 text-charcoal-400 hover:text-charcoal-700 rounded touch-target flex items-center justify-center"
+            className="p-1.5 -mr-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded touch-target flex items-center justify-center"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Content */}
-        <div className="p-6 overflow-y-auto font-ui flex-1">{children}</div>
+        <div className="p-5 overflow-y-auto flex-1">{children}</div>
       </div>
     </div>
   )

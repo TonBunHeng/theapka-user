@@ -108,10 +108,10 @@ export function DashboardPage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Welcome Banner */}
-      <div className="bg-gradient-to-r from-cream-100 via-white to-gold-50 p-6 sm:p-8 rounded border border-gold-200 shadow-card flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white p-6 sm:p-8 rounded border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gold-700 bg-gold-100 px-2.5 py-0.5 rounded-full">
+            <span className="text-xs font-semibold uppercase tracking-wider text-brand-emerald-800 bg-brand-emerald-50 border border-brand-emerald-200/60 px-2.5 py-0.5 rounded-full">
               TheapKa Online
             </span>
             {wedding?.is_published ? (
@@ -148,7 +148,7 @@ export function DashboardPage() {
             href={`/i/${wedding?.slug}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded bg-burgundy-500 hover:bg-burgundy-600 text-white text-xs font-bold shadow-sm transition-transform active:scale-95 touch-target"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded bg-brand-emerald-700 hover:bg-brand-emerald-800 text-white text-xs font-semibold shadow-sm transition-colors rounded px-3.5 py-2"
           >
             <ExternalLink className="w-3.5 h-3.5" />
             <span>{t('dashboard.preview', 'Preview')}</span>
@@ -159,7 +159,7 @@ export function DashboardPage() {
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* CARD 1: Countdown */}
-        <Card className="hover:border-gold-300 transition-colors">
+        <Card className="hover:border-slate-300 transition-colors">
           <CardContent className="p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
@@ -193,7 +193,7 @@ export function DashboardPage() {
         </Card>
 
         {/* CARD 2: Total Guests & RSVP */}
-        <Card className="hover:border-gold-300 transition-colors">
+        <Card className="hover:border-slate-300 transition-colors">
           <CardContent className="p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
@@ -231,13 +231,13 @@ export function DashboardPage() {
         </Card>
 
         {/* CARD 3: Gifts Total (KHR) */}
-        <Card className="hover:border-gold-300 transition-colors">
+        <Card className="hover:border-slate-300 transition-colors">
           <CardContent className="p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
                 {t('gifts.totalKhr', 'Total Gifts (KHR)')}
               </span>
-              <div className="w-8 h-8 rounded bg-burgundy-50 text-burgundy-600 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-brand-emerald-50 text-brand-emerald-700 flex items-center justify-center">
                 <Gift className="w-4 h-4" />
               </div>
             </div>
@@ -255,7 +255,7 @@ export function DashboardPage() {
         </Card>
 
         {/* CARD 4: Gifts Total (USD) */}
-        <Card className="hover:border-gold-300 transition-colors">
+        <Card className="hover:border-slate-300 transition-colors">
           <CardContent className="p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">

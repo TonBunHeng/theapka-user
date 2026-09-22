@@ -4,6 +4,7 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { Image as ImageIcon, Upload, Trash2, Check, Star, ArrowUp, ArrowDown } from 'lucide-react'
 import api from '../../lib/api'
 import Card, { CardContent } from '../../components/Card'
+import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import EmptyState from '../../components/EmptyState'
 import { SkeletonCard } from '../../components/Skeleton'
@@ -109,18 +110,11 @@ export function GalleryPage() {
   return (
     <div className="space-y-6 font-ui">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight">
-            {t('gallery.title', 'Photo Gallery')}
-          </h2>
-          <p className="text-xs sm:text-sm text-charcoal-500">
-            {t('gallery.subtitle', 'Upload pre-wedding and memory photos')}
-          </p>
-        </div>
-
-        <div>
-          <label className="inline-flex items-center gap-2 px-4 py-2.5 rounded bg-burgundy-500 hover:bg-burgundy-600 text-white text-sm font-semibold shadow-sm cursor-pointer active:scale-95 transition-all touch-target">
+      <PageHeader
+        title={t('gallery.title', 'Photo Gallery')}
+        subtitle={t('gallery.subtitle', 'Upload pre-wedding and memory photos')}
+        actions={
+          <label className="inline-flex items-center gap-2 px-4 py-2 rounded bg-brand-emerald-700 hover:bg-brand-emerald-800 text-white text-sm font-semibold shadow-sm cursor-pointer active:scale-95 transition-all touch-target">
             <Upload className="w-4 h-4" />
             <span>{isUploading ? t('common.loading', 'Uploading...') : t('gallery.uploadButton', 'Upload Photos')}</span>
             <input
@@ -132,8 +126,8 @@ export function GalleryPage() {
               className="hidden"
             />
           </label>
-        </div>
-      </div>
+        }
+      />
 
       {/* Gallery Grid */}
       {isLoading ? (
@@ -148,7 +142,7 @@ export function GalleryPage() {
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
           {media.map((photo) => (
             <Card key={photo.id} className="group relative overflow-hidden">
-              <div className="aspect-[3/4] relative bg-cream-200">
+              <div className="aspect-[3/4] relative bg-slate-100">
                 <img
                   src={photo.url}
                   alt="Wedding gallery moment"

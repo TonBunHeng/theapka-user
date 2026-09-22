@@ -39,13 +39,12 @@ export function ForgotPasswordPage() {
   }
 
   return (
-    <Card className="border-gold-200/80 shadow-card">
-      <CardContent className="space-y-6 pt-8 pb-8">
+    <div className="space-y-6">
         <div className="text-center space-y-1.5">
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 font-ui tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-ui tracking-tight">
             {t('auth.forgotPasswordTitle', 'Reset Password')}
           </h2>
-          <p className="text-xs sm:text-sm text-charcoal-500 font-ui">
+          <p className="text-xs sm:text-sm text-slate-500 font-ui">
             {t('auth.forgotPasswordSubtitle', 'Enter your email to receive a password reset link')}
           </p>
         </div>
@@ -60,7 +59,7 @@ export function ForgotPasswordPage() {
             </p>
             <Link
               to="/login"
-              className="inline-flex items-center gap-2 text-sm font-bold text-burgundy-600 hover:text-burgundy-700"
+              className="inline-flex items-center gap-2 text-sm font-bold text-brand-emerald-700 hover:text-brand-emerald-800"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>{t('common.back', 'Back to')} {t('auth.login', 'Log In')}</span>
@@ -89,7 +88,7 @@ export function ForgotPasswordPage() {
             <div className="text-center pt-2">
               <Link
                 to="/login"
-                className="inline-flex items-center gap-1.5 text-xs text-charcoal-600 hover:text-charcoal-900 font-ui"
+                className="inline-flex items-center gap-1.5 text-xs text-slate-600 hover:text-slate-900 font-ui"
               >
                 <ArrowLeft className="w-3.5 h-3.5" />
                 <span>{t('common.back', 'Back to')} {t('auth.login', 'Log In')}</span>
@@ -97,8 +96,7 @@ export function ForgotPasswordPage() {
             </div>
           </form>
         )}
-      </CardContent>
-    </Card>
+    </div>
   )
 }
 

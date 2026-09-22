@@ -105,7 +105,7 @@ export function LocationPage() {
             />
 
             <div className="space-y-1.5">
-              <label className="block text-sm font-medium text-charcoal-800 font-ui">
+              <label className="block text-xs font-semibold text-charcoal-700">
                 {t('location.address', 'Full Address')}
               </label>
               <textarea

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Content:wght@400;700&family=Dangrek&family=Hanuman:wght@400;700&family=Kantumruy+Pro:wght@400;500;700&family=Koulen&family=Moul&family=Moulpali&family=Noto+Sans+Khmer:wght@400;700&family=Siemreap&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Inter:wght@300;400;500;600;700&family=Content:wght@400;700&family=Dangrek&family=Hanuman:wght@400;700&family=Kantumruy+Pro:wght@400;500;700&family=Koulen&family=Moul&family=Moulpali&family=Noto+Sans+Khmer:wght@400;700&family=Siemreap&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,6 +13,7 @@
   }
 
   html {
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-tap-highlight-color: transparent;
     scroll-behavior: smooth;
   }
@@ -23,28 +24,25 @@
   }
 
   /* Khmer text readability optimization */
-  :lang(km), [lang="km"], .font-ui, .font-body {
-    line-height: 1.7;
+  :lang(km), [lang="km"], .font-khmer, .font-sans, .font-ui, .font-body {
+    line-height: 1.65;
     letter-spacing: 0.01em;
   }
 
-  /* Smooth scrollbars */
+  /* Custom scrollbars */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
   }
-
   ::-webkit-scrollbar-track {
-    background: #F4EFE6;
+    background: #f1f5f9;
   }
-
   ::-webkit-scrollbar-thumb {
-    background: #DFC784;
+    background: #cbd5e1;
     border-radius: 9999px;
   }
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #C59B27;
+    background: #94a3b8;
   }
 }
 
@@ -114,4 +112,56 @@
     break-inside: avoid;
     page-break-inside: avoid;
   }
+}
+
+
+/* Smooth Popups and Modals Animations */
+@keyframes modalBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalContentIn {
+  0% { opacity: 0; transform: scale(0.94) translateY(12px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes drawerSlideIn {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes popupScaleIn {
+  0% { opacity: 0; transform: scale(0.96) translateY(-6px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes toastSlideIn {
+  0% { opacity: 0; transform: translateY(16px) scale(0.95); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-modal-backdrop {
+  animation: modalBackdropIn 220ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity;
+}
+
+.animate-modal-content {
+  animation: modalContentIn 260ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-drawer-slide {
+  animation: drawerSlideIn 280ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform;
+}
+
+.animate-popup-scale {
+  animation: popupScaleIn 180ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
+}
+
+.animate-toast-slide {
+  animation: toastSlideIn 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: transform, opacity;
 }

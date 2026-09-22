@@ -2,8 +2,8 @@ import React from 'react'
 
 export function Table({ children, className = '', containerClassName = '' }) {
   return (
-    <div className={`w-full overflow-x-auto rounded border border-cream-200/80 ${containerClassName}`}>
-      <table className={`w-full text-left text-sm text-charcoal-800 font-ui border-collapse ${className}`}>
+    <div className={`w-full overflow-x-auto rounded border border-slate-200 bg-white ${containerClassName}`}>
+      <table className={`w-full text-left text-xs text-slate-800 border-collapse ${className}`}>
         {children}
       </table>
     </div>
@@ -12,20 +12,20 @@ export function Table({ children, className = '', containerClassName = '' }) {
 
 export function TableHeader({ children, className = '' }) {
   return (
-    <thead className={`bg-cream-100/90 text-charcoal-700 font-semibold border-b border-cream-200 ${className}`}>
+    <thead className={`bg-slate-50 text-slate-600 font-semibold border-b border-slate-200 sticky top-0 z-1 ${className}`}>
       {children}
     </thead>
   )
 }
 
 export function TableBody({ children, className = '' }) {
-  return <tbody className={`divide-y divide-cream-200/60 bg-white ${className}`}>{children}</tbody>
+  return <tbody className={`divide-y divide-slate-100 bg-white ${className}`}>{children}</tbody>
 }
 
 export function TableRow({ children, className = '', ...props }) {
   return (
     <tr
-      className={`hover:bg-cream-50/70 transition-colors duration-150 ${className}`}
+      className={`hover:bg-slate-50/80 transition-colors duration-150 ${className}`}
       {...props}
     >
       {children}
@@ -37,7 +37,7 @@ export function TableHead({ children, className = '', ...props }) {
   return (
     <th
       scope="col"
-      className={`px-4 py-3.5 text-xs uppercase tracking-wider font-medium text-charcoal-600 ${className}`}
+      className={`py-3 px-4 text-xs font-semibold uppercase tracking-wider text-slate-700 ${className}`}
       {...props}
     >
       {children}
@@ -47,7 +47,7 @@ export function TableHead({ children, className = '', ...props }) {
 
 export function TableCell({ children, className = '', ...props }) {
   return (
-    <td className={`px-4 py-3.5 text-sm whitespace-nowrap text-charcoal-800 ${className}`} {...props}>
+    <td className={`py-3 px-4 text-xs whitespace-nowrap text-slate-800 ${className}`} {...props}>
       {children}
     </td>
   )

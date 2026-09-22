@@ -30,8 +30,8 @@ const SettingsPage = lazy(() => import('../features/settings/SettingsPage'))
 const PublicInvitationPage = lazy(() => import('../public/InvitationPage'))
 
 const LoadingFallback = () => (
-  <div className="min-h-screen bg-cream-100 flex items-center justify-center p-6">
-    <div className="w-10 h-10 border-4 border-gold-300 border-t-gold-600 rounded-full animate-spin" />
+  <div className="min-h-screen bg-slate-50 flex items-center justify-center p-6">
+    <div className="w-10 h-10 border-4 border-slate-200 border-t-brand-emerald-700 rounded-full animate-spin" />
   </div>
 )
 

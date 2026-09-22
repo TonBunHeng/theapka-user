@@ -93,17 +93,17 @@ export function OnboardingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream-100 flex flex-col items-center justify-center p-4 sm:p-6 font-ui selection:bg-gold-200">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-4 sm:p-6 font-ui selection:bg-brand-emerald-100">
       <div className="w-full max-w-xl space-y-6">
         {/* Header Branding */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded bg-gold-500 text-white font-moul text-xl shadow-card mb-1">
+          <div className="inline-flex items-center justify-center w-12 h-12 rounded bg-brand-emerald-700 text-white font-bold text-lg shadow-sm mb-1 ring-4 ring-brand-emerald-100">
             ធ
           </div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-charcoal-900 tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
             {t('onboarding.title', 'Set Up Your Wedding')}
           </h1>
-          <p className="text-xs sm:text-sm text-charcoal-600 max-w-md mx-auto">
+          <p className="text-xs sm:text-sm text-slate-500 max-w-md mx-auto">
             {t('onboarding.subtitle', 'Complete these 3 simple steps to create your digital invitation')}
           </p>
         </div>
@@ -115,10 +115,10 @@ export function OnboardingPage() {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors ${
                   step === s
-                    ? 'bg-burgundy-500 text-white shadow-sm ring-4 ring-burgundy-100'
+                    ? 'bg-brand-emerald-700 text-white shadow-sm ring-4 ring-brand-emerald-100'
                     : step > s
-                    ? 'bg-green-500 text-white'
-                    : 'bg-cream-200 text-charcoal-500'
+                    ? 'bg-brand-emerald-600 text-white'
+                    : 'bg-slate-200 text-slate-500'
                 }`}
               >
                 {step > s ? <Check className="w-4 h-4" /> : s}
@@ -135,12 +135,12 @@ export function OnboardingPage() {
         </div>
 
         {/* Step Card */}
-        <Card className="border-gold-200/80 shadow-elevated">
+        <Card className="border-slate-200 shadow-sm">
           <CardContent className="p-6 sm:p-8 space-y-6">
             {/* STEP 1: Couple Names */}
             {step === 1 && (
               <div className="space-y-4 animate-in fade-in duration-200">
-                <div className="border-b border-cream-200 pb-3">
+                <div className="border-b border-slate-100 pb-3">
                   <h3 className="text-base font-bold text-charcoal-900 flex items-center gap-2">
                     <Heart className="w-5 h-5 text-burgundy-500" />
                     <span>{t('onboarding.step1', '1. Couple Information')}</span>
@@ -180,7 +180,7 @@ export function OnboardingPage() {
             {/* STEP 2: Date & Venue */}
             {step === 2 && (
               <div className="space-y-4 animate-in fade-in duration-200">
-                <div className="border-b border-cream-200 pb-3">
+                <div className="border-b border-slate-100 pb-3">
                   <h3 className="text-base font-bold text-charcoal-900 flex items-center gap-2">
                     <Calendar className="w-5 h-5 text-gold-600" />
                     <span>{t('onboarding.step2', '2. Date & Venue')}</span>
@@ -216,7 +216,7 @@ export function OnboardingPage() {
             {/* STEP 3: Choose Template Preset */}
             {step === 3 && (
               <div className="space-y-4 animate-in fade-in duration-200">
-                <div className="border-b border-cream-200 pb-3">
+                <div className="border-b border-slate-100 pb-3">
                   <h3 className="text-base font-bold text-charcoal-900 flex items-center gap-2">
                     <Palette className="w-5 h-5 text-emerald-600" />
                     <span>{t('onboarding.step3', '3. Choose Starting Template')}</span>
@@ -234,8 +234,8 @@ export function OnboardingPage() {
                           p-4 rounded border-2 cursor-pointer transition-all flex items-center justify-between
                           ${
                             isSelected
-                              ? 'border-gold-500 bg-gold-50/50 shadow-sm'
-                              : 'border-cream-200 bg-white hover:border-gold-300'
+                              ? 'border-brand-emerald-600 bg-brand-emerald-50/40 shadow-sm'
+                              : 'border-slate-200 bg-white hover:border-slate-300'
                           }
                         `}
                       >
@@ -259,8 +259,8 @@ export function OnboardingPage() {
                         <div
                           className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
                             isSelected
-                              ? 'border-gold-500 bg-gold-500 text-white'
-                              : 'border-cream-300'
+                              ? 'border-brand-emerald-600 bg-brand-emerald-600 text-white'
+                              : 'border-slate-300'
                           }`}
                         >
                           {isSelected && <Check className="w-3 h-3" />}
@@ -274,7 +274,7 @@ export function OnboardingPage() {
           </CardContent>
 
           {/* Wizard Footer Controls */}
-          <CardFooter className="flex items-center justify-between border-t border-cream-200">
+          <CardFooter className="flex items-center justify-between border-t border-slate-100">
             {step > 1 ? (
               <Button
                 variant="ghost"
@@ -297,7 +297,7 @@ export function OnboardingPage() {
               </Button>
             ) : (
               <Button
-                variant="gold"
+                variant="primary"
                 isLoading={isSubmitting}
                 onClick={handleFinish}
                 rightIcon={Check}

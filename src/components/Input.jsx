@@ -23,17 +23,17 @@ export const Input = forwardRef(
         {label && (
           <label
             htmlFor={inputId}
-            className="block text-sm font-medium text-charcoal-800 mb-1.5 font-ui"
+            className="block text-xs font-semibold text-slate-700 mb-1.5"
           >
             {label}
-            {props.required && <span className="text-red-500 ml-1">*</span>}
+            {props.required && <span className="text-rose-500 ml-1">*</span>}
           </label>
         )}
 
-        <div className="relative rounded">
+        <div className="relative rounded flex items-center">
           {LeftIcon && (
-            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-charcoal-400">
-              <LeftIcon className="w-5 h-5" />
+            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+              <LeftIcon className="w-4 h-4" />
             </div>
           )}
 
@@ -42,35 +42,35 @@ export const Input = forwardRef(
             id={inputId}
             type={type}
             className={`
-              w-full min-h-[44px] px-3.5 py-2.5 rounded text-charcoal-900 bg-white
-              border transition-all duration-200 text-sm font-ui
-              placeholder:text-charcoal-400
-              ${LeftIcon ? 'pl-11' : ''}
-              ${RightIcon ? 'pr-11' : ''}
+              w-full px-3 py-2 rounded text-slate-900 bg-white
+              border transition-colors text-sm
+              placeholder:text-slate-400
+              ${LeftIcon ? 'pl-9' : ''}
+              ${RightIcon ? 'pr-9' : ''}
               ${
                 error
-                  ? 'border-red-400 focus:border-red-500 focus:ring-2 focus:ring-red-200'
-                  : 'border-cream-300 hover:border-gold-300 focus:border-gold-500 focus:ring-2 focus:ring-gold-200'
+                  ? 'border-rose-300 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 text-rose-900'
+                  : 'border-slate-300 hover:border-slate-400 focus:border-brand-emerald-600 focus:ring-2 focus:ring-brand-emerald-100'
               }
-              focus:outline-none disabled:bg-cream-100 disabled:cursor-not-allowed
+              focus:outline-none disabled:bg-slate-50 disabled:text-slate-400 disabled:cursor-not-allowed
               ${className}
             `}
             {...props}
           />
 
           {RightIcon && (
-            <div className="absolute inset-y-0 right-0 pr-3.5 flex items-center pointer-events-none text-charcoal-400">
-              <RightIcon className="w-5 h-5" />
+            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
+              <RightIcon className="w-4 h-4" />
             </div>
           )}
         </div>
 
         {error ? (
-          <p className="mt-1.5 text-xs text-red-600 font-ui flex items-center gap-1">
+          <p className="mt-1 text-xs text-rose-600 font-medium flex items-center gap-1">
             <span>{error}</span>
           </p>
         ) : helperText ? (
-          <p className="mt-1.5 text-xs text-charcoal-500 font-ui">{helperText}</p>
+          <p className="mt-1 text-xs text-slate-500">{helperText}</p>
         ) : null}
       </div>
     )

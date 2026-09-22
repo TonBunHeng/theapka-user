@@ -5,6 +5,7 @@ import { User, Lock, Globe, Save, Check } from 'lucide-react'
 import api from '../../lib/api'
 import { useAuthStore } from '../../auth/authStore'
 import Card, { CardContent, CardHeader, CardTitle } from '../../components/Card'
+import PageHeader from '../../components/PageHeader'
 import Button from '../../components/Button'
 import Input from '../../components/Input'
 import { useToast } from '../../components/Toast'
@@ -76,20 +77,16 @@ export function SettingsPage() {
   return (
     <div className="space-y-6 font-ui w-full">
       {/* Header */}
-      <div>
-        <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight">
-          {t('settings.title', 'Account Settings')}
-        </h2>
-        <p className="text-xs sm:text-sm text-charcoal-500">
-          {t('settings.subtitle', 'Manage profile information, password, and language')}
-        </p>
-      </div>
+      <PageHeader
+        title={t('settings.title', 'Account Settings')}
+        subtitle={t('settings.subtitle', 'Manage profile information, password, and language')}
+      />
 
       {/* Language Switch Card */}
       <Card>
         <CardHeader>
           <CardTitle className="text-base flex items-center gap-2">
-            <Globe className="w-4 h-4 text-gold-600" />
+            <Globe className="w-4 h-4 text-brand-emerald-700" />
             <span>{t('settings.language', 'Language')}</span>
           </CardTitle>
         </CardHeader>
@@ -100,12 +97,12 @@ export function SettingsPage() {
               onClick={() => switchLanguage('km')}
               className={`flex-1 p-3 rounded border font-semibold text-xs sm:text-sm transition-all flex items-center justify-between touch-target ${
                 i18n.language === 'km'
-                  ? 'bg-gold-50 border-gold-500 text-gold-900 shadow-sm'
-                  : 'bg-white border-cream-200 text-charcoal-700 hover:bg-cream-50'
+                  ? 'bg-brand-emerald-50 border-brand-emerald-600 text-brand-emerald-900 shadow-sm'
+                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
               <span>ភាសាខ្មែរ (Khmer - Default)</span>
-              {i18n.language === 'km' && <Check className="w-4 h-4 text-gold-600" />}
+              {i18n.language === 'km' && <Check className="w-4 h-4 text-brand-emerald-700" />}
             </button>
 
             <button
@@ -113,12 +110,12 @@ export function SettingsPage() {
               onClick={() => switchLanguage('en')}
               className={`flex-1 p-3 rounded border font-semibold text-xs sm:text-sm transition-all flex items-center justify-between touch-target ${
                 i18n.language === 'en'
-                  ? 'bg-gold-50 border-gold-500 text-gold-900 shadow-sm'
-                  : 'bg-white border-cream-200 text-charcoal-700 hover:bg-cream-50'
+                  ? 'bg-brand-emerald-50 border-brand-emerald-600 text-brand-emerald-900 shadow-sm'
+                  : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
               }`}
             >
               <span>English</span>
-              {i18n.language === 'en' && <Check className="w-4 h-4 text-gold-600" />}
+              {i18n.language === 'en' && <Check className="w-4 h-4 text-brand-emerald-700" />}
             </button>
           </div>
         </CardContent>
@@ -129,7 +126,7 @@ export function SettingsPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <User className="w-4 h-4 text-gold-600" />
+              <User className="w-4 h-4 text-brand-emerald-700" />
               <span>{t('settings.profile', 'Profile Info')}</span>
             </CardTitle>
           </CardHeader>
@@ -184,7 +181,7 @@ export function SettingsPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-base flex items-center gap-2">
-              <Lock className="w-4 h-4 text-gold-600" />
+              <Lock className="w-4 h-4 text-brand-emerald-700" />
               <span>{t('settings.changePassword', 'Change Password')}</span>
             </CardTitle>
           </CardHeader>

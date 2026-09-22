@@ -58,13 +58,12 @@ export function RegisterPage() {
   }
 
   return (
-    <Card className="border-gold-200/80 shadow-card">
-      <CardContent className="space-y-6 pt-8 pb-8">
+    <div className="space-y-6">
         <div className="text-center space-y-1.5">
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 font-ui tracking-tight">
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-900 font-ui tracking-tight">
             {t('auth.registerTitle', 'Create a New Account')}
           </h2>
-          <p className="text-xs sm:text-sm text-charcoal-500 font-ui">
+          <p className="text-xs sm:text-sm text-slate-500 font-ui">
             {t('auth.registerSubtitle', 'Start organizing your digital wedding invitations')}
           </p>
         </div>
@@ -131,17 +130,16 @@ export function RegisterPage() {
           </Button>
         </form>
 
-        <div className="text-center text-xs text-charcoal-600 font-ui pt-2">
+        <div className="text-center text-xs text-slate-600 font-ui pt-2">
           <span>{t('auth.alreadyHaveAccount', 'Already have an account?')} </span>
           <Link
             to="/login"
-            className="font-bold text-burgundy-600 hover:text-burgundy-700 underline"
+            className="font-bold text-brand-emerald-700 hover:text-brand-emerald-800 underline"
           >
             {t('auth.login', 'Log In')}
           </Link>
         </div>
-      </CardContent>
-    </Card>
+    </div>
   )
 }
 

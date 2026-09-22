@@ -82,7 +82,7 @@ function ToastItem({ toast, onClose }) {
   return (
     <div
       className={`
-        pointer-events-auto flex items-start gap-3 p-4 rounded border shadow-elevated font-ui
+        pointer-events-auto flex items-start gap-3 p-3.5 rounded border shadow-elevated
         animate-in slide-in-from-bottom-5 duration-200
         ${borderStyles[toast.type] || borderStyles.info}
       `}
@@ -91,9 +91,9 @@ function ToastItem({ toast, onClose }) {
 
       <div className="flex-1 min-w-0">
         {toast.title && (
-          <h5 className="text-sm font-semibold text-charcoal-900">{toast.title}</h5>
+          <h5 className="text-xs font-semibold text-charcoal-900">{toast.title}</h5>
         )}
-        <p className="text-sm text-charcoal-700 leading-snug">{toast.message}</p>
+        <p className="text-xs text-charcoal-700 leading-snug">{toast.message}</p>
 
         {toast.action && (
           <div className="mt-2">

@@ -14,24 +14,24 @@ export function EmptyState({
 }) {
   return (
     <div
-      className={`flex flex-col items-center justify-center text-center p-8 md:p-12 rounded bg-cream-50/70 border border-dashed border-gold-300/50 ${className}`}
+      className={`flex flex-col items-center justify-center text-center p-8 md:p-12 rounded bg-white/60 border border-dashed border-slate-300 ${className}`}
     >
-      <div className="w-14 h-14 rounded bg-gold-100 flex items-center justify-center text-gold-600 mb-4 shadow-sm">
-        <Icon className="w-7 h-7" />
+      <div className="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mb-3.5 shadow-sm">
+        <Icon className="w-6 h-6" />
       </div>
 
-      <h4 className="text-base md:text-lg font-semibold text-charcoal-900 font-ui mb-1">
+      <h4 className="text-sm font-semibold text-slate-800 mb-1">
         {title}
       </h4>
 
       {description && (
-        <p className="text-sm text-charcoal-500 font-ui max-w-sm mb-6 leading-relaxed">
+        <p className="text-xs text-slate-500 max-w-sm mb-4 leading-relaxed">
           {description}
         </p>
       )}
 
       {actionLabel && onAction && (
-        <Button variant={actionVariant} onClick={onAction}>
+        <Button size="sm" variant={actionVariant} onClick={onAction}>
           {actionLabel}
         </Button>
       )}
