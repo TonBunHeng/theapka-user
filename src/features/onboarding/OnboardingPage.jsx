@@ -97,9 +97,11 @@ export function OnboardingPage() {
       <div className="w-full max-w-xl space-y-6">
         {/* Header Branding */}
         <div className="text-center space-y-2">
-          <div className="inline-flex items-center justify-center w-12 h-12 rounded bg-brand-emerald-700 text-white font-bold text-lg shadow-sm mb-1 ring-4 ring-brand-emerald-100">
-            ធ
-          </div>
+          <img
+            src="/TK.jpeg"
+            alt="TheapKa"
+            className="inline-block w-12 h-12 rounded object-cover shadow-sm mb-1 ring-4 ring-brand-emerald-100"
+          />
           <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 tracking-tight">
             {t('onboarding.title', 'Set Up Your Wedding')}
           </h1>
