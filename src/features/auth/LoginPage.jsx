@@ -32,8 +32,8 @@ export function LoginPage() {
   } = useForm({
     resolver: zodResolver(loginSchema),
     defaultValues: {
-      email: "sovann@theapka.com",
-      password: "password123",
+      email: "couple@theapka.com",
+      password: "Password123!",
     },
   })
 
@@ -144,8 +144,8 @@ export function LoginPage() {
           <button
             type="button"
             onClick={() => {
-              setValue("email", "sovann@theapka.com")
-              setValue("password", "password123")
+              setValue("email", "couple@theapka.com")
+              setValue("password", "Password123!")
             }}
             className="px-2.5 py-1.5 rounded bg-slate-100 hover:bg-slate-200 text-[11px] font-semibold text-slate-700 border border-slate-200 truncate transition-colors"
           >
@@ -155,7 +155,7 @@ export function LoginPage() {
             type="button"
             onClick={() => {
               setValue("email", "admin@theapka.com")
-              setValue("password", "admin123")
+              setValue("password", "Password123!")
             }}
             className="px-2.5 py-1.5 rounded bg-red-50 hover:bg-red-100 text-[11px] font-semibold text-red-700 border border-red-100 truncate transition-colors"
           >
