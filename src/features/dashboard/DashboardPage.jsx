@@ -125,8 +125,10 @@ export function DashboardPage() {
             )}
           </div>
 
-          <h2 className="text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight pt-1 font-moul">
-            {wedding?.groom_name_kh} & {wedding?.bride_name_kh}
+          <h2 className={`text-xl sm:text-2xl font-bold text-charcoal-900 tracking-tight pt-1 ${isKhmer ? 'font-moul' : 'font-ui'}`}>
+            {isKhmer
+              ? `${wedding?.groom_name_kh || wedding?.groom_name} & ${wedding?.bride_name_kh || wedding?.bride_name}`
+              : `${wedding?.groom_name_en || wedding?.groom_name} & ${wedding?.bride_name_en || wedding?.bride_name}`}
           </h2>
           <p className="text-xs sm:text-sm text-charcoal-600">
             {wedding?.venue_name} • {wedding?.wedding_date}

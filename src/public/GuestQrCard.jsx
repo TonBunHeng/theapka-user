@@ -11,12 +11,8 @@ export function GuestQrCard({ isOpen, onClose, guest, wedding, group, lang = 'km
 
   if (!guest) return null
 
-  // Value encoded in QR: unique guest token or check-in string
-  const qrValue = JSON.stringify({
-    token: guest.token,
-    name: guest.name,
-    seats: guest.seats,
-  })
+  // Value encoded in QR: unique guest live invitation pass URL
+  const qrValue = `${window.location.origin}/i/${wedding?.slug || 'wedding'}/${guest.token}`
 
   const handleDownload = () => {
     // Generate simple download by grabbing the SVG

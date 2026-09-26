@@ -110,11 +110,7 @@ export function QrCodePage() {
       <div className="print-page grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 print:grid-cols-3 print:gap-3">
         {filteredGuests.map((guest) => {
           const grp = groups.find((g) => g.id === guest.group_id)
-          const qrData = JSON.stringify({
-            token: guest.token,
-            name: guest.name,
-            seats: guest.seats,
-          })
+          const qrData = `${window.location.origin}/i/${wedding?.slug || 'wedding'}/${guest.token}`
 
           return (
             <div

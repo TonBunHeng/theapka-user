@@ -317,18 +317,20 @@ export function InvitationPage() {
                   {t("invitation.fonts", "Heading Typography")}
                 </label>
                 <select
-                  value={templateConfig.fonts?.heading || "Kantumruy Pro"}
-                  onChange={(e) =>
+                  value={templateConfig.fontHeading || templateConfig.fonts?.heading || "moul"}
+                  onChange={(e) => {
+                    const selectedFont = e.target.value
                     setTemplateConfig({
                       ...templateConfig,
-                      fonts: { ...templateConfig.fonts, heading: e.target.value },
+                      fontHeading: selectedFont,
+                      fonts: { ...templateConfig.fonts, heading: selectedFont },
                     })
-                  }
+                  }}
                   className="w-full px-3 py-2 text-sm rounded border border-slate-300 bg-white text-slate-800 focus:border-brand-emerald-600 focus:ring-2 focus:ring-brand-emerald-100 outline-none font-ui"
                 >
                   {FONT_OPTIONS.map((f) => (
-                    <option key={f.name} value={f.name}>
-                      {f.name} ({f.label_kh})
+                    <option key={f.value} value={f.value}>
+                      {f.label} ({f.label_kh})
                     </option>
                   ))}
                 </select>

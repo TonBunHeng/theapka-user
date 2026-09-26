@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useOutletContext } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
@@ -11,6 +11,22 @@ import { useToast } from '../components/Toast'
 export function PublicInvitationPage() {
   const { slug, token } = useParams()
   const { i18n } = useTranslation()
+  const outletCtx = useOutletContext() || {}
+  const [activeLang, setActiveLang] = useState(outletCtx.lang || i18n.language || 'km')
+
+  useEffect(() => {
+    if (outletCtx.lang) {
+      setActiveLang(outletCtx.lang)
+    }
+  }, [outletCtx.lang])
+
+  useEffect(() => {
+    const handleLanguageChanged = (lng) => setActiveLang(lng)
+    i18n.on('languageChanged', handleLanguageChanged)
+    return () => {
+      i18n.off('languageChanged', handleLanguageChanged)
+    }
+  }, [i18n])
   const queryClient = useQueryClient()
   const { success, error } = useToast()
 
@@ -136,9 +152,10 @@ export function PublicInvitationPage() {
   }
 
   const { wedding, guest, group, schedules, gallery, wishes } = data
+  const isKhmer = activeLang === 'km'
   const welcomeNames = [
-    wedding?.groom_name_kh || wedding?.groom_name_en,
-    wedding?.bride_name_kh || wedding?.bride_name_en,
+    isKhmer ? (wedding?.groom_name_kh || wedding?.groom_name) : (wedding?.groom_name_en || wedding?.groom_name),
+    isKhmer ? (wedding?.bride_name_kh || wedding?.bride_name) : (wedding?.bride_name_en || wedding?.bride_name),
   ].filter(Boolean)
 
   return (
@@ -153,7 +170,7 @@ export function PublicInvitationPage() {
         onRsvpSubmit={(payload) => rsvpMutation.mutateAsync(payload)}
         onWishSubmit={(payload) => wishMutation.mutateAsync(payload)}
         onOpenQrCard={() => setIsQrModalOpen(true)}
-        lang={i18n.language}
+        lang={activeLang}
       />
 
       {showWelcome && (
@@ -226,7 +243,7 @@ export function PublicInvitationPage() {
           guest={guest}
           wedding={wedding}
           group={group}
-          lang={i18n.language}
+          lang={activeLang}
         />
       )}
     </>

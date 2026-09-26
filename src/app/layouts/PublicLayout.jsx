@@ -1,26 +1,29 @@
-import React, { useState, useRef, useLayoutEffect, useEffect } from 'react'
-import { Outlet, useLocation } from 'react-router-dom'
-import { Volume2, VolumeX, Globe } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Outlet, useSearchParams } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { Volume2, VolumeX, Globe } from 'lucide-react'
 
 const DEFAULT_MUSIC_URL = '/music/ភ្ជាប់និស្ស័យ.mp3'
 
 export function PublicLayout() {
   const { i18n } = useTranslation()
-  const location = useLocation()
-  const [isPlaying, setIsPlaying] = useState(false)
-  const [audioUrl, setAudioUrl] = useState(null)
-  const audioRef = useRef(null)
-  const shouldAutoplay = new URLSearchParams(location.search).get('autoplay') === '1'
+  const [searchParams] = useSearchParams()
+  const shouldAutoplay = searchParams.get('autoplay') === '1'
+  const [currentLang, setCurrentLang] = useState(i18n.language || 'km')
 
-  useLayoutEffect(() => {
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [audioUrl, setAudioUrl] = useState(DEFAULT_MUSIC_URL)
+  const audioRef = useRef(null)
+
+  // Allow child components to set wedding-specific song without re-rendering layout
+  useEffect(() => {
     window.__setWeddingMusic = (url) => {
-      setAudioUrl(url || DEFAULT_MUSIC_URL)
+      if (url && url !== audioUrl) setAudioUrl(url)
     }
     return () => {
       delete window.__setWeddingMusic
     }
-  }, [])
+  }, [audioUrl])
 
   useEffect(() => {
     if (!audioRef.current || !audioUrl) return
@@ -51,8 +54,9 @@ export function PublicLayout() {
   }, [audioUrl, isPlaying])
 
   const toggleLanguage = () => {
-    const next = i18n.language === 'km' ? 'en' : 'km'
+    const next = currentLang === 'km' ? 'en' : 'km'
     i18n.changeLanguage(next)
+    setCurrentLang(next)
   }
 
   const togglePlay = () => {
@@ -87,14 +91,14 @@ export function PublicLayout() {
       )}
 
       {/* Floating Controls Bar (Language & Music) */}
-      <div className="fixed top-4 right-4 z-40 flex items-center gap-2">
+      <div className="fixed top-4 right-4 z-40 flex items-center gap-2 public-floating-controls">
         {audioUrl && (
           <button
             type="button"
             onClick={togglePlay}
             aria-label={isPlaying ? 'Mute Music' : 'Play Music'}
             className={`
-              w-10 h-10 rounded-full flex items-center justify-center shadow-elevated border transition-all duration-300
+              w-10 h-10 rounded-full flex items-center justify-center shadow-elevated border transition-all duration-300 cursor-pointer
               ${
                 isPlaying
                   ? 'bg-burgundy-500 text-white border-burgundy-600 animate-spin-slow'
@@ -110,15 +114,15 @@ export function PublicLayout() {
           type="button"
           onClick={toggleLanguage}
           aria-label="Toggle Language"
-          className="h-10 px-3 rounded-full bg-white/90 backdrop-blur-sm border border-gold-300/60 shadow-elevated text-xs font-semibold text-charcoal-800 hover:bg-cream-100 flex items-center gap-1.5 transition-all"
+          className="h-10 px-3.5 rounded-full bg-white/95 backdrop-blur-sm border border-gold-300/60 shadow-elevated text-xs font-semibold text-charcoal-800 hover:bg-cream-100 flex items-center gap-1.5 transition-all cursor-pointer"
         >
           <Globe className="w-4 h-4 text-gold-600" />
-          <span>{i18n.language === 'km' ? 'EN' : 'ខ្មែរ'}</span>
+          <span className="font-bold">{currentLang === 'km' ? 'ភាសាខ្មែរ' : 'English'}</span>
         </button>
       </div>
 
-      {/* Page Content */}
-      <Outlet />
+      {/* Page Content with active language context */}
+      <Outlet context={{ lang: currentLang }} />
     </div>
   )
 }

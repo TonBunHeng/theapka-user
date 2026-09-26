@@ -8,7 +8,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
   const isKhmer = lang === 'km'
 
   const primaryColor = config.primaryColor || '#C59B27'
-  const headingFont = { fontFamily: getFontFamily(config.fontHeading || 'moul') }
+  const headingFont = isKhmer ? { fontFamily: getFontFamily(config.fontHeading || 'moul') } : { fontFamily: 'Georgia, Cambria, serif', fontWeight: 700 }
 
   return (
     <section className="relative text-center py-12 md:py-20 px-4 overflow-hidden">
@@ -37,7 +37,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
             className="text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed"
             style={{ ...headingFont, color: primaryColor }}
           >
-            {isKhmer ? wedding?.groom_name_kh : wedding?.groom_name_en}
+            {isKhmer ? (wedding?.groom_name_kh || wedding?.groom_name) : (wedding?.groom_name_en || wedding?.groom_name)}
           </h1>
 
           <div className="flex items-center justify-center gap-3 text-gold-500">
@@ -50,7 +50,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
             className="text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed"
             style={{ ...headingFont, color: primaryColor }}
           >
-            {isKhmer ? wedding?.bride_name_kh : wedding?.bride_name_en}
+            {isKhmer ? (wedding?.bride_name_kh || wedding?.bride_name) : (wedding?.bride_name_en || wedding?.bride_name)}
           </h1>
         </div>
 
@@ -76,7 +76,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-charcoal-700 font-ui pt-2">
           <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded border border-cream-200">
             <Calendar className="w-4 h-4 text-gold-600" />
-            <span>{formatDate(wedding?.wedding_date, 'dddd D MMMM YYYY', lang)}</span>
+            <span>{formatDate(wedding?.wedding_date, 'dddd D MMMM YYYY', isKhmer ? 'km' : 'en')}</span>
           </div>
 
           <div className="flex items-center gap-2 bg-white/80 px-4 py-2 rounded border border-cream-200 text-center max-w-xs truncate">

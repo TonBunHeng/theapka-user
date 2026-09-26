@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import HeroBlock from './blocks/HeroBlock'
 import StoryBlock from './blocks/StoryBlock'
 import ScheduleBlock from './blocks/ScheduleBlock'
@@ -16,9 +17,12 @@ export function TemplateRenderer({
   onRsvpSubmit,
   onWishSubmit,
   onOpenQrCard,
-  lang = 'km',
+  lang,
   previewMode = false,
 }) {
+  const { i18n } = useTranslation()
+  const activeLang = lang || i18n.language || 'km'
+
   const config = {
     primaryColor: templateConfig?.primaryColor || '#C59B27',
     accentColor: templateConfig?.accentColor || '#8B1E3F',
@@ -42,7 +46,7 @@ export function TemplateRenderer({
         wedding={wedding}
         guest={guest}
         config={config}
-        lang={lang}
+        lang={activeLang}
       />
     ),
     story: (
@@ -50,7 +54,7 @@ export function TemplateRenderer({
         key="story"
         wedding={wedding}
         config={config}
-        lang={lang}
+        lang={activeLang}
       />
     ),
     schedule: (
@@ -58,7 +62,7 @@ export function TemplateRenderer({
         key="schedule"
         schedules={schedules}
         config={config}
-        lang={lang}
+        lang={activeLang}
       />
     ),
     gallery: (
@@ -66,7 +70,7 @@ export function TemplateRenderer({
         key="gallery"
         gallery={gallery}
         config={config}
-        lang={lang}
+        lang={activeLang}
       />
     ),
     map: (
@@ -74,7 +78,7 @@ export function TemplateRenderer({
         key="map"
         wedding={wedding}
         config={config}
-        lang={lang}
+        lang={activeLang}
       />
     ),
     rsvp: (
@@ -83,7 +87,7 @@ export function TemplateRenderer({
         guest={guest}
         onRsvpSubmit={onRsvpSubmit}
         config={config}
-        lang={lang}
+        lang={activeLang}
       />
     ),
   }
@@ -106,15 +110,17 @@ export function TemplateRenderer({
             onClick={onOpenQrCard}
             className="flex items-center gap-2 px-5 py-3 rounded-full bg-burgundy-500 text-white shadow-elevated hover:bg-burgundy-600 font-bold text-xs font-ui border-2 border-white active:scale-95 transition-all touch-target"
           >
-            <span>{lang === 'km' ? 'កាត QR ចូលរួមកម្មវិធី' : 'My Entrance QR Pass'}</span>
+            <span>{activeLang === 'km' ? 'កាត QR ចូលរួមកម្មវិធី' : 'My Entrance QR Pass'}</span>
           </button>
         </div>
       )}
 
       {/* Elegant Wedding Footer */}
       <footer className="py-12 px-4 text-center border-t border-gold-200/50 space-y-2">
-        <p className="font-moul text-sm text-gold-700">
-          {wedding?.groom_name_kh} & {wedding?.bride_name_kh}
+        <p className={`text-sm text-gold-700 ${activeLang === 'km' ? 'font-moul' : 'font-serif font-bold'}`}>
+          {activeLang === 'km'
+            ? `${wedding?.groom_name_kh || wedding?.groom_name} & ${wedding?.bride_name_kh || wedding?.bride_name}`
+            : `${wedding?.groom_name_en || wedding?.groom_name} & ${wedding?.bride_name_en || wedding?.bride_name}`}
         </p>
         <p className="text-xs text-charcoal-500 font-serif tracking-widest uppercase">
           Powered by TheapKa Online
