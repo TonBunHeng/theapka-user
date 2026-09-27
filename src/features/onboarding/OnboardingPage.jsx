@@ -19,7 +19,7 @@ export function OnboardingPage() {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const { setWedding } = useAuthStore()
-  const { success, error } = useToast()
+  const { success, error, warning } = useToast()
 
   const [step, setStep] = useState(1)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -228,16 +228,30 @@ export function OnboardingPage() {
                 <div className="space-y-3">
                   {PRESETS.map((preset) => {
                     const isSelected = formData.template_id === preset.id
+                    const isComingSoon = !!preset.isComingSoon
                     return (
                       <div
                         key={preset.id}
-                        onClick={() => handlePresetSelect(preset)}
+                        onClick={() => {
+                          if (isComingSoon) {
+                            warning(
+                              t(
+                                "invitation.templateComingSoon",
+                                "គំរូនេះនឹងមកដល់ឆាប់ៗនេះ! សូមជ្រើសរើសគំរូមាសបុរាណសិន។"
+                              )
+                            )
+                            return
+                          }
+                          handlePresetSelect(preset)
+                        }}
                         className={`
-                          p-4 rounded border-2 cursor-pointer transition-all flex items-center justify-between
+                          p-4 rounded border-2 transition-all flex items-center justify-between
                           ${
-                            isSelected
-                              ? 'border-brand-emerald-600 bg-brand-emerald-50/40 shadow-sm'
-                              : 'border-slate-200 bg-white hover:border-slate-300'
+                            isComingSoon
+                              ? 'border-slate-200 bg-slate-50/60 opacity-80 cursor-not-allowed hover:border-slate-200'
+                              : isSelected
+                              ? 'border-brand-emerald-600 bg-brand-emerald-50/40 shadow-sm cursor-pointer'
+                              : 'border-slate-200 bg-white hover:border-slate-300 cursor-pointer'
                           }
                         `}
                       >
@@ -249,9 +263,16 @@ export function OnboardingPage() {
                             TK
                           </div>
                           <div>
-                            <h4 className="text-sm font-bold text-charcoal-900">
-                              {preset.name_kh} ({preset.name_en})
-                            </h4>
+                            <div className="flex items-center gap-2">
+                              <h4 className="text-sm font-bold text-charcoal-900">
+                                {preset.name_kh} ({preset.name_en})
+                              </h4>
+                              {isComingSoon && (
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200 font-ui leading-none shrink-0">
+                                  {t("common.comingSoon", "ឆាប់ៗនេះ")}
+                                </span>
+                              )}
+                            </div>
                             <p className="text-xs text-charcoal-500 leading-snug">
                               {preset.description_kh}
                             </p>
@@ -260,12 +281,12 @@ export function OnboardingPage() {
 
                         <div
                           className={`w-5 h-5 rounded-full border-2 flex items-center justify-center shrink-0 ${
-                            isSelected
+                            isSelected && !isComingSoon
                               ? 'border-brand-emerald-600 bg-brand-emerald-600 text-white'
                               : 'border-slate-300'
                           }`}
                         >
-                          {isSelected && <Check className="w-3 h-3" />}
+                          {isSelected && !isComingSoon && <Check className="w-3 h-3" />}
                         </div>
                       </div>
                     )

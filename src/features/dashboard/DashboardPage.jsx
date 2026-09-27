@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import {
   Calendar,
   Users,
@@ -17,19 +17,25 @@ import {
   HeartHandshake,
   XCircle,
   HelpCircle,
+  Edit2,
 } from 'lucide-react'
 import api from '../../lib/api'
 import Card, { CardContent, CardHeader, CardTitle } from '../../components/Card'
 import Button from '../../components/Button'
 import Badge from '../../components/Badge'
+import Modal from '../../components/Modal'
 import { SkeletonCard } from '../../components/Skeleton'
 import { formatCurrency, getCountdown, toKhmerNumeral } from '../../lib/format'
 import { useToast } from '../../components/Toast'
 
 export function DashboardPage() {
   const { t, i18n } = useTranslation()
+  const queryClient = useQueryClient()
   const { success, error } = useToast()
   const isKhmer = i18n.language === 'km'
+
+  const [isDateModalOpen, setIsDateModalOpen] = useState(false)
+  const [selectedDate, setSelectedDate] = useState('')
 
   const { data, isLoading, isError, refetch } = useQuery({
     queryKey: ['dashboard-data'],
@@ -45,6 +51,22 @@ export function DashboardPage() {
     navigator.clipboard.writeText(url)
     success(t('common.copied', 'Link copied to clipboard!'))
   }
+
+  const updateDateMutation = useMutation({
+    mutationFn: async (newDate) => {
+      const res = await api.put('/api/user/wedding', { wedding_date: newDate })
+      return res.data.data
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['dashboard-data'] })
+      queryClient.invalidateQueries({ queryKey: ['wedding-profile'] })
+      setIsDateModalOpen(false)
+      success(t('dashboard.dateUpdated', 'កាលបរិច្ឆេទមង្គលការត្រូវបានផ្លាស់ប្តូរជោគជ័យ!'))
+    },
+    onError: () => {
+      error(t('common.error', 'បរាជ័យក្នុងការផ្លាស់ប្តូរកាលបរិច្ឆេទ'))
+    },
+  })
 
   if (isLoading) {
     return (
@@ -161,13 +183,19 @@ export function DashboardPage() {
       {/* KPI Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* CARD 1: Countdown */}
-        <Card className="hover:border-slate-300 transition-colors">
+        <Card
+          onClick={() => {
+            setSelectedDate(wedding?.wedding_date ? wedding.wedding_date.split('T')[0] : '')
+            setIsDateModalOpen(true)
+          }}
+          className="hover:border-brand-emerald-500 hover:shadow-md transition-all cursor-pointer group"
+        >
           <CardContent className="p-5 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">
                 {t('dashboard.daysCountdown', 'Countdown')}
               </span>
-              <div className="w-8 h-8 rounded bg-gold-100 text-gold-700 flex items-center justify-center">
+              <div className="w-8 h-8 rounded bg-gold-100 text-gold-700 flex items-center justify-center group-hover:bg-brand-emerald-50 group-hover:text-brand-emerald-700 transition-colors">
                 <Clock className="w-4 h-4" />
               </div>
             </div>
@@ -188,9 +216,13 @@ export function DashboardPage() {
                 </span>
               </div>
             )}
-            <p className="text-[11px] text-charcoal-400">
-              {wedding?.wedding_date}
-            </p>
+            <div className="flex items-center justify-between text-[11px] text-charcoal-500 pt-1 border-t border-slate-100">
+              <span className="font-mono">{wedding?.wedding_date ? wedding.wedding_date.split('T')[0] : 'Not set'}</span>
+              <span className="text-brand-emerald-700 font-semibold group-hover:underline flex items-center gap-1">
+                <Calendar className="w-3 h-3" />
+                <span>{t('dashboard.setDay', 'កំណត់ថ្ងៃ')}</span>
+              </span>
+            </div>
           </CardContent>
         </Card>
 
@@ -382,6 +414,57 @@ export function DashboardPage() {
           </Card>
         </div>
       </div>
+      {/* Set Wedding Date Modal */}
+      <Modal
+        isOpen={isDateModalOpen}
+        onClose={() => setIsDateModalOpen(false)}
+        title={t('dashboard.setWeddingDateTitle', 'កំណត់កាលបរិច្ឆេទមង្គលការ (Set Wedding Date)')}
+        description={t(
+          'dashboard.setWeddingDateDesc',
+          'ជ្រើសរើសថ្ងៃមង្គលការរបស់អ្នកដើម្បីគណនាការរាប់ថយក្រោយ (Countdown) ដោយស្វ័យប្រវត្តិ។'
+        )}
+        maxWidth="max-w-md"
+      >
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            if (!selectedDate) return
+            updateDateMutation.mutate(selectedDate)
+          }}
+          className="space-y-4 pt-2"
+        >
+          <div className="space-y-1.5">
+            <label className="block text-xs font-semibold text-slate-700">
+              {t('wedding.weddingDate', 'កាលបរិច្ឆេទមង្គលការ (Wedding Date)')} *
+            </label>
+            <input
+              type="date"
+              required
+              value={selectedDate}
+              onChange={(e) => setSelectedDate(e.target.value)}
+              className="w-full px-3.5 py-2.5 rounded border border-slate-300 focus:border-brand-emerald-600 focus:ring-2 focus:ring-brand-emerald-100 text-sm font-ui outline-none bg-white"
+            />
+          </div>
+
+          <div className="flex justify-end gap-2 pt-2 border-t border-slate-100">
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsDateModalOpen(false)}
+              disabled={updateDateMutation.isPending}
+            >
+              {t('common.cancel', 'Cancel')}
+            </Button>
+            <Button
+              type="submit"
+              variant="primary"
+              isLoading={updateDateMutation.isPending}
+            >
+              {t('common.save', 'Save Changes')}
+            </Button>
+          </div>
+        </form>
+      </Modal>
     </div>
   )
 }

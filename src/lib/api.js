@@ -1,8 +1,6 @@
 import axios from 'axios'
-import { handleMockRequest } from './mock/mockServer'
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000'
-const USE_MOCK = import.meta.env.VITE_USE_MOCK === 'true'
 
 export const api = axios.create({
   baseURL: API_URL,
@@ -12,13 +10,6 @@ export const api = axios.create({
   },
   timeout: 15000,
 })
-
-// Use custom mock adapter if mock mode is on
-if (USE_MOCK) {
-  api.defaults.adapter = async (config) => {
-    return handleMockRequest(config)
-  }
-}
 
 // Request interceptor: attach Bearer token
 api.interceptors.request.use(

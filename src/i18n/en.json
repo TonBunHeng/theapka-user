@@ -42,7 +42,8 @@
     "transfer": "Bank Transfer",
     "seats": "Seats",
     "optional": "Optional",
-    "required": "Required"
+    "required": "Required",
+    "comingSoon": "Coming Soon"
   },
   "auth": {
     "login": "Log In",
@@ -63,7 +64,16 @@
     "noAccount": "Don't have an account?",
     "sendResetLink": "Send Password Reset Link",
     "logout": "Log Out",
-    "adminWarning": "This account has Admin privileges. Please use the Admin Portal."
+    "adminWarning": "This account has Admin privileges. Please use the Admin Portal.",
+    "continueWithGoogle": "Continue with Google",
+    "connectingGoogle": "Connecting to Google...",
+    "orContinueWith": "Or continue with",
+    "connectGoogleTitle": "Connect with Google",
+    "connectGoogleSubtitle": "Enter your Google account email to sign in or create your account",
+    "googleEmail": "Google Email Address",
+    "googleName": "Your Name (Optional)",
+    "connect": "Connect Account",
+    "cancel": "Cancel"
   },
   "onboarding": {
     "title": "Set Up Your Wedding",
@@ -121,7 +131,7 @@
     "coverPhoto": "Cover Photo",
     "musicUrl": "Background Music URL (MP3)",
     "slug": "Invitation Web Link (Slug)",
-    "slugHint": "Guests will view your invitation at: theapka.online/i/",
+    "slugHint": "Guests will use this web link to open their invitations",
     "slugAvailable": "This link is available",
     "slugChecking": "Checking availability...",
     "slugTaken": "This link is already taken"
@@ -231,7 +241,8 @@
     "publishConfirm": "Are you sure you want to publish this invitation live?",
     "unpublishConfirm": "Are you sure you want to unpublish this invitation?",
     "publishSuccess": "Invitation published successfully!",
-    "unpublishSuccess": "Invitation has been unpublished"
+    "unpublishSuccess": "Invitation has been unpublished",
+    "templateComingSoon": "This template is coming soon! Please use Traditional Gold for now."
   },
   "gallery": {
     "title": "Photo Gallery",

@@ -1,3 +1,22 @@
+function getCoupleDisplayName(nameKh, nameEn, rawName, slug, isKhmer, isGroom = true) {
+  const hasKhmer = (str) => /[\u1780-\u17FF]/.test(str || '')
+  if (isKhmer) {
+    if (nameKh) return nameKh
+    if (rawName && hasKhmer(rawName)) return rawName
+    return isGroom ? 'កូនកំលោះ' : 'កូនក្រមុំ'
+  }
+  if (nameEn && !hasKhmer(nameEn)) return nameEn
+  if (rawName && !hasKhmer(rawName)) return rawName
+  if (slug) {
+    const m = slug.match(/^([a-z0-9-]+?)-([a-z0-9-]+?)-wedding$/i)
+    if (m) {
+      const part = isGroom ? m[1] : m[2]
+      return part.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+    }
+  }
+  return isGroom ? 'Groom' : 'Bride'
+}
+
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import HeroBlock from './blocks/HeroBlock'
@@ -119,8 +138,8 @@ export function TemplateRenderer({
       <footer className="py-12 px-4 text-center border-t border-gold-200/50 space-y-2">
         <p className={`text-sm text-gold-700 ${activeLang === 'km' ? 'font-moul' : 'font-serif font-bold'}`}>
           {activeLang === 'km'
-            ? `${wedding?.groom_name_kh || wedding?.groom_name} & ${wedding?.bride_name_kh || wedding?.bride_name}`
-            : `${wedding?.groom_name_en || wedding?.groom_name} & ${wedding?.bride_name_en || wedding?.bride_name}`}
+            ? `${getCoupleDisplayName(wedding?.groom_name_kh, wedding?.groom_name_en, wedding?.groom_name, wedding?.slug, true, true)} & ${getCoupleDisplayName(wedding?.bride_name_kh, wedding?.bride_name_en, wedding?.bride_name, wedding?.slug, true, false)}`
+            : `${getCoupleDisplayName(wedding?.groom_name_kh, wedding?.groom_name_en, wedding?.groom_name, wedding?.slug, false, true)} & ${getCoupleDisplayName(wedding?.bride_name_kh, wedding?.bride_name_en, wedding?.bride_name, wedding?.slug, false, false)}`}
         </p>
         <p className="text-xs text-charcoal-500 font-serif tracking-widest uppercase">
           Powered by TheapKa Online

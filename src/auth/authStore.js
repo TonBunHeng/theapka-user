@@ -1,5 +1,16 @@
 import { create } from 'zustand'
 
+// Purge any legacy mock data on startup
+if (typeof window !== 'undefined') {
+  localStorage.removeItem('theapka_mock_data_v1')
+  const rawToken = localStorage.getItem('theapka_token')
+  if (rawToken && (rawToken.startsWith('mock') || !rawToken.includes('|'))) {
+    localStorage.removeItem('theapka_token')
+    localStorage.removeItem('theapka_user')
+    localStorage.removeItem('theapka_wedding')
+  }
+}
+
 const storedToken = typeof window !== 'undefined' ? localStorage.getItem('theapka_token') : null
 const storedUser = typeof window !== 'undefined' ? localStorage.getItem('theapka_user') : null
 const storedWedding = typeof window !== 'undefined' ? localStorage.getItem('theapka_wedding') : null
@@ -33,6 +44,7 @@ export const useAuthStore = create((set) => ({
       localStorage.removeItem('theapka_token')
       localStorage.removeItem('theapka_user')
       localStorage.removeItem('theapka_wedding')
+      localStorage.removeItem('theapka_mock_data_v1')
     }
     set({
       token: null,

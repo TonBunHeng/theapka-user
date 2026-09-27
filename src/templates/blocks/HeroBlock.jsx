@@ -3,12 +3,52 @@ import { Calendar, MapPin, Heart, Sparkles } from 'lucide-react'
 import { formatDate, getCountdown, toKhmerNumeral } from '../../lib/format'
 import { getFontFamily } from '../../lib/fonts'
 
+function getCoupleDisplayName(nameKh, nameEn, rawName, slug, isKhmer, isGroom = true) {
+  const hasKhmer = (str) => /[\u1780-\u17FF]/.test(str || '')
+  if (isKhmer) {
+    if (nameKh) return nameKh
+    if (rawName && hasKhmer(rawName)) return rawName
+    return isGroom ? 'កូនកំលោះ' : 'កូនក្រមុំ'
+  }
+  // English mode
+  if (nameEn && !hasKhmer(nameEn)) return nameEn
+  if (rawName && !hasKhmer(rawName)) return rawName
+  if (slug) {
+    const m = slug.match(/^([a-z0-9-]+?)-([a-z0-9-]+?)-wedding$/i)
+    if (m) {
+      const part = isGroom ? m[1] : m[2]
+      return part.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')
+    }
+  }
+  return isGroom ? 'Groom' : 'Bride'
+}
+
 export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
   const countdown = getCountdown(wedding?.wedding_date)
   const isKhmer = lang === 'km'
 
   const primaryColor = config.primaryColor || '#C59B27'
-  const headingFont = isKhmer ? { fontFamily: getFontFamily(config.fontHeading || 'moul') } : { fontFamily: 'Georgia, Cambria, serif', fontWeight: 700 }
+  const headingFont = isKhmer
+    ? { fontFamily: getFontFamily(config.fontHeading || 'moul') }
+    : { fontFamily: "'Playfair Display', Georgia, Cambria, 'Times New Roman', serif", fontWeight: 700 }
+
+  const groomDisplayName = getCoupleDisplayName(
+    wedding?.groom_name_kh,
+    wedding?.groom_name_en,
+    wedding?.groom_name,
+    wedding?.slug,
+    isKhmer,
+    true
+  )
+
+  const brideDisplayName = getCoupleDisplayName(
+    wedding?.bride_name_kh,
+    wedding?.bride_name_en,
+    wedding?.bride_name,
+    wedding?.slug,
+    isKhmer,
+    false
+  )
 
   return (
     <section className="relative text-center py-12 md:py-20 px-4 overflow-hidden">
@@ -37,7 +77,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
             className="text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed"
             style={{ ...headingFont, color: primaryColor }}
           >
-            {isKhmer ? (wedding?.groom_name_kh || wedding?.groom_name) : (wedding?.groom_name_en || wedding?.groom_name)}
+            {groomDisplayName}
           </h1>
 
           <div className="flex items-center justify-center gap-3 text-gold-500">
@@ -50,7 +90,7 @@ export function HeroBlock({ wedding, guest, config = {}, lang = 'km' }) {
             className="text-2xl sm:text-4xl md:text-5xl leading-relaxed sm:leading-relaxed"
             style={{ ...headingFont, color: primaryColor }}
           >
-            {isKhmer ? (wedding?.bride_name_kh || wedding?.bride_name) : (wedding?.bride_name_en || wedding?.bride_name)}
+            {brideDisplayName}
           </h1>
         </div>
 

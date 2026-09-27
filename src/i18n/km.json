@@ -42,7 +42,8 @@
     "transfer": "ផ្ទេរប្រាក់",
     "seats": "កៅអី",
     "optional": "ស្រេចចិត្ត",
-    "required": "ចាំបាច់"
+    "required": "ចាំបាច់",
+    "comingSoon": "ឆាប់ៗនេះ"
   },
   "auth": {
     "login": "ចូលគណនី",
@@ -63,7 +64,16 @@
     "noAccount": "មិនទាន់មានគណនី?",
     "sendResetLink": "ផ្ញើតំណភ្ជាប់កំណត់ពាក្យសម្ងាត់",
     "logout": "ចាកចេញ",
-    "adminWarning": "គណនីនេះជា Admin! សូមប្រើប្រាស់ Admin Portal ផ្ទាល់។"
+    "adminWarning": "គណនីនេះជា Admin! សូមប្រើប្រាស់ Admin Portal ផ្ទាល់។",
+    "continueWithGoogle": "ភ្ជាប់ជាមួយគណនី Google",
+    "connectingGoogle": "កំពុងភ្ជាប់ទៅកាន់ Google...",
+    "orContinueWith": "ឬ បន្តជាមួយ",
+    "connectGoogleTitle": "ភ្ជាប់គណនី Google",
+    "connectGoogleSubtitle": "បញ្ចូលអ៊ីមែល Google របស់អ្នកដើម្បីចូល ឬបង្កើតគណនី",
+    "googleEmail": "អ៊ីមែល Google",
+    "googleName": "ឈ្មោះរបស់អ្នក (មិនទាមទារ)",
+    "connect": "ភ្ជាប់គណនី",
+    "cancel": "បោះបង់"
   },
   "onboarding": {
     "title": "រៀបចំកម្មវិធីអាពាហ៍ពិពាហ៍របស់អ្នក",
@@ -121,7 +131,7 @@
     "coverPhoto": "រូបភាពគម្របធៀបការ",
     "musicUrl": "តំណភ្ជាប់តន្ត្រីផ្ទៃខាងក្រោយ (MP3 URL)",
     "slug": "តំណភ្ជាប់ធៀបការ (Slug)",
-    "slugHint": "តំណភ្ជាប់នេះនឹងប្រើសម្រាប់ភ្ញៀវបើកមើល: theapka.online/i/",
+    "slugHint": "តំណភ្ជាប់នេះនឹងប្រើសម្រាប់ភ្ញៀវបើកមើលធៀបការ",
     "slugAvailable": "តំណភ្ជាប់នេះអាចប្រើបាន",
     "slugChecking": "កំពុងពិនិត្យតំណភ្ជាប់...",
     "slugTaken": "តំណភ្ជាប់នេះត្រូវបានគេប្រើរួចហើយ"
@@ -231,7 +241,8 @@
     "publishConfirm": "តើអ្នកចង់ផ្សាយធៀបការនេះជាសាធារណៈមែនទេ?",
     "unpublishConfirm": "តើអ្នកចង់ផ្អាកការផ្សាយធៀបការនេះជាបណ្តោះអាសន្នមែនទេ?",
     "publishSuccess": "ធៀបការត្រូវបានផ្សាយជាសាធារណៈដោយជោគជ័យ!",
-    "unpublishSuccess": "ធៀបការត្រូវបានផ្អាកការផ្សាយ"
+    "unpublishSuccess": "ធៀបការត្រូវបានផ្អាកការផ្សាយ",
+    "templateComingSoon": "គំរូនេះនឹងមកដល់ឆាប់ៗនេះ! សូមជ្រើសរើសគំរូមាសបុរាណសិន។"
   },
   "gallery": {
     "title": "វិចិត្រសាលរូបភាព",

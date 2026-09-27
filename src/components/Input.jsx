@@ -1,4 +1,5 @@
-import React, { forwardRef } from 'react'
+import React, { forwardRef, useState } from 'react'
+import { Eye, EyeOff } from 'lucide-react'
 
 export const Input = forwardRef(
   (
@@ -6,17 +7,25 @@ export const Input = forwardRef(
       label,
       error,
       helperText,
-      leftIcon: LeftIcon,
-      rightIcon: RightIcon,
+      leftIcon,
+      icon,
+      rightIcon,
+      iconRight,
       className = '',
       wrapperClassName = '',
       id,
       type = 'text',
+      required,
       ...props
     },
     ref
   ) => {
     const inputId = id || props.name || Math.random().toString(36).substring(7)
+    const [showPassword, setShowPassword] = useState(false)
+    const isPassword = type === 'password'
+    const effectiveType = isPassword ? (showPassword ? 'text' : 'password') : type
+    const LeftIcon = leftIcon || icon
+    const RightIcon = rightIcon || iconRight
 
     return (
       <div className={`w-full ${wrapperClassName}`}>
@@ -26,7 +35,7 @@ export const Input = forwardRef(
             className="block text-xs font-semibold text-slate-700 mb-1.5"
           >
             {label}
-            {props.required && <span className="text-rose-500 ml-1">*</span>}
+            {required && <span className="text-rose-500 ml-1">*</span>}
           </label>
         )}
 
@@ -40,13 +49,14 @@ export const Input = forwardRef(
           <input
             ref={ref}
             id={inputId}
-            type={type}
+            type={effectiveType}
+            required={required}
             className={`
               w-full px-3 py-2 rounded text-slate-900 bg-white
               border transition-colors text-sm
               placeholder:text-slate-400
               ${LeftIcon ? 'pl-9' : ''}
-              ${RightIcon ? 'pr-9' : ''}
+              ${RightIcon || isPassword ? 'pr-9' : ''}
               ${
                 error
                   ? 'border-rose-300 focus:border-rose-500 focus:ring-2 focus:ring-rose-100 text-rose-900'
@@ -58,11 +68,20 @@ export const Input = forwardRef(
             {...props}
           />
 
-          {RightIcon && (
+          {isPassword ? (
+            <button
+              type="button"
+              tabIndex={-1}
+              onClick={() => setShowPassword(!showPassword)}
+              className="absolute inset-y-0 right-0 pr-3 flex items-center text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
+            >
+              {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+            </button>
+          ) : RightIcon ? (
             <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none text-slate-400">
               <RightIcon className="w-4 h-4" />
             </div>
-          )}
+          ) : null}
         </div>
 
         {error ? (

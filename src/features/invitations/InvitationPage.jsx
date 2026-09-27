@@ -34,7 +34,7 @@ const PRESETS = [traditionalPreset, modernPreset, minimalPreset]
 export function InvitationPage() {
   const { t, i18n } = useTranslation()
   const queryClient = useQueryClient()
-  const { success, error } = useToast()
+  const { success, error, warning } = useToast()
 
   const [activePresetId, setActivePresetId] = useState("traditional-gold")
   const [templateConfig, setTemplateConfig] = useState(traditionalPreset)
@@ -42,6 +42,13 @@ export function InvitationPage() {
   const [isPublishModalOpen, setIsPublishModalOpen] = useState(false)
   const [isPreviewMusicPlaying, setIsPreviewMusicPlaying] = useState(false)
   const previewMusicRef = useRef(null)
+  const [previewLang, setPreviewLang] = useState(i18n.language || "km")
+
+  useEffect(() => {
+    if (i18n.language) {
+      setPreviewLang(i18n.language)
+    }
+  }, [i18n.language])
 
   // Fetch current invitation config & wedding info
   const { data, isLoading } = useQuery({
@@ -173,8 +180,7 @@ export function InvitationPage() {
   }
 
   const togglePreviewLanguage = () => {
-    const next = i18n.language === "km" ? "en" : "km"
-    i18n.changeLanguage(next)
+    setPreviewLang((prev) => (prev === "km" ? "en" : "km"))
   }
 
   if (isLoading) {
@@ -227,36 +233,57 @@ export function InvitationPage() {
             <CardContent className="space-y-3">
               {PRESETS.map((preset) => {
                 const isSelected = activePresetId === preset.id
+                const isComingSoon = !!preset.isComingSoon
                 return (
                   <div
                     key={preset.id}
-                    onClick={() => handleApplyPreset(preset)}
+                    onClick={() => {
+                      if (isComingSoon) {
+                        warning(
+                          t(
+                            "invitation.templateComingSoon",
+                            "គំរូនេះនឹងមកដល់ឆាប់ៗនេះ! សូមជ្រើសរើសគំរូមាសបុរាណសិន។"
+                          )
+                        )
+                        return
+                      }
+                      handleApplyPreset(preset)
+                    }}
                     className={`
-                      p-3.5 rounded border-2 cursor-pointer transition-all flex items-center justify-between
+                      p-3.5 rounded border-2 transition-all flex items-center justify-between
                       ${
-                        isSelected
-                          ? "border-brand-emerald-600 bg-brand-emerald-50/40 shadow-sm"
-                          : "border-slate-200 bg-white hover:border-slate-300"
+                        isComingSoon
+                          ? "border-slate-200 bg-slate-50/60 opacity-80 cursor-not-allowed hover:border-slate-200"
+                          : isSelected
+                          ? "border-brand-emerald-600 bg-brand-emerald-50/40 shadow-sm cursor-pointer"
+                          : "border-slate-200 bg-white hover:border-slate-300 cursor-pointer"
                       }
                     `}
                   >
                     <div className="flex items-center gap-3">
                       <div
-                        className="w-8 h-8 rounded flex items-center justify-center text-white text-xs font-serif font-bold shadow-sm"
+                        className="w-8 h-8 rounded flex items-center justify-center text-white text-xs font-serif font-bold shadow-sm shrink-0"
                         style={{ backgroundColor: preset.primaryColor }}
                       >
                         TK
                       </div>
                       <div>
-                        <h4 className="text-sm font-bold text-slate-900">
-                          {preset.name_kh}
-                        </h4>
+                        <div className="flex items-center gap-2">
+                          <h4 className="text-sm font-bold text-slate-900">
+                            {preset.name_kh}
+                          </h4>
+                          {isComingSoon && (
+                            <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-200 font-ui leading-none shrink-0">
+                              {t("common.comingSoon", "ឆាប់ៗនេះ")}
+                            </span>
+                          )}
+                        </div>
                         <p className="text-xs text-slate-500 font-serif">{preset.name_en}</p>
                       </div>
                     </div>
 
-                    {isSelected && (
-                      <span className="w-5 h-5 rounded-full bg-brand-emerald-700 text-white flex items-center justify-center shadow-sm">
+                    {isSelected && !isComingSoon && (
+                      <span className="w-5 h-5 rounded-full bg-brand-emerald-700 text-white flex items-center justify-center shadow-sm shrink-0">
                         <Check className="w-3.5 h-3.5" />
                       </span>
                     )}
@@ -425,7 +452,7 @@ export function InvitationPage() {
 
           <div className="flex justify-center p-4">
             <div className="w-full max-w-[420px] overflow-hidden rounded-[2.25rem] border-4 border-slate-800 bg-slate-900 shadow-2xl p-2.5">
-              <div className="h-[700px] overflow-y-auto rounded-[1.75rem] bg-white">
+              <div className="h-[700px] overflow-y-auto no-scrollbar rounded-[1.75rem] bg-white">
                 <TemplateRenderer
                   wedding={wedding}
                   guest={{ name: "ភ្ញៀវកិត្តិយស (គំរូ)", seats: 2 }}
@@ -433,7 +460,7 @@ export function InvitationPage() {
                   gallery={gallery}
                   wishes={[]}
                   templateConfig={templateConfig}
-                  lang={i18n.language}
+                  lang={previewLang}
                   previewMode
                 />
               </div>
@@ -460,7 +487,7 @@ export function InvitationPage() {
               aria-label="Toggle language"
               className="h-12 w-12 rounded-full border border-slate-300 bg-white hover:bg-slate-50 shadow-sm flex items-center justify-center text-slate-800 font-bold tracking-wider text-xs transition-all hover:scale-105 active:scale-95"
             >
-              {i18n.language === "km" ? "EN" : "ខ្មែរ"}
+              {previewLang === "km" ? "EN" : "ខ្មែរ"}
             </button>
           </div>
         </div>
@@ -471,7 +498,7 @@ export function InvitationPage() {
         <div className="fixed inset-0 z-50 bg-slate-900/80 backdrop-blur-md flex flex-col">
           <div className="p-4 bg-white border-b border-slate-200 flex items-center justify-between px-6">
             <h3 className="text-base font-bold text-slate-900 font-ui">
-              {t("invitation.livePreview", "Live Preview")} - {wedding?.groom_name_kh} & {wedding?.bride_name_kh}
+              {t("invitation.livePreview", "Live Preview")} - {previewLang === "km" ? (wedding?.groom_name_kh || wedding?.groom_name) : (wedding?.groom_name_en || wedding?.groom_name)} & {previewLang === "km" ? (wedding?.bride_name_kh || wedding?.bride_name) : (wedding?.bride_name_en || wedding?.bride_name)}
             </h3>
             <button
               type="button"
@@ -490,7 +517,7 @@ export function InvitationPage() {
               gallery={gallery}
               wishes={[]}
               templateConfig={templateConfig}
-              lang={i18n.language}
+              lang={previewLang}
               previewMode
             />
           </div>
